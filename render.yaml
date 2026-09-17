@@ -1,0 +1,23 @@
+# Render blueprint — https://render.com/docs/blueprint-spec
+#
+# Deploy: Render dashboard → New → Blueprint → pick this repo.
+# Then set GEMINI_API_KEY in the service's Environment tab (it is marked sync:false
+# below precisely so it is never written into this file).
+
+services:
+  - type: web
+    name: gcc-proposal-deck
+    runtime: node
+    plan: free
+    buildCommand: npm install --omit=dev
+    startCommand: node server.js
+    healthCheckPath: /api/state
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GIST_ID
+        sync: false
+      - key: GITHUB_TOKEN
+        sync: false
+      - key: NODE_ENV
+        value: production

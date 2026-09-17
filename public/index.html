@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>General Construction Co. · Talent Proposal</title>
+<link rel="stylesheet" href="/deck.css" />
+<link rel="stylesheet" href="/budget-embed.css" />
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand">Talent acquisition &amp; retention <span>· General Construction Co.</span></div>
+  <span class="nav-current" id="nav-current"></span>
+  <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-items">
+    <span class="bars" aria-hidden="true"><span></span><span></span><span></span></span>
+    <span class="sr">Slides</span>
+  </button>
+  <div class="nav-items" id="nav-items"></div>
+
+  <div class="nav-ask" id="nav-ask">
+    <button class="ask-toggle" id="ask-toggle" type="button" aria-label="Ask this document">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="9" cy="9" r="6" /><line x1="13.4" y1="13.4" x2="18" y2="18" /></svg>
+    </button>
+    <form class="ask-form" id="ask-form" role="search">
+      <svg class="ask-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="9" cy="9" r="6" /><line x1="13.4" y1="13.4" x2="18" y2="18" /></svg>
+      <input id="ask-input" type="text" placeholder="Ask this document" autocomplete="off"
+             aria-label="Ask this document" aria-expanded="false" aria-controls="ask-panel" />
+    </form>
+    <div class="ask-panel" id="ask-panel" role="region" aria-live="polite" hidden></div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════ 1 · OVERVIEW ══ -->
+<section class="slide" data-slide="0" data-title="Overview" data-active="true">
+  <div class="inner">
+    <p class="eyebrow">01 · Overview</p>
+    <h1>A talent acquisition and retention system</h1>
+
+    <div class="panel" data-active="true">
+      <div class="proposal-grid">
+        <div class="col">
+          <div class="flow-wrap">
+            <svg viewBox="0 0 1000 400" role="img"
+                 aria-label="Flowchart: hiring and onboarding feed three goals — training, a KPI system and retention — which together support revenue growth, with a feedback loop from retention back to hiring.">
+
+              <!-- the outcome the three goals hold up -->
+              <g class="outcome">
+                <rect x="400" y="24" width="560" height="72" rx="10" />
+                <text class="outcome-label" x="680" y="52">Revenue growth</text>
+                <text class="outcome-sub" x="680" y="74">through the downturn and the uncertainty around it</text>
+              </g>
+
+              <!-- goals carrying the outcome -->
+              <g class="risers">
+                <path d="M485 196 L485 96" />
+                <path d="M680 196 L680 96" />
+                <path d="M875 196 L875 96" />
+              </g>
+
+              <!-- acquisition -->
+              <g class="fnode" data-node="hire" tabindex="0" role="button" aria-pressed="false"
+                 aria-label="Attract and hire">
+                <rect x="40" y="196" width="160" height="76" rx="9" />
+                <text class="fnode-label" x="120" y="230">Attract</text>
+                <text class="fnode-label" x="120" y="252">&amp; hire</text>
+              </g>
+
+              <g class="fnode" data-node="onboard" tabindex="0" role="button" aria-pressed="false"
+                 aria-label="Onboard">
+                <rect x="225" y="196" width="150" height="76" rx="9" />
+                <text class="fnode-label" x="300" y="241">Onboard</text>
+              </g>
+
+              <!-- the three goals -->
+              <g class="fnode goal" data-node="training" tabindex="0" role="button" aria-pressed="false"
+                 aria-label="Goal one, training">
+                <rect x="400" y="196" width="170" height="76" rx="9" />
+                <text class="fnode-num" x="416" y="220">01</text>
+                <text class="fnode-label" x="485" y="248">Training</text>
+              </g>
+
+              <g class="fnode goal" data-node="kpi" tabindex="0" role="button" aria-pressed="false"
+                 aria-label="Goal two, KPI system">
+                <rect x="595" y="196" width="170" height="76" rx="9" />
+                <text class="fnode-num" x="611" y="220">02</text>
+                <text class="fnode-label" x="680" y="248">KPI system</text>
+              </g>
+
+              <g class="fnode goal" data-node="retention" tabindex="0" role="button" aria-pressed="false"
+                 aria-label="Goal three, talent retention">
+                <rect x="790" y="196" width="170" height="76" rx="9" />
+                <text class="fnode-num" x="806" y="220">03</text>
+                <text class="fnode-label" x="875" y="248">Retention</text>
+              </g>
+
+              <!-- the spine -->
+              <g class="flow-arrows">
+                <path d="M200 234 L219 234" marker-end="url(#tip)" />
+                <path d="M375 234 L394 234" marker-end="url(#tip)" />
+                <path d="M570 234 L589 234" marker-end="url(#tip)" />
+                <path d="M765 234 L784 234" marker-end="url(#tip)" />
+              </g>
+
+              <!-- what measurement sends back to training -->
+              <g class="flow-arrows back-short">
+                <path d="M680 272 L680 300 L485 300 L485 278" marker-end="url(#tip)" />
+                <text class="flow-note" x="582" y="318">what the numbers say to teach next</text>
+              </g>
+
+              <!-- the loop that makes hiring cheaper -->
+              <g class="flow-arrows feedback">
+                <path d="M875 272 L875 350 L120 350 L120 278" marker-end="url(#tip)" />
+                <text class="flow-note" x="497" y="370">people who stay refer, mentor and move up</text>
+              </g>
+
+              <defs>
+                <marker id="tip" viewBox="0 0 10 10" refX="9" refY="5"
+                        markerWidth="7" markerHeight="7" orient="auto">
+                  <path d="M0 1 L9 5 L0 9 z" />
+                </marker>
+              </defs>
+            </svg>
+          </div>
+
+          <div class="flow-legend">
+            <button type="button" data-node="training" aria-pressed="false">
+              <b>01 · Training</b>
+              <span>What people are taught, when, and who is accountable for them being able to do the work.</span>
+            </button>
+            <button type="button" data-node="kpi" aria-pressed="false">
+              <b>02 · KPI system</b>
+              <span>The measures that say whether any of it is working, and how often they are looked at.</span>
+            </button>
+            <button type="button" data-node="retention" aria-pressed="false">
+              <b>03 · Talent retention</b>
+              <span>Why a good person stays a third year — and what it costs when they do not.</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card tight">
+            <h3>The goal this serves</h3>
+            <p class="note"><b>Revenue growth despite the economic downturn and the uncertainty around it.</b>
+            Every part of the system below is judged against that, not against activity.</p>
+          </div>
+
+          <div class="card tight">
+            <h3>Three goals</h3>
+            <ol class="goals">
+              <li><b>Training</b></li>
+              <li><b>KPI system</b></li>
+              <li><b>Talent retention</b></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════ 2 · PROCESS ══ -->
+<section class="slide" data-slide="1" data-title="Process">
+  <div class="inner">
+    <p class="eyebrow">02 · Process</p>
+
+    <div class="panel" data-active="true">
+
+      <div class="phases">
+        <article class="phase" data-open="true">
+          <button class="phase-head" type="button" aria-expanded="true">
+            <span class="phase-num">Phase 1</span>
+            <span class="phase-title"></span>
+            <span class="phase-dur"></span>
+            <span class="phase-owner"></span>
+            <span class="chev" aria-hidden="true"></span>
+          </button>
+        <div class="phase-body">
+          <div class="phase-top">
+            <div>
+              <h3>Objectives</h3>
+              <ul></ul>
+            </div>
+            <div>
+              <h3>Outcomes</h3>
+              <ul></ul>
+            </div>
+          </div>
+
+          <div class="phase-process">
+            <h3>Process</h3>
+            <div class="plines" data-budget-phases="p1"></div>
+          </div>
+        </div>
+      </article>
+
+        <article class="phase" data-open="true">
+          <button class="phase-head" type="button" aria-expanded="true">
+            <span class="phase-num">Phase 2</span>
+            <span class="phase-title"></span>
+            <span class="phase-dur"></span>
+            <span class="phase-owner"></span>
+            <span class="chev" aria-hidden="true"></span>
+          </button>
+        <div class="phase-body">
+          <div class="phase-top">
+            <div>
+              <h3>Objectives</h3>
+              <ul></ul>
+            </div>
+            <div>
+              <h3>Outcomes</h3>
+              <ul></ul>
+            </div>
+          </div>
+
+          <div class="phase-process">
+            <h3>Process</h3>
+            <div class="plines" data-budget-phases="p2"></div>
+          </div>
+        </div>
+      </article>
+
+        <article class="phase" data-open="true">
+          <button class="phase-head" type="button" aria-expanded="true">
+            <span class="phase-num">Phase 3</span>
+            <span class="phase-title"></span>
+            <span class="phase-dur"></span>
+            <span class="phase-owner"></span>
+            <span class="chev" aria-hidden="true"></span>
+          </button>
+        <div class="phase-body">
+          <div class="phase-top">
+            <div>
+              <h3>Objectives</h3>
+              <ul></ul>
+            </div>
+            <div>
+              <h3>Outcomes</h3>
+              <ul></ul>
+            </div>
+          </div>
+
+          <div class="phase-process">
+            <h3>Process</h3>
+            <div class="plines" data-budget-phases="p3"></div>
+          </div>
+        </div>
+      </article>
+      </div>
+
+      <div class="budget-scope process-summary-wrap">
+        <section class="summary" id="process-summary"></section>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═════════════════════════════════════════════════════ 3 · CAPABILITIES ══ -->
+<section class="slide" data-slide="2" data-title="Capabilities">
+  <div class="inner">
+    <p class="eyebrow">03 · Capabilities</p>
+
+    <div class="panel" data-active="true">
+      <h1>Capabilities</h1>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ 4 · Q&A ══ -->
+<section class="slide" data-slide="3" data-title="Q&amp;A">
+  <div class="inner">
+    <div class="workshop-head">
+      <div>
+        <p class="eyebrow">04 · Live</p>
+        <h1>Q&amp;A</h1>
+      </div>
+      <div class="companion-card">
+        Add from your phone
+        <code id="companion-url">—</code>
+      </div>
+    </div>
+
+    <form class="capture" id="capture">
+      <input id="entry" type="text" maxlength="240" autocomplete="off"
+             placeholder="What does the room want to know?" aria-label="Add a question" />
+      <button class="btn" type="submit">Add</button>
+    </form>
+
+    <div class="bottleneck-list">
+      <ul class="bottlenecks" id="bottlenecks"></ul>
+      <div class="empty" id="bottlenecks-empty">Nothing asked yet — type a question above.</div>
+    </div>
+
+    <div class="actions">
+      <button class="btn" id="generate">Answer these</button>
+      <button class="btn ghost" id="reset">Clear</button>
+      <span class="status" id="gen-status"></span>
+    </div>
+
+    <div class="results" id="results" hidden>
+      <div class="results-head">
+        <div>Answer<span>Written against the questions in the order you put them</span></div>
+      </div>
+      <div id="rows"></div>
+      <p class="source-note" id="source-note"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ 5 · ABOUT US ══ -->
+<section class="slide" data-slide="4" data-title="About Us">
+  <div class="inner">
+    <p class="eyebrow">05 · About</p>
+
+    <div class="panel" data-active="true">
+      <h1>About us</h1>
+    </div>
+
+  </div>
+</section>
+
+
+<script src="/budget-core.js"></script>
+<script src="/deck-budget.js"></script>
+<script src="/deck.js"></script>
+<script src="/ask.js"></script>
+</body>
+</html>

@@ -1,0 +1,2172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="A talent acquisition and retention system for General Construction Co. — the proposal, its process, and a live question session." />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="color-scheme" content="light" />
+<title>GCC · Talent Proposal</title>
+<style>
+/* General Construction Co. · talent acquisition & retention — light editorial deck */
+
+:root {
+  --paper: #fbfaf7;
+  --paper-2: #f4f1ea;
+  --ink: #17150f;
+  --muted: #6e675a;
+  --rule: #e3ded2;
+  --accent: #b03a1a;
+  --accent-soft: #f6ebe5;
+  --nav-h: 60px;
+
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, ui-serif, serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+}
+
+* { box-sizing: border-box; }
+
+/* an author display rule would otherwise beat [hidden] and keep it on screen */
+[hidden] { display: none !important; }
+
+html, body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+body { overflow-x: hidden; }
+
+/* ---------------------------------------------------------------- nav */
+
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: var(--nav-h);
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  padding: 0 28px;
+  background: rgba(251, 250, 247, 0.92);
+  backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid var(--rule);
+  z-index: 50;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-right: 32px;
+  font-family: var(--serif);
+  font-size: 15px;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.nav-brand span { color: var(--muted); }
+
+.nav-items { display: flex; align-items: stretch; gap: 2px; flex: 1; overflow-x: auto; }
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0 16px;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 13.5px;
+  color: var(--muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.nav-item:hover { color: var(--ink); }
+
+.nav-item[aria-current="true"] {
+  color: var(--ink);
+  border-bottom-color: var(--accent);
+}
+
+.nav-item b {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--accent);
+  opacity: 0.75;
+}
+
+/* hamburger + current-slide label: mobile only */
+
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.nav-current, .nav-toggle { display: none; }
+
+.nav-toggle {
+  width: 46px;
+  height: 46px;
+  align-self: center;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  padding: 0;
+  place-items: center;
+  flex: 0 0 auto;
+}
+
+.nav-toggle .bars {
+  display: block;
+  width: 19px;
+  height: 14px;
+  position: relative;
+}
+
+.nav-toggle .bars span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--ink);
+  transition: transform 0.22s ease, opacity 0.16s ease;
+}
+
+.nav-toggle .bars span:nth-child(1) { top: 0; }
+.nav-toggle .bars span:nth-child(2) { top: 6px; }
+.nav-toggle .bars span:nth-child(3) { top: 12px; }
+
+.nav-toggle[aria-expanded="true"] .bars span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] .bars span:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] .bars span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+/* lede on the second proposal version */
+
+.v2-lede {
+  margin: -8px 0 24px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 78ch;
+}
+
+/* the budget's line list, shown as the process in V2 */
+.phase-body.single { grid-template-columns: 1fr; }
+.phase-body.single ul { columns: 2; column-gap: 34px; }
+.phase-body.single li { break-inside: avoid; margin-bottom: 9px; }
+.sub-note { font-size: 12px; color: var(--muted); line-height: 1.45; }
+
+@media (max-width: 900px) {
+  .phase-body.single ul { columns: 1; }
+}
+
+/* ---------------------------------------------------------------- ask box */
+
+.nav-budget {
+  flex: 0 0 auto;
+  margin-left: 14px;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 5px 10px;
+  white-space: nowrap;
+}
+
+.nav-budget:hover { color: var(--accent); border-color: var(--accent); }
+
+@media (max-width: 900px) {
+  .nav-budget { display: none; }
+}
+
+.nav-ask { position: relative; display: flex; align-items: center; flex: 0 0 auto; margin-left: 16px; }
+
+.ask-toggle { display: none; }
+
+.ask-form { position: relative; display: flex; align-items: center; }
+
+.ask-icon, .ask-toggle svg {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1.7;
+  stroke-linecap: round;
+}
+
+.ask-icon { position: absolute; left: 11px; pointer-events: none; }
+
+.ask-form input {
+  width: 216px;
+  font: inherit;
+  font-size: 13px;
+  padding: 8px 12px 8px 32px;
+  border: 1px solid var(--rule);
+  border-radius: 7px;
+  background: #fff;
+  color: var(--ink);
+  transition: width 0.2s ease, border-color 0.15s ease;
+}
+
+.ask-form input::placeholder { color: var(--muted); }
+.ask-form input:focus { outline: none; border-color: var(--accent); width: 268px; }
+
+.ask-panel {
+  position: absolute;
+  top: calc(100% + 9px);
+  right: 0;
+  width: 430px;
+  max-width: calc(100vw - 28px);
+  max-height: 62vh;
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 16px 18px;
+  box-shadow: 0 22px 44px -26px rgba(23, 21, 15, 0.5);
+  animation: rise 0.16s ease both;
+  z-index: 60;
+}
+
+.ask-answer p { margin: 0 0 10px; font-size: 14.5px; line-height: 1.6; }
+.ask-answer p:last-child { margin-bottom: 0; }
+
+.ask-status, .ask-empty { margin: 0; font-size: 13.5px; color: var(--muted); line-height: 1.55; }
+
+.ask-sources { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin-top: 14px; }
+.ask-sources:first-child { margin-top: 0; margin-bottom: 10px; }
+
+.ask-label {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-right: 3px;
+}
+
+.ask-chip {
+  border: 1px solid var(--rule);
+  background: var(--paper-2);
+  border-radius: 999px;
+  padding: 5px 11px;
+  font: inherit;
+  font-size: 12px;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.ask-chip:hover { border-color: var(--accent); color: var(--accent); }
+
+.ask-hit {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  border-top: 1px solid var(--rule);
+  background: none;
+  font: inherit;
+  padding: 12px 0;
+  cursor: pointer;
+}
+
+.ask-hit:hover .ask-hit-text { color: var(--ink); }
+
+.ask-hit-where {
+  display: block;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 5px;
+}
+
+.ask-hit-text { display: block; font-size: 13.5px; line-height: 1.55; color: var(--muted); }
+
+/* ---------------------------------------------------------------- slide shell */
+
+.slide { display: none; }
+.slide[data-active="true"] { display: block; animation: rise 0.35s ease both; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+.inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: calc(var(--nav-h) + 34px) 44px 72px;
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 12px;
+}
+
+/* one heading size across every slide */
+h1 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(25px, 2.5vw, 33px);
+  line-height: 1.14;
+  letter-spacing: -0.012em;
+  margin: 0 0 26px;
+  max-width: none; /* headlines run on one line at desktop widths */
+  text-wrap: balance;
+}
+
+h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  margin: 0 0 14px;
+}
+
+h3 {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 12px;
+}
+
+h3.spaced { margin-top: 26px; }
+
+p { line-height: 1.6; }
+
+.rule { height: 1px; background: var(--rule); border: 0; margin: 44px 0; }
+
+/* ---------------------------------------------------------------- primitives */
+
+.grid { display: grid; gap: 22px; }
+.g2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+.card {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 22px 24px;
+}
+
+.card p { margin: 0; color: var(--muted); font-size: 14.5px; }
+.card ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 14.5px; line-height: 1.75; }
+.card li + li { margin-top: 2px; }
+
+.placeholder {
+  border: 1px dashed #cfc7b6;
+  background: repeating-linear-gradient(-45deg, transparent, transparent 9px, rgba(176, 58, 26, 0.035) 9px, rgba(176, 58, 26, 0.035) 18px);
+  border-radius: 10px;
+  padding: 22px 24px;
+  color: var(--muted);
+}
+
+.placeholder .tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid rgba(176, 58, 26, 0.3);
+  border-radius: 3px;
+  padding: 2px 6px;
+  margin-bottom: 12px;
+}
+
+.placeholder p { margin: 0; font-size: 14.5px; line-height: 1.6; }
+
+.stack { display: flex; flex-direction: column; gap: 12px; }
+
+.line {
+  display: grid;
+  grid-template-columns: 84px 150px 1fr;
+  gap: 22px;
+  padding: 16px 0;
+  border-top: 1px solid var(--rule);
+  align-items: center;
+}
+
+.line-mark {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: flex-start;
+}
+
+.line-mark img { width: 34px; height: 34px; object-fit: contain; display: block; }
+.line-mark.pair img { width: 30px; height: 30px; }
+
+/* raster art (an NFT, a mark lifted from a favicon) gets a frame; vector logos float free */
+.line-mark img.art {
+  width: 44px;
+  height: 44px;
+  border-radius: 7px;
+  border: 1px solid var(--rule);
+  object-fit: cover;
+  background: #fff;
+}
+
+.line:last-child { border-bottom: 1px solid var(--rule); }
+.line dt { font-size: 14px; font-weight: 600; }
+.line dd { margin: 0; font-size: 14.5px; color: var(--muted); line-height: 1.6; }
+.line dd b { color: var(--ink); font-weight: 600; }
+
+.note { font-size: 13px; color: var(--muted); font-style: italic; }
+
+/* ------------------------------------------------------- proposal, one screen */
+
+.proposal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: 26px;
+  align-items: start;
+}
+
+.proposal-grid .col { display: flex; flex-direction: column; gap: 14px; }
+
+.card.tight { padding: 18px 20px; }
+.card.tight ul { font-size: 13.5px; line-height: 1.55; padding-left: 16px; }
+.card.tight li + li { margin-top: 6px; }
+
+.proposal-grid .note { margin: 0; font-size: 12.5px; line-height: 1.55; font-style: normal; }
+.proposal-grid .note b { color: var(--ink); font-weight: 600; }
+
+/* ------------------------------------------------------------ budget slide */
+
+.budget-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+/* The panel is the whole surface — it brings its own layout, so it gets a frame and
+   room to breathe rather than being re-styled from out here. */
+/* The board's summary box, closing the process slide. */
+.process-summary-wrap { margin-top: 28px; display: flex; justify-content: flex-end; }
+.process-summary-wrap .summary { width: 100%; max-width: 430px; }
+.process-summary-wrap .summary:empty { display: none; }
+
+.admin-frame {
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--paper);
+}
+
+.admin-frame iframe {
+  display: block;
+  width: 100%;
+  height: 76vh;
+  min-height: 520px;
+  border: 0;
+}
+
+/* ----------------------------------------------------- reference folds */
+
+.fold {
+  margin-top: 22px;
+  border-top: 1px solid var(--rule);
+  padding-top: 4px;
+}
+
+.fold + .fold { margin-top: 0; }
+
+.fold summary {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 14px 2px;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.fold summary::-webkit-details-marker { display: none; }
+.fold summary:hover .fold-title { color: var(--accent); }
+
+.fold-mark {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 auto;
+  border-right: 1.5px solid var(--accent);
+  border-bottom: 1.5px solid var(--accent);
+  transform: rotate(-45deg);
+  transition: transform 0.18s ease;
+  position: relative;
+  top: -2px;
+}
+
+.fold[open] .fold-mark { transform: rotate(45deg); }
+
+.fold-title { font-family: var(--serif); font-size: 19px; }
+.fold-sub { font-size: 13px; color: var(--muted); }
+
+.fold-body {
+  padding: 6px 0 18px;
+  overflow-x: auto;
+}
+
+@media (max-width: 900px) {
+  .fold-sub { display: none; }
+}
+
+/* ---------------------------------------------------------------- sub-slides */
+
+/* the proposal's own process sits apart from the precedents that inform it */
+.subnav-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.subnav-label.first { padding-left: 0; border-left: 0; }
+
+.subnav-label {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-left: 14px;
+  border-left: 1px solid var(--rule);
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+}
+
+.subnav {
+  display: inline-flex;
+  gap: 3px;
+  padding: 3px;
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+  border-radius: 9px;
+}
+
+.subnav button {
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 13.5px;
+  color: var(--muted);
+  padding: 8px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.subnav button:hover { color: var(--ink); }
+
+.subnav button[aria-selected="true"] {
+  background: #fff;
+  color: var(--ink);
+  box-shadow: 0 1px 2px rgba(23, 21, 15, 0.09);
+}
+
+.panel { display: none; }
+.panel[data-active="true"] { display: block; animation: rise 0.28s ease both; }
+
+/* ---------------------------------------------------------------- process */
+
+.phases { display: flex; flex-direction: column; gap: 10px; }
+
+.phase {
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.phase-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 17px 22px;
+  border: 0;
+  background: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.phase-head:hover { background: var(--paper-2); }
+.phase[data-open="true"] .phase-head { background: var(--paper-2); border-bottom: 1px solid var(--rule); }
+
+.phase-num {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  flex: 0 0 auto;
+}
+
+.phase-title { font-family: var(--serif); font-size: 20px; flex: 1; }
+.phase-dur { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+
+/* Whoever is carrying the phase, filled in from the board. */
+.phase-owner {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.phase-owner:empty { display: none; }
+
+.chev {
+  width: 9px;
+  height: 9px;
+  border-right: 1.6px solid var(--muted);
+  border-bottom: 1.6px solid var(--muted);
+  transform: rotate(45deg);
+  transition: transform 0.22s ease;
+  margin-left: 4px;
+  flex: 0 0 auto;
+}
+
+.phase[data-open="true"] .chev { transform: rotate(-135deg); }
+
+.phase[data-open="false"] .phase-body { display: none; }
+
+.phase-body { padding: 22px 24px 26px; }
+
+.phase-top { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px; }
+
+.phase-process { margin-top: 22px; border-top: 1px solid var(--rule); padding-top: 18px; }
+
+/* The steps are the residency budget's line items, in the same shape. */
+.plines {
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--paper);
+}
+
+.pline {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 14px;
+  align-items: baseline;
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.pline:last-child { border-bottom: 0; }
+
+/* Once the budget answers, the step list becomes the budget's own line items; the
+   frame stays, the rows come from budget-embed.css. */
+.plines-live { padding: 0; }
+.plines-live .line { padding: 12px 16px; }
+
+/* The add-task row closes the list, so it takes the rule above it rather than one
+   of its own. */
+.plines-add {
+  padding: 10px 16px;
+  border-top: 1px solid var(--rule);
+  background: var(--paper-2);
+}
+.pline-name { font-size: 14px; font-weight: 600; color: var(--ink); }
+.pline-note { font-size: 12.5px; color: var(--muted); line-height: 1.5; margin-top: 3px; }
+
+.pline-meta {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .phase-top { grid-template-columns: 1fr; gap: 18px; }
+}
+.phase-body h3 { margin-bottom: 10px; }
+.phase-body ul { margin: 0; padding-left: 17px; font-size: 14px; color: var(--muted); line-height: 1.6; }
+.phase-body li + li { margin-top: 7px; }
+.phase-body b { color: var(--ink); font-weight: 600; }
+
+.dur {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--accent);
+  border: 1px solid rgba(176, 58, 26, 0.25);
+  border-radius: 3px;
+  padding: 1px 5px;
+  margin-left: 5px;
+  white-space: nowrap;
+}
+
+.callout {
+  margin-top: 22px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  border-radius: 0 8px 8px 0;
+  padding: 16px 22px;
+}
+
+.callout-tag {
+  display: block;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+
+.callout p { margin: 0; font-size: 15px; color: var(--ink); }
+
+/* case studies */
+
+.case {
+  display: grid;
+  grid-template-columns: 340px minmax(0, 1fr);
+  gap: 0 32px;
+  align-items: start;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  background: #fff;
+  padding: 26px 28px 28px;
+  margin-bottom: 20px;
+}
+
+/* photo beside the text, at its own aspect ratio — nothing is cropped away */
+.case-photo {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  margin: 0;
+  position: sticky;
+  top: calc(var(--nav-h) + 24px);
+}
+
+.case-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  background: #fff;
+}
+
+.case-photo figcaption {
+  font-size: 12px;
+  color: var(--muted);
+  padding: 10px 0 0;
+  line-height: 1.5;
+}
+
+.case > header {
+  grid-column: 2;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 18px;
+  margin-bottom: 22px;
+}
+.case > header h2 { margin: 0 0 8px; font-size: 26px; }
+.case-meta { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.6; max-width: 92ch; }
+
+.case-source { margin: 10px 0 0; font-size: 13px; }
+
+.case-source a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(176, 58, 26, 0.35);
+  padding-bottom: 1px;
+}
+
+.case-source a::after { content: "↗"; font-size: 11px; }
+.case-source a:hover { border-bottom-color: var(--accent); }
+
+.case-body { grid-column: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 34px; }
+
+/* A case with no photograph is one column, not an empty one and a full one. */
+.case.no-photo { grid-template-columns: minmax(0, 1fr); }
+.case.no-photo > header,
+.case.no-photo .case-body { grid-column: 1; }
+.case-body p { margin: 0 0 12px; font-size: 14.5px; color: var(--muted); line-height: 1.65; }
+.case-body b { color: var(--ink); font-weight: 600; }
+.case-body ul { margin: 0; padding-left: 18px; font-size: 14.5px; color: var(--muted); line-height: 1.65; }
+.case-body li + li { margin-top: 9px; }
+
+.steps { margin: 0; padding-left: 20px; font-size: 14.5px; color: var(--muted); line-height: 1.65; }
+.steps li { margin-bottom: 9px; padding-left: 4px; }
+.steps li::marker { color: var(--accent); font-family: var(--mono); font-size: 12px; }
+
+/* ---------------------------------------------------------------- slide 5 workshop */
+
+.workshop-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.companion-card {
+  border: 1px solid var(--rule);
+  background: #fff;
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.companion-card code {
+  display: block;
+  font-family: var(--mono);
+  font-size: 15px;
+  color: var(--ink);
+  margin-top: 4px;
+}
+
+/* type straight into the screen — the phone companion is an addition, not the only way in */
+.capture { display: flex; gap: 10px; margin-top: 30px; max-width: 640px; }
+
+.capture input {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  font-size: 16px;
+  padding: 13px 16px;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+}
+
+.capture input::placeholder { color: var(--muted); }
+.capture input:focus { outline: none; border-color: var(--accent); }
+
+.bottleneck-list { margin-top: 24px; }
+
+.bottlenecks { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+
+.bottleneck {
+  display: grid;
+  grid-template-columns: 40px 1fr auto;
+  align-items: center;
+  gap: 16px;
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 16px 18px;
+  cursor: grab;
+  animation: rise 0.3s ease both;
+}
+
+.bottleneck[data-dragging="true"] { opacity: 0.35; }
+.bottleneck[data-over="true"] { border-color: var(--accent); }
+
+.bottleneck .rank {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--accent);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+}
+
+.bottleneck .text { font-size: 17px; line-height: 1.4; }
+.bottleneck .grip { color: #c3bbaa; font-size: 15px; letter-spacing: 2px; }
+
+.empty {
+  border: 1px dashed #cfc7b6;
+  border-radius: 10px;
+  padding: 44px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.actions { display: flex; align-items: center; gap: 14px; margin: 28px 0 0; flex-wrap: wrap; }
+
+.btn {
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 8px;
+  padding: 12px 22px;
+  font: inherit;
+  font-size: 14.5px;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.btn:hover { opacity: 0.85; }
+.btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.btn.ghost { background: none; color: var(--ink); border-color: var(--rule); }
+
+.status { font-size: 13px; color: var(--muted); font-family: var(--mono); }
+
+.spinner {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border: 2px solid var(--rule);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-right: 8px;
+  vertical-align: -1px;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* results table */
+
+.results { margin-top: 36px; }
+
+.results-head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 0 0 12px;
+  border-bottom: 1px solid var(--ink);
+  margin-bottom: 4px;
+}
+
+.results-head div { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+.results-head span { display: block; text-transform: none; letter-spacing: 0; font-weight: 400; font-size: 13px; color: var(--muted); margin-top: 5px; }
+
+.row { padding: 26px 0; border-bottom: 1px solid var(--rule); animation: rise 0.35s ease both; }
+
+.row-title {
+  font-family: var(--serif);
+  font-size: 21px;
+  margin: 0 0 4px;
+}
+
+.row-theme {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 18px;
+}
+
+.cells { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+.cell {
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 18px 20px;
+  background: #fff;
+}
+
+.cell.answer { border-left: 3px solid var(--accent); }
+
+.cell .solution { margin: 0 0 8px; font-size: 15.5px; line-height: 1.5; }
+.cell .how { margin: 0 0 14px; font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+
+.examples { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+
+.examples li {
+  font-size: 13px;
+  line-height: 1.5;
+  display: flex;
+  gap: 9px;
+  align-items: flex-start;
+}
+
+.examples li > span { flex: 1; min-width: 0; }
+
+.ex-mark {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  object-fit: contain;
+  background: #fff;
+  border: 1px solid var(--rule);
+  margin-top: 1px;
+}
+.examples a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--accent); }
+.examples a:hover { color: var(--accent); }
+.examples em { font-style: normal; color: var(--muted); }
+
+.source-note { margin-top: 20px; font-size: 12px; color: var(--muted); font-family: var(--mono); }
+
+/* ---------------------------------------------------------------- responsive */
+
+@media (max-width: 1100px) {
+  .phase-body { grid-template-columns: 1fr; gap: 20px; }
+  .case-body { grid-template-columns: 1fr; gap: 22px; }
+  .proposal-grid { grid-template-columns: 1fr; }
+}
+
+/* below this the two-column case is too tight — photo goes back on top, still uncropped */
+@media (max-width: 940px) {
+  .case { grid-template-columns: 1fr; gap: 0; }
+  .case-photo { grid-column: 1; grid-row: auto; position: static; margin-bottom: 20px; }
+  .case > header, .case-body { grid-column: 1; }
+}
+
+@media (max-width: 900px) {
+  .g2, .g3, .cells, .results-head, .flow-legend { grid-template-columns: 1fr; }
+  .inner { padding-left: 22px; padding-right: 22px; }
+  .line { grid-template-columns: 64px 1fr; gap: 6px 16px; align-items: start; }
+  .line dt { grid-column: 2; }
+  .line dd { grid-column: 2; }
+  .line-mark { grid-row: span 2; }
+}
+
+/* Below this width the five tabs stop being tappable — collapse them into a menu.
+   Above it the row scrolls sideways rather than hiding, so the tabs stay visible in a
+   narrow panel (an artifact viewer, a split window) instead of vanishing into the menu. */
+@media (max-width: 640px) {
+  .nav { padding: 0 14px; gap: 12px; }
+  .nav-brand { padding-right: 0; font-size: 14px; flex: 0 1 auto; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .nav-brand span { display: none; }
+
+  .nav-current {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .nav-toggle { display: grid; }
+
+  /* the field would crowd the bar — it opens as a full-width row beneath it */
+  .nav-ask { position: static; margin-left: 0; }
+
+  .ask-toggle {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    background: #fff;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .ask-toggle svg { width: 18px; height: 18px; }
+
+  .nav-ask .ask-form { display: none; }
+
+  .nav-ask[data-open="true"] .ask-form {
+    display: flex;
+    position: absolute;
+    top: var(--nav-h);
+    left: 0;
+    right: 0;
+    padding: 10px 14px;
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .nav-ask[data-open="true"] .ask-form input,
+  .nav-ask[data-open="true"] .ask-form input:focus { width: 100%; font-size: 16px; padding: 12px 14px 12px 36px; }
+  .nav-ask[data-open="true"] .ask-icon { left: 26px; }
+
+  .ask-panel { top: calc(var(--nav-h) + 62px); right: 10px; left: 10px; width: auto; }
+
+  .nav-items {
+    display: none;
+    position: absolute;
+    top: var(--nav-h);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    padding: 6px 0 10px;
+    overflow: visible;
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+    box-shadow: 0 18px 30px -22px rgba(23, 21, 15, 0.45);
+  }
+
+  .nav-items[data-open="true"] { display: flex; animation: rise 0.18s ease both; }
+
+  .nav-item {
+    justify-content: flex-start;
+    gap: 12px;
+    padding: 15px 20px;
+    font-size: 16px;
+    border-bottom: 0;
+    border-left: 3px solid transparent;
+  }
+
+  .nav-item[aria-current="true"] { border-left-color: var(--accent); background: var(--accent-soft); }
+  .nav-item b { font-size: 11px; }
+}
+
+/* ---------------------------------------------------------------- flowchart */
+
+.flow-wrap {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 14px 12px;
+}
+
+.flow-wrap svg { width: 100%; height: auto; display: block; }
+
+.outcome rect { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.5; }
+
+.outcome-label {
+  font-family: var(--serif);
+  font-size: 25px;
+  fill: var(--accent);
+  text-anchor: middle;
+}
+
+.outcome-sub {
+  font-family: var(--sans);
+  font-size: 13px;
+  fill: var(--muted);
+  text-anchor: middle;
+}
+
+.risers path { fill: none; stroke: var(--rule); stroke-width: 2; }
+
+.fnode { cursor: pointer; }
+
+.fnode rect {
+  fill: #fff;
+  stroke: #cdc5b4;
+  stroke-width: 1.5;
+  transition: fill 0.2s ease, stroke 0.2s ease;
+}
+
+/* the three goals carry the weight, so they carry the heavier edge */
+.fnode.goal rect { stroke: var(--ink); stroke-width: 2; }
+
+.fnode-label {
+  font-family: var(--sans);
+  font-size: 17px;
+  font-weight: 600;
+  fill: var(--ink);
+  text-anchor: middle;
+  pointer-events: none;
+  transition: fill 0.2s ease;
+}
+
+.fnode-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  fill: var(--muted);
+  pointer-events: none;
+  transition: fill 0.2s ease;
+}
+
+.fnode:hover rect { fill: var(--paper-2); }
+.fnode[data-selected="true"] rect { fill: var(--accent-soft); stroke: var(--accent); }
+.fnode[data-selected="true"] .fnode-label { fill: var(--accent); }
+.fnode[data-selected="true"] .fnode-num { fill: var(--accent); }
+.fnode:focus-visible { outline: none; }
+.fnode:focus-visible rect { stroke: var(--accent); stroke-width: 3; }
+
+.flow-arrows path { fill: none; stroke: #b9b1a0; stroke-width: 2; }
+.flow-arrows.feedback path, .flow-arrows.back-short path { stroke-dasharray: 5 5; }
+#tip path { fill: #b9b1a0; stroke: none; }
+
+.flow-note {
+  font-family: var(--mono);
+  font-size: 11px;
+  fill: var(--muted);
+  text-anchor: middle;
+}
+
+.flow-legend { display: flex; flex-direction: column; gap: 8px; }
+
+.flow-legend button {
+  text-align: left;
+  border: 1px solid var(--rule);
+  background: #fff;
+  border-radius: 8px;
+  padding: 11px 14px;
+  cursor: pointer;
+  font: inherit;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.flow-legend button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); }
+.flow-legend b { display: block; font-size: 13.5px; margin-bottom: 3px; }
+.flow-legend span { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+
+.goals { margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.9; }
+
+/* --------------------------------------------- one answer per question, not two */
+
+.results-head { grid-template-columns: 1fr; }
+.cells { grid-template-columns: 1fr; }
+
+/* Between phone width and full width the five tabs need the room the brand suffix
+   takes, so the suffix goes first and the tab row keeps its place. */
+@media (max-width: 900px) {
+  .nav-brand span { display: none; }
+  .nav { padding: 0 18px; }
+  .nav-item { padding: 0 11px; font-size: 13px; }
+}
+
+/* ------------------------------------------------- the tab row always shows
+   Two things were hiding it. A flex item defaults to min-width:auto, so .nav-items
+   would not shrink and overflowed the fixed bar rather than scrolling; and below the
+   collapse width it was replaced by a hamburger. Both go: the row shrinks, scrolls,
+   and stays on screen at every width. */
+
+.nav-items {
+  min-width: 0;
+  flex: 1 1 0;
+  display: flex !important;
+  position: static !important;
+  inset: auto !important;
+  flex-direction: row !important;
+  padding: 0 !important;
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.nav-items::-webkit-scrollbar { display: none; }
+
+/* the brand yields space instead of pinning the row open */
+.nav-brand { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+
+/* the menu fallback is gone, so neither control has a job */
+.nav-toggle, .nav-current { display: none !important; }
+
+/* the menu styling made tall left-bordered rows — keep them as tabs */
+.nav-item {
+  justify-content: center;
+  border-left: 0 !important;
+  border-bottom: 2px solid transparent;
+  background: none !important;
+}
+
+.nav-item[aria-current="true"] {
+  border-bottom-color: var(--accent);
+  background: none !important;
+}
+
+@media (max-width: 900px) {
+  .ask-form input, .ask-form input:focus { width: 128px; }
+}
+
+@media (max-width: 640px) {
+  .nav { padding: 0 10px; gap: 8px; }
+  .nav-brand { display: none; }
+  .nav-item { padding: 0 9px; font-size: 12.5px; }
+}
+
+
+.companion-card { max-width: 340px; }
+.bottleneck { cursor: grab; }
+
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand">Talent acquisition &amp; retention <span>· General Construction Co.</span></div>
+  <span class="nav-current" id="nav-current"></span>
+  <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-items">
+    <span class="bars" aria-hidden="true"><span></span><span></span><span></span></span>
+    <span class="sr">Slides</span>
+  </button>
+  <div class="nav-items" id="nav-items"></div>
+
+  <div class="nav-ask" id="nav-ask">
+    <button class="ask-toggle" id="ask-toggle" type="button" aria-label="Ask this document">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="9" cy="9" r="6" /><line x1="13.4" y1="13.4" x2="18" y2="18" /></svg>
+    </button>
+    <form class="ask-form" id="ask-form" role="search">
+      <svg class="ask-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="9" cy="9" r="6" /><line x1="13.4" y1="13.4" x2="18" y2="18" /></svg>
+      <input id="ask-input" type="text" placeholder="Ask this document" autocomplete="off"
+             aria-label="Ask this document" aria-expanded="false" aria-controls="ask-panel" />
+    </form>
+    <div class="ask-panel" id="ask-panel" role="region" aria-live="polite" hidden></div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════ 1 · OVERVIEW ══ -->
+<section class="slide" data-slide="0" data-title="Overview" data-active="true">
+  <div class="inner">
+    <p class="eyebrow">01 · Overview</p>
+    <h1>A talent acquisition and retention system</h1>
+
+    <div class="panel" data-active="true">
+      <div class="proposal-grid">
+        <div class="col">
+          <div class="flow-wrap">
+            <svg viewBox="0 0 1000 400" role="img"
+                 aria-label="Flowchart: hiring and onboarding feed three goals — training, a KPI system and retention — which together support revenue growth, with a feedback loop from retention back to hiring.">
+
+              <!-- the outcome the three goals hold up -->
+              <g class="outcome">
+                <rect x="400" y="24" width="560" height="72" rx="10" />
+                <text class="outcome-label" x="680" y="52">Revenue growth</text>
+                <text class="outcome-sub" x="680" y="74">through the downturn and the uncertainty around it</text>
+              </g>
+
+              <!-- goals carrying the outcome -->
+              <g class="risers">
+                <path d="M485 196 L485 96" />
+                <path d="M680 196 L680 96" />
+                <path d="M875 196 L875 96" />
+              </g>
+
+              <!-- acquisition -->
+              <g class="fnode" data-node="hire" tabindex="0" role="button" aria-pressed="false"
+                 aria-label="Attract and hire">
+                <rect x="40" y="196" width="160" height="76" rx="9" />
+                <text class="fnode-label" x="120" y="230">Attract</text>
+                <text class="fnode-label" x="120" y="252">&amp; hire</text>
+              </g>
+
+              <g class="fnode" data-node="onboard" tabindex="0" role="button" aria-pressed="false"
+                 aria-label="Onboard">
+                <rect x="225" y="196" width="150" height="76" rx="9" />
+                <text class="fnode-label" x="300" y="241">Onboard</text>
+              </g>
+
+              <!-- the three goals -->
+              <g class="fnode goal" data-node="training" tabindex="0" role="button" aria-pressed="false"
+                 aria-label="Goal one, training">
+                <rect x="400" y="196" width="170" height="76" rx="9" />
+                <text class="fnode-num" x="416" y="220">01</text>
+                <text class="fnode-label" x="485" y="248">Training</text>
+              </g>
+
+              <g class="fnode goal" data-node="kpi" tabindex="0" role="button" aria-pressed="false"
+                 aria-label="Goal two, KPI system">
+                <rect x="595" y="196" width="170" height="76" rx="9" />
+                <text class="fnode-num" x="611" y="220">02</text>
+                <text class="fnode-label" x="680" y="248">KPI system</text>
+              </g>
+
+              <g class="fnode goal" data-node="retention" tabindex="0" role="button" aria-pressed="false"
+                 aria-label="Goal three, talent retention">
+                <rect x="790" y="196" width="170" height="76" rx="9" />
+                <text class="fnode-num" x="806" y="220">03</text>
+                <text class="fnode-label" x="875" y="248">Retention</text>
+              </g>
+
+              <!-- the spine -->
+              <g class="flow-arrows">
+                <path d="M200 234 L219 234" marker-end="url(#tip)" />
+                <path d="M375 234 L394 234" marker-end="url(#tip)" />
+                <path d="M570 234 L589 234" marker-end="url(#tip)" />
+                <path d="M765 234 L784 234" marker-end="url(#tip)" />
+              </g>
+
+              <!-- what measurement sends back to training -->
+              <g class="flow-arrows back-short">
+                <path d="M680 272 L680 300 L485 300 L485 278" marker-end="url(#tip)" />
+                <text class="flow-note" x="582" y="318">what the numbers say to teach next</text>
+              </g>
+
+              <!-- the loop that makes hiring cheaper -->
+              <g class="flow-arrows feedback">
+                <path d="M875 272 L875 350 L120 350 L120 278" marker-end="url(#tip)" />
+                <text class="flow-note" x="497" y="370">people who stay refer, mentor and move up</text>
+              </g>
+
+              <defs>
+                <marker id="tip" viewBox="0 0 10 10" refX="9" refY="5"
+                        markerWidth="7" markerHeight="7" orient="auto">
+                  <path d="M0 1 L9 5 L0 9 z" />
+                </marker>
+              </defs>
+            </svg>
+          </div>
+
+          <div class="flow-legend">
+            <button type="button" data-node="training" aria-pressed="false">
+              <b>01 · Training</b>
+              <span>What people are taught, when, and who is accountable for them being able to do the work.</span>
+            </button>
+            <button type="button" data-node="kpi" aria-pressed="false">
+              <b>02 · KPI system</b>
+              <span>The measures that say whether any of it is working, and how often they are looked at.</span>
+            </button>
+            <button type="button" data-node="retention" aria-pressed="false">
+              <b>03 · Talent retention</b>
+              <span>Why a good person stays a third year — and what it costs when they do not.</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card tight">
+            <h3>The goal this serves</h3>
+            <p class="note"><b>Revenue growth despite the economic downturn and the uncertainty around it.</b>
+            Every part of the system below is judged against that, not against activity.</p>
+          </div>
+
+          <div class="card tight">
+            <h3>Three goals</h3>
+            <ol class="goals">
+              <li><b>Training</b></li>
+              <li><b>KPI system</b></li>
+              <li><b>Talent retention</b></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════ 2 · PROCESS ══ -->
+<section class="slide" data-slide="1" data-title="Process">
+  <div class="inner">
+    <p class="eyebrow">02 · Process</p>
+
+    <div class="panel" data-active="true">
+
+      <div class="phases">
+        <article class="phase" data-open="true">
+          <button class="phase-head" type="button" aria-expanded="true">
+            <span class="phase-num">Phase 1</span>
+            <span class="phase-title"></span>
+            <span class="phase-dur"></span>
+            <span class="phase-owner"></span>
+            <span class="chev" aria-hidden="true"></span>
+          </button>
+        <div class="phase-body">
+          <div class="phase-top">
+            <div>
+              <h3>Objectives</h3>
+              <ul></ul>
+            </div>
+            <div>
+              <h3>Outcomes</h3>
+              <ul></ul>
+            </div>
+          </div>
+
+          <div class="phase-process">
+            <h3>Process</h3>
+            <div class="plines" data-budget-phases="p1"></div>
+          </div>
+        </div>
+      </article>
+
+        <article class="phase" data-open="true">
+          <button class="phase-head" type="button" aria-expanded="true">
+            <span class="phase-num">Phase 2</span>
+            <span class="phase-title"></span>
+            <span class="phase-dur"></span>
+            <span class="phase-owner"></span>
+            <span class="chev" aria-hidden="true"></span>
+          </button>
+        <div class="phase-body">
+          <div class="phase-top">
+            <div>
+              <h3>Objectives</h3>
+              <ul></ul>
+            </div>
+            <div>
+              <h3>Outcomes</h3>
+              <ul></ul>
+            </div>
+          </div>
+
+          <div class="phase-process">
+            <h3>Process</h3>
+            <div class="plines" data-budget-phases="p2"></div>
+          </div>
+        </div>
+      </article>
+
+        <article class="phase" data-open="true">
+          <button class="phase-head" type="button" aria-expanded="true">
+            <span class="phase-num">Phase 3</span>
+            <span class="phase-title"></span>
+            <span class="phase-dur"></span>
+            <span class="phase-owner"></span>
+            <span class="chev" aria-hidden="true"></span>
+          </button>
+        <div class="phase-body">
+          <div class="phase-top">
+            <div>
+              <h3>Objectives</h3>
+              <ul></ul>
+            </div>
+            <div>
+              <h3>Outcomes</h3>
+              <ul></ul>
+            </div>
+          </div>
+
+          <div class="phase-process">
+            <h3>Process</h3>
+            <div class="plines" data-budget-phases="p3"></div>
+          </div>
+        </div>
+      </article>
+      </div>
+
+      <div class="budget-scope process-summary-wrap">
+        <section class="summary" id="process-summary"></section>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═════════════════════════════════════════════════════ 3 · CAPABILITIES ══ -->
+<section class="slide" data-slide="2" data-title="Capabilities">
+  <div class="inner">
+    <p class="eyebrow">03 · Capabilities</p>
+
+    <div class="panel" data-active="true">
+      <h1>Capabilities</h1>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ 4 · Q&A ══ -->
+<section class="slide" data-slide="3" data-title="Q&amp;A">
+  <div class="inner">
+    <div class="workshop-head">
+      <div>
+        <p class="eyebrow">04 · Live</p>
+        <h1>Q&amp;A</h1>
+      </div>
+      
+    </div>
+
+    <form class="capture" id="capture">
+      <input id="entry" type="text" maxlength="240" autocomplete="off"
+             placeholder="What does the room want to know?" aria-label="Add a question" />
+      <button class="btn" type="submit">Add</button>
+    </form>
+
+    <div class="bottleneck-list">
+      <ul class="bottlenecks" id="bottlenecks"></ul>
+      <div class="empty" id="bottlenecks-empty">Nothing asked yet — type a question above.</div>
+    </div>
+
+    <div class="actions">
+      <button class="btn" id="generate">Answer these</button>
+      <button class="btn ghost" id="reset">Clear</button>
+      <span class="status" id="gen-status"></span>
+    </div>
+
+    <div class="results" id="results" hidden>
+      <div class="results-head">
+        <div>Answer<span>Written against the questions in the order you put them</span></div>
+      </div>
+      <div id="rows"></div>
+      <p class="source-note" id="source-note"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ 5 · ABOUT US ══ -->
+<section class="slide" data-slide="4" data-title="About Us">
+  <div class="inner">
+    <p class="eyebrow">05 · About</p>
+
+    <div class="panel" data-active="true">
+      <h1>About us</h1>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+<script>
+
+// Offline fallback for the Questions and Answers slide.
+//
+// Used when there's no API key, or when the live call fails mid-talk. It is deliberately
+// empty of content for this proposal: no themes are defined yet, so every question falls
+// through to GENERIC, which says plainly that the answer has to come from the room rather
+// than inventing one in front of a client.
+//
+// To give the fallback real substance, add entries to THEMES. Each needs an id, a label,
+// the keywords that should match it, and an `answer` with a one-sentence `solution`, an
+// optional `how`, and any examples worth naming.
+
+const THEMES = [];
+
+const GENERIC = {
+  id: "generic",
+  label: "Unanswered",
+  answer: {
+    solution: "No answer is on file for this one yet.",
+    how: "Captured so it is not lost. Answer it in the room, or add it to the library before the next session.",
+    examples: [],
+  },
+};
+
+function matchTheme(text) {
+  const lower = text.toLowerCase();
+  let best = null;
+  let bestScore = 0;
+  for (const theme of THEMES) {
+    const score = theme.keys.reduce((n, key) => (lower.includes(key) ? n + key.length : n), 0);
+    if (score > bestScore) {
+      bestScore = score;
+      best = theme;
+    }
+  }
+  return best || GENERIC;
+}
+
+function libraryRows(questions) {
+  return questions.map((text) => {
+    const theme = matchTheme(text);
+    return { question: text, theme: theme.label, answer: theme.answer };
+  });
+}
+
+
+const MARKS = {};
+
+const slides = [...document.querySelectorAll(".slide")];
+const navItems = document.getElementById("nav-items");
+const list = document.getElementById("bottlenecks");
+const empty = document.getElementById("bottlenecks-empty");
+const generateBtn = document.getElementById("generate");
+const resetBtn = document.getElementById("reset");
+const genStatus = document.getElementById("gen-status");
+const results = document.getElementById("results");
+const rowsEl = document.getElementById("rows");
+const sourceNote = document.getElementById("source-note");
+const form = document.getElementById("capture");
+const entry = document.getElementById("entry");
+
+let current = 0;
+let currentSub = 0;
+let items = [];
+let nextId = 1;
+
+const panelsFor = (i) => [...slides[i].querySelectorAll(".panel")];
+const tabsFor = (i) => [...slides[i].querySelectorAll(".subnav button")];
+
+const esc = (s) =>
+  String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+// -- navigation
+slides.forEach((slide, i) => {
+  const btn = document.createElement("button");
+  btn.className = "nav-item";
+  btn.innerHTML = '<b>0' + (i + 1) + '</b>' + esc(slide.dataset.title);
+  btn.addEventListener("click", () => go(i, 0));
+  navItems.appendChild(btn);
+});
+
+const navToggle = document.getElementById("nav-toggle");
+const navCurrent = document.getElementById("nav-current");
+
+function setMenu(open) {
+  navItems.dataset.open = String(open);
+  navToggle.setAttribute("aria-expanded", String(open));
+}
+
+navToggle.addEventListener("click", (e) => {
+  e.stopPropagation();
+  setMenu(navItems.dataset.open !== "true");
+});
+
+document.addEventListener("click", (e) => {
+  if (navItems.dataset.open === "true" && !navItems.contains(e.target)) setMenu(false);
+});
+
+// Every slide, and every sub-panel with a tab, has an address: #/overview, #/process.
+const slug = (s) =>
+  String(s).toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
+function addressFor(index, sub) {
+  const base = slug(slides[index].dataset.title);
+  const tabs = tabsFor(index);
+  const tab = tabs.length > 1 && tabs[sub] ? slug(tabs[sub].textContent) : "";
+  // a tab named after its own slide adds nothing — "#/process", not "#/process/process"
+  return tab && tab !== base ? "#/" + base + "/" + tab : "#/" + base;
+}
+
+function applyAddress() {
+  // \/ not / — this script is built inside a template literal, where / collapses to
+  // / and closes the regex early, breaking the whole file's parse.
+  const parts = (location.hash || "").replace(/^#\/?/, "").split("/").filter(Boolean);
+  if (!parts.length) return false;
+  const index = slides.findIndex((s) => slug(s.dataset.title) === parts[0]);
+  if (index < 0) return false;
+  let sub = 0;
+  if (parts[1]) {
+    const k = tabsFor(index).findIndex((t) => slug(t.textContent) === parts[1]);
+    if (k >= 0) sub = k;
+  }
+  go(index, sub);
+  return true;
+}
+
+function go(index, sub) {
+  current = Math.max(0, Math.min(slides.length - 1, index));
+  const panels = panelsFor(current);
+  currentSub = Math.max(0, Math.min(Math.max(panels.length - 1, 0), sub || 0));
+
+  slides.forEach((s, i) => s.setAttribute("data-active", String(i === current)));
+  [...navItems.children].forEach((b, i) => b.setAttribute("aria-current", String(i === current)));
+  panels.forEach((p, i) => p.setAttribute("data-active", String(i === currentSub)));
+
+
+  const tabs = tabsFor(current);
+  tabs.forEach((t, i) => t.setAttribute("aria-selected", String(i === currentSub)));
+
+  const label = tabs.length
+    ? slides[current].dataset.title + " · " + (tabs[currentSub] ? tabs[currentSub].textContent : "")
+    : slides[current].dataset.title;
+  navCurrent.textContent = "0" + (current + 1) + " · " + label;
+
+  setMenu(false);
+  window.scrollTo({ top: 0 });
+
+  const address = addressFor(current, currentSub);
+  if (location.hash !== address) history.replaceState(null, "", address);
+}
+
+function step(dir) {
+  let slide = current;
+  let sub = currentSub + dir;
+  if (sub < 0) {
+    slide -= 1;
+    sub = slide >= 0 ? Math.max(panelsFor(slide).length - 1, 0) : 0;
+  } else if (sub > Math.max(panelsFor(slide).length - 1, 0)) {
+    slide += 1;
+    sub = 0;
+  }
+  if (slide < 0 || slide >= slides.length) return;
+  go(slide, sub);
+}
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") return setMenu(false);
+  if (e.target.matches("input, textarea")) return;
+  if (e.key === "ArrowRight" || e.key === "PageDown") step(1);
+  else if (e.key === "ArrowLeft" || e.key === "PageUp") step(-1);
+  else if (/^[1-5]$/.test(e.key)) go(Number(e.key) - 1, 0);
+});
+
+// keyed on position, so a stripped panel needs no renumbering
+document.querySelectorAll(".subnav").forEach((nav) => {
+  nav.addEventListener("click", (e) => {
+    const tab = e.target.closest("button");
+    if (!tab) return;
+    go(current, tabsFor(current).indexOf(tab));
+  });
+});
+
+document.querySelectorAll(".phase-head").forEach((head) => {
+  head.addEventListener("click", () => {
+    const phase = head.closest(".phase");
+    const open = phase.dataset.open !== "true";
+    phase.dataset.open = String(open);
+    head.setAttribute("aria-expanded", String(open));
+  });
+});
+
+go(0, 0);
+
+// -- flowchart
+const fnodes = [...document.querySelectorAll(".fnode")];
+const flowLegend = [...document.querySelectorAll(".flow-legend button")];
+
+function selectNode(name) {
+  const already = fnodes.find((n) => n.dataset.node === name)?.dataset.selected === "true";
+  const on = (el) => !already && el.dataset.node === name;
+  fnodes.forEach((n) => {
+    n.setAttribute("data-selected", String(on(n)));
+    n.setAttribute("aria-pressed", String(on(n)));
+  });
+  flowLegend.forEach((b) => b.setAttribute("aria-pressed", String(on(b))));
+}
+
+fnodes.forEach((n) => n.addEventListener("click", () => selectNode(n.dataset.node)));
+flowLegend.forEach((b) => b.addEventListener("click", () => selectNode(b.dataset.node)));
+
+// -- capture
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const text = entry.value.trim();
+  if (!text) return;
+  items.push({ id: nextId++, text });
+  entry.value = "";
+  render();
+});
+
+function render() {
+  empty.hidden = items.length > 0;
+  generateBtn.disabled = items.length === 0;
+  list.innerHTML = items
+    .map(
+      (item, i) =>
+        '<li class="bottleneck" draggable="true" data-id="' + item.id + '">' +
+        '<span class="rank">' + (i + 1) + '</span>' +
+        '<span class="text">' + esc(item.text) + '</span>' +
+        '<span class="grip">···</span></li>'
+    )
+    .join("");
+}
+
+render();
+
+// -- drag to prioritise
+let dragged = null;
+
+list.addEventListener("dragstart", (e) => {
+  dragged = e.target.closest(".bottleneck");
+  if (!dragged) return;
+  dragged.dataset.dragging = "true";
+  e.dataTransfer.effectAllowed = "move";
+});
+
+list.addEventListener("dragover", (e) => {
+  e.preventDefault();
+  const over = e.target.closest(".bottleneck");
+  if (!over || !dragged || over === dragged) return;
+  const { top, height } = over.getBoundingClientRect();
+  list.insertBefore(dragged, e.clientY > top + height / 2 ? over.nextSibling : over);
+});
+
+list.addEventListener("dragend", () => {
+  if (!dragged) return;
+  delete dragged.dataset.dragging;
+  dragged = null;
+  const order = [...list.children].map((li) => Number(li.dataset.id));
+  items = order.map((id) => items.find((b) => b.id === id)).filter(Boolean);
+  render();
+});
+
+// -- generate
+function markHtml(url) {
+  let host;
+  try { host = new URL(url).host; } catch { return ""; }
+  const slug = host.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  const src = MARKS[slug];
+  return src ? '<img class="ex-mark" src="' + src + '" alt="" />' : "";
+}
+
+function cellHtml(cell, kind) {
+  const examples = (cell.examples || [])
+    .map((ex) => {
+      const link = '<a href="' + esc(ex.url) + '" target="_blank" rel="noreferrer">' + esc(ex.name) + '</a>';
+      return '<li>' + markHtml(ex.url) + '<span>' + link + ' — <em>' + esc(ex.note) + '</em></span></li>';
+    })
+    .join("");
+  return '<div class="cell ' + kind + '">' +
+    '<p class="solution">' + esc(cell.solution) + '</p>' +
+    '<ul class="examples">' + examples + '</ul></div>';
+}
+
+generateBtn.addEventListener("click", () => {
+  genStatus.innerHTML = '<span class="spinner"></span>matching';
+  generateBtn.disabled = true;
+
+  setTimeout(() => {
+    const rows = libraryRows(items.map((b) => b.text));
+    rowsEl.innerHTML = rows
+      .map(
+        (row) =>
+          '<div class="row"><p class="row-title">' + esc(row.question) + '</p>' +
+          '<p class="row-theme">' + esc(row.theme) + '</p>' +
+          '<div class="cells">' + cellHtml(row.answer, "answer") + '</div></div>'
+      )
+      .join("");
+    results.hidden = false;
+    genStatus.textContent = rows.length + (rows.length === 1 ? " answer" : " answers");
+    generateBtn.disabled = false;
+    sourceNote.textContent =
+      "Matched against the library bundled into this page. In the live version these answers are written by Claude, with web search, against whatever the room actually asked.";
+  }, 400);
+});
+
+let clearArmed = null;
+resetBtn.addEventListener("click", () => {
+  if (clearArmed) {
+    clearTimeout(clearArmed);
+    clearArmed = null;
+    resetBtn.textContent = "Clear";
+    items = [];
+    results.hidden = true;
+    genStatus.textContent = "";
+    render();
+    return;
+  }
+  resetBtn.textContent = "Tap again to clear";
+  clearArmed = setTimeout(() => { clearArmed = null; resetBtn.textContent = "Clear"; }, 3000);
+});
+
+
+window.deckGo = (slide, sub) => go(slide, sub);
+
+applyAddress();
+window.addEventListener("hashchange", applyAddress);
+
+// "Ask this document" — a question box in the nav bar.
+//
+// The index is built from the rendered deck, so it is never out of date with the slides.
+// The client always ranks passages locally; where a server is present and has credentials,
+// it also asks Claude to answer from those passages. Shared with the standalone build,
+// which has no server and so shows the passages themselves.
+
+(function () {
+  const wrap = document.getElementById("nav-ask");
+  const form = document.getElementById("ask-form");
+  const input = document.getElementById("ask-input");
+  const panel = document.getElementById("ask-panel");
+  const toggle = document.getElementById("ask-toggle");
+
+  const STOP = new Set(["the", "and", "for", "with", "that", "this", "what", "how", "does", "did", "are", "was", "were", "from", "you", "your", "our", "who", "why", "when", "where", "which", "into", "about", "there", "their", "have", "has", "can", "will", "would"]);
+
+  const esc = (s) =>
+    String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+  // ---------------------------------------------------------------- index
+
+  const index = [];
+
+  function nearestHeading(el) {
+    let node = el;
+    while (node && node !== document.body) {
+      let sib = node.previousElementSibling;
+      while (sib) {
+        if (/^H[1-3]$/.test(sib.tagName)) return sib.textContent.trim();
+        const inner = sib.querySelector && sib.querySelector("h1, h2, h3");
+        if (inner) return inner.textContent.trim();
+        sib = sib.previousElementSibling;
+      }
+      node = node.parentElement;
+    }
+    return "";
+  }
+
+  function buildIndex() {
+    document.querySelectorAll(".slide").forEach((slide) => {
+      const slideIndex = Number(slide.dataset.slide);
+      const title = slide.dataset.title;
+      const panels = [...slide.querySelectorAll(".panel")];
+      const scopes = panels.length ? panels : [slide];
+
+      scopes.forEach((scope, sub) => {
+        const tab = slide.querySelectorAll(".subnav button")[sub];
+        const label = tab ? `${title} · ${tab.textContent.trim()}` : title;
+
+        scope.querySelectorAll("p, li, dd, figcaption, .chip").forEach((el) => {
+          if (el.closest(".ask-panel")) return;
+          const text = el.textContent.replace(/\s+/g, " ").trim();
+          if (text.length < 30) return;
+          index.push({
+            slide: slideIndex,
+            sub,
+            label,
+            heading: nearestHeading(el),
+            text,
+          });
+        });
+      });
+    });
+  }
+
+  // ---------------------------------------------------------------- ranking
+
+  function terms(q) {
+    return [...new Set((q.toLowerCase().match(/[a-z0-9]{3,}/g) || []).filter((t) => !STOP.has(t)))];
+  }
+
+  function rank(q, limit) {
+    const ts = terms(q);
+    if (!ts.length) return [];
+    return index
+      .map((entry) => {
+        const body = entry.text.toLowerCase();
+        const head = (entry.heading + " " + entry.label).toLowerCase();
+        let score = 0;
+        for (const t of ts) {
+          if (body.includes(t)) score += 1;
+          if (head.includes(t)) score += 1.5;
+        }
+        // a passage matching more of the question beats one repeating a single word
+        const covered = ts.filter((t) => body.includes(t) || head.includes(t)).length;
+        return { entry, score: score * (1 + covered / ts.length) };
+      })
+      .filter((r) => r.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, limit)
+      .map((r) => r.entry);
+  }
+
+  // ---------------------------------------------------------------- rendering
+
+  function open(html) {
+    panel.hidden = false;
+    panel.innerHTML = html;
+    input.setAttribute("aria-expanded", "true");
+  }
+
+  function close() {
+    panel.hidden = true;
+    panel.innerHTML = "";
+    input.setAttribute("aria-expanded", "false");
+    wrap.removeAttribute("data-open");
+  }
+
+  function sourcesHtml(hits) {
+    const seen = new Set();
+    return hits
+      .filter((h) => {
+        const key = h.slide + ":" + h.sub;
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      })
+      .map(
+        (h) =>
+          `<button class="ask-chip" data-slide="${h.slide}" data-sub="${h.sub}">${esc(h.label)}</button>`
+      )
+      .join("");
+  }
+
+  function passagesHtml(hits) {
+    return hits
+      .slice(0, 5)
+      .map(
+        (h) =>
+          `<button class="ask-hit" data-slide="${h.slide}" data-sub="${h.sub}">
+             <span class="ask-hit-where">${esc(h.label)}${h.heading ? " · " + esc(h.heading) : ""}</span>
+             <span class="ask-hit-text">${esc(h.text.slice(0, 220))}${h.text.length > 220 ? "…" : ""}</span>
+           </button>`
+      )
+      .join("");
+  }
+
+  // ---------------------------------------------------------------- asking
+
+  let pending = 0;
+
+  async function ask(question) {
+    const hits = rank(question, 8);
+
+    if (!hits.length) {
+      open(`<p class="ask-empty">Nothing in the deck matches that. Try a word from the slides — a phase, a goal, a capability.</p>`);
+      return;
+    }
+
+    const token = ++pending;
+    open(`<p class="ask-status"><span class="spinner"></span>Reading the deck…</p>`);
+
+    let answer = null;
+    try {
+      const res = await fetch("/api/ask", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ q: question, passages: hits }),
+      });
+      if (res.ok) answer = (await res.json()).answer;
+    } catch {
+      // no server (the shared copy) — fall through to the passages
+    }
+
+    if (token !== pending) return; // a newer question overtook this one
+
+    if (answer) {
+      open(
+        `<div class="ask-answer">${esc(answer).replace(/\n+/g, "</p><p>").replace(/^/, "<p>") + "</p>"}</div>
+         <div class="ask-sources"><span class="ask-label">In the deck</span>${sourcesHtml(hits)}</div>`
+      );
+    } else {
+      open(
+        `<div class="ask-sources"><span class="ask-label">From the deck</span></div>${passagesHtml(hits)}`
+      );
+    }
+  }
+
+  // ---------------------------------------------------------------- wiring
+
+  buildIndex();
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const q = input.value.trim();
+    if (q) ask(q);
+  });
+
+  input.addEventListener("input", () => {
+    if (!input.value.trim()) close();
+  });
+
+  panel.addEventListener("click", (e) => {
+    const target = e.target.closest("[data-slide]");
+    if (!target) return;
+    if (typeof window.deckGo === "function") {
+      window.deckGo(Number(target.dataset.slide), Number(target.dataset.sub));
+    }
+    close();
+  });
+
+  toggle.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const willOpen = wrap.dataset.open !== "true";
+    wrap.dataset.open = String(willOpen);
+    if (willOpen) input.focus();
+    else close();
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!wrap.contains(e.target)) close();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      close();
+      input.blur();
+    }
+  });
+})();
+
+
+</script>
+
+</body>
+</html>

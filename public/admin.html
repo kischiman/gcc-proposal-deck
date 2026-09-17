@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Budget admin</title>
+<link rel="stylesheet" href="/budget.css" />
+</head>
+<body>
+
+<!-- gate -->
+
+<!-- panel -->
+<div id="panel">
+  <header class="top">
+    <div class="top-inner">
+      <div>
+        <p class="eyebrow">Admin · base rates and staffing</p>
+        <h1>Residency budget</h1>
+      </div>
+      <div class="top-actions">
+        <span class="live" id="live">live</span>
+        <a class="btn ghost" href="/">Proposal</a>
+        <a class="btn ghost" href="/budget">Public view</a>
+        <button class="btn ghost" id="export">Export</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="storage-warn" id="storage-warn" hidden></div>
+
+    <section class="rates">
+      <h3>Project settings <span class="admin-only">admin only</span></h3>
+      <div class="rate-grid" id="rate-grid"></div>
+
+      <div class="prefill-bar">
+        <span>
+          <b>Suggested rates on the public board</b>
+          <em>Decide line by line, using the <code>suggest</code> control on each. A line
+          that is off gives collaborators no anchor and never reveals its base rate.</em>
+        </span>
+        <span class="prefill-actions">
+          <span class="prefill-count" id="prefill-count"></span>
+          <button class="btn ghost small" data-prefill-all="1">Suggest all</button>
+          <button class="btn ghost small" data-prefill-all="0">None</button>
+        </span>
+      </div>
+
+      <div class="prefill-bar">
+        <span>
+          <b>Budget visible on the public board</b>
+          <em>Off by default. Anyone with the public link sees scope only — quantities,
+          units, and who is on each line. Turn it on to publish rates, amounts and
+          totals. Collaborators can still enter their own rate either way; it just
+          is not shown to anyone else while this is off.</em>
+        </span>
+        <span class="prefill-actions">
+          <span class="prefill-count" id="money-state"></span>
+          <button class="prefill-toggle" id="public-money" type="button" aria-pressed="false">hidden</button>
+        </span>
+      </div>
+
+        <div class="prefill-bar">
+          <span>
+            <b>Proposals visible on the public board</b>
+            <em>Off by default. Everyone would see who has put themselves forward for
+            each line and what they wrote. The lines take proposals either way — this
+            only decides whether the public deck shows them back.</em>
+          </span>
+          <span class="prefill-actions">
+            <span class="prefill-count" id="proposals-state"></span>
+            <button class="prefill-toggle" id="public-proposals" type="button" aria-pressed="true">visible</button>
+          </span>
+        </div>
+
+        <div class="prefill-bar">
+          <span>
+            <b>Public comments visible on the deck</b>
+            <em>On by default. A comment left on the deck is public and shows there; one
+            left on the team page never does, whatever this says. Turn this off to take
+            the public threads down without losing them — you still read every comment
+            here and on the team page.</em>
+          </span>
+          <span class="prefill-actions">
+            <span class="prefill-count" id="comments-state"></span>
+            <button class="prefill-toggle" id="public-comments" type="button" aria-pressed="true">visible</button>
+          </span>
+        </div>
+    </section>
+
+    <section class="people-block">
+      <h3>People</h3>
+      <div id="people"></div>
+    </section>
+
+    <div id="phases"></div>
+
+    <section class="summary" id="summary"></section>
+
+    <p class="footnote">
+      <b>Committed</b> uses the rate of whoever is on each line; unstaffed lines fall back to the
+      base rate card. Free hosting has an ephemeral disk — <b>Export</b> before any redeploy.
+    </p>
+  </main>
+</div>
+
+<div class="scrim" id="scrim" hidden></div>
+
+<div class="modal" id="edit-modal" role="dialog" aria-modal="true" aria-labelledby="edit-title" hidden>
+  <header>
+    <h2 id="edit-title">Edit line</h2>
+    <button class="x" id="edit-close" type="button" aria-label="Close">&times;</button>
+  </header>
+
+  <p class="modal-task">Your own estimate for this line. Where you have marked a line
+    <code>suggested</code>, these numbers are what collaborators see prefilled.</p>
+
+  <div class="modal-body">
+    <label for="e-name">Task</label>
+    <input id="e-name" type="text" maxlength="90" />
+
+    <label for="e-note">Detail</label>
+    <textarea id="e-note" rows="3" maxlength="300"></textarea>
+
+    <div class="calc calc-5">
+      <div>
+        <label for="e-qty">Quantity</label>
+        <input id="e-qty" type="number" step="0.5" min="0" />
+      </div>
+      <div>
+        <label for="e-unit">Unit</label>
+        <select id="e-unit"></select>
+      </div>
+      <div class="times">&times;</div>
+      <div>
+        <label for="e-rate">Rate / unit · USD</label>
+        <input id="e-rate" type="number" step="25" min="0" />
+      </div>
+      <div class="equals">=</div>
+      <div class="calc-total">
+        <label>Line total</label>
+        <output id="e-total">$0</output>
+      </div>
+    </div>
+
+    <label for="e-memo">Private note <span class="only-here">admin only</span></label>
+    <textarea id="e-memo" rows="3" maxlength="500"
+              placeholder="Who might take this on, what still needs deciding, anything not for the board…"></textarea>
+
+    <div class="modal-actions">
+      <button class="btn" id="edit-save" type="button">Save</button>
+      <button class="btn ghost" id="edit-cancel" type="button">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="prop-modal" role="dialog" aria-modal="true" aria-labelledby="prop-title" hidden>
+  <header>
+    <h2 id="prop-title">Edit proposal</h2>
+    <button class="x" id="prop-close" type="button" aria-label="Close">&times;</button>
+  </header>
+
+  <p class="modal-task" id="prop-task"></p>
+
+  <div class="modal-body">
+    <label for="pr-name">Name</label>
+    <input id="pr-name" type="text" maxlength="60" />
+
+    <div class="calc calc-5">
+      <div>
+        <label for="pr-qty">Quantity</label>
+        <input id="pr-qty" type="number" step="0.5" min="0" />
+      </div>
+      <div>
+        <label for="pr-unit">Unit</label>
+        <select id="pr-unit"></select>
+      </div>
+      <div class="times">&times;</div>
+      <div>
+        <label for="pr-rate">Rate / unit · USD</label>
+        <input id="pr-rate" type="number" step="25" min="0" />
+      </div>
+      <div class="equals">=</div>
+      <div class="calc-total">
+        <label>Line total</label>
+        <output id="pr-total">$0</output>
+      </div>
+    </div>
+
+    <label for="pr-notes">Task details</label>
+    <textarea id="pr-notes" rows="4" maxlength="600"></textarea>
+
+    <div class="modal-actions">
+      <button class="btn" id="prop-save" type="button">Save</button>
+      <button class="btn ghost" id="prop-cancel" type="button">Cancel</button>
+      <button class="btn ghost danger" id="prop-remove" type="button">Remove proposal</button>
+    </div>
+  </div>
+</div>
+
+<script src="/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+node_modules/
+.env
+
+# Internal scratch copies — not part of the published proposal
+budget/
+dist/deck-internal.html
+
+# runtime state — the live copy is the gist, or the server's own file
+budget-state.json

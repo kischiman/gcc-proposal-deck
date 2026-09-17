@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<title>Companion</title>
+<link rel="stylesheet" href="/mobile.css" />
+</head>
+<body>
+
+<header>
+  <h1>Questions</h1>
+  <p id="conn">connecting…</p>
+</header>
+
+<form id="capture">
+  <input id="entry" type="text" placeholder="What do they want to know?" autocomplete="off"
+         autocapitalize="sentences" enterkeyhint="done" maxlength="240" />
+  <button type="submit" aria-label="Add">Add</button>
+</form>
+
+<ul id="list"></ul>
+<p class="empty" id="empty">Nothing yet. Type what the room asks — it appears on the big screen instantly.</p>
+
+<div class="pad">
+  <button class="primary" id="generate">Answer these</button>
+  <p class="status" id="status"></p>
+</div>
+
+
+<script src="/mobile.js"></script>
+</body>
+</html>

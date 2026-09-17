@@ -1,0 +1,29 @@
+# Fly.io — https://fly.io/docs/reference/configuration/
+#
+#   fly auth login
+#   fly launch --copy-config --no-deploy
+#   fly secrets import < .env      # sets GEMINI_API_KEY without printing it
+#   fly deploy
+#
+# auto_stop_machines keeps cost near zero; the trade-off is a cold start on the
+# first request after idle. Set min_machines_running = 1 before a live session.
+
+app = "gcc-proposal-deck"
+primary_region = "sin"
+
+[build]
+
+[env]
+  PORT = "8080"
+  NODE_ENV = "production"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = "suspend"
+  auto_start_machines = true
+  min_machines_running = 0
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "512mb"

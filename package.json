@@ -1,0 +1,17 @@
+{
+  "name": "gcc-proposal-deck",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Semi-interactive client proposal: a talent acquisition and retention system for General Construction Co.",
+  "scripts": {
+    "start": "node server.js",
+    "models": "node list-models.js",
+    "build": "node build-artifact.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.70.0",
+    "@google/genai": "^2.18.0",
+    "openai": "^7.5.0"
+  }
+}
