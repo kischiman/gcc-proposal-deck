@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "node build-budget-embed.mjs && node build-artifact.js",
+  "buildCommand": "node build-private-pages.mjs && node build-budget-embed.mjs && node build-artifact.js",
   "rewrites": [
     {
       "source": "/",
@@ -9,18 +9,6 @@
     {
       "source": "/budget",
       "destination": "/budget.html"
-    },
-    {
-      "source": "/admin",
-      "destination": "/admin.html"
-    },
-    {
-      "source": "/budgets",
-      "destination": "/admin.html"
-    },
-    {
-      "source": "/team",
-      "destination": "/team.html"
     },
     {
       "source": "/m",

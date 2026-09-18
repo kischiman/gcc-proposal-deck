@@ -16,6 +16,7 @@ import { generateSolutions } from "./lib/generate.js";
 import { answerFromDeck } from "./lib/ask.js";
 import { providerLabel } from "./lib/llm.js";
 import * as budget from "./lib/budget-store.js";
+import { PAGES } from "./private/pages.js";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const PUBLIC = path.join(HERE, "public");
@@ -204,6 +205,19 @@ function serveSignIn(res) {
   res.end(SIGN_IN_PAGE);
 }
 
+/** The gated pages come from a generated module rather than public/.
+ *
+ *  A managed host serves everything in public/ from its CDN before a request reaches
+ *  this code, so a page kept there cannot be gated at all — /admin.html was answering
+ *  200 to anyone who asked. These arrive as imported strings, which also survives
+ *  serverless bundling, where an untraced fs read of a loose file may find nothing. */
+function servePage(res, name) {
+  const body = PAGES[name];
+  if (!body) return json(res, 500, { error: `page missing from the bundle: ${name}` });
+  res.writeHead(200, { "content-type": "text/html; charset=utf-8", "cache-control": "no-store" });
+  res.end(body);
+}
+
 // ---------------------------------------------------------------- routes
 
 
@@ -238,13 +252,13 @@ export async function handle(req, res) {
   if (pathname === "/admin" || pathname === "/budgets" || pathname === "/budget-admin") {
     if (!adminAvailable()) return json(res, 404, { error: "not found" });
     if (!adminAllowed(req)) return serveSignIn(res);
-    return serveStatic(res, "admin.html");
+    return servePage(res, "admin.html");
   }
   // The team's view of the process: proposals and comments together.
   if (pathname === "/team") {
     if (!adminAvailable()) return json(res, 404, { error: "not found" });
     if (!adminAllowed(req)) return serveSignIn(res);
-    return serveStatic(res, "team.html");
+    return servePage(res, "team.html");
   }
 
   // --- budget: shared state, so everyone with the link sees the same numbers.
