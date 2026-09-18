@@ -270,6 +270,9 @@ function render() {
             <input class="phase-sub" type="text" maxlength="300" value="${esc(p.note || "")}"
                    data-phase-field="note" data-id="${esc(p.id)}"
                    placeholder="What this phase is for" aria-label="What this phase is for" />
+            <input class="phase-sub" type="text" maxlength="80" value="${esc(p.fee || "")}"
+                   data-phase-field="fee" data-id="${esc(p.id)}"
+                   placeholder="Fee — e.g. US$10,000, or included in the package" aria-label="Fee" />
             <div class="phase-lists">
               <label>
                 <span>Objectives · one per line</span>

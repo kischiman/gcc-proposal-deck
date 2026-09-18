@@ -43,7 +43,7 @@
       <button class="phase-head" type="button" aria-expanded="true">
         <span class="phase-num">${esc(p.title || "Phase")}</span>
         <span class="phase-title">${esc(p.note || "")}</span>
-        <span class="phase-dur">${esc(p.duration || "")}</span>
+        <span class="phase-dur">${esc([p.duration, p.fee].filter(Boolean).join(" · "))}</span>
         <span class="phase-owner">${esc(p.owner || "")}</span>
         <span class="chev" aria-hidden="true"></span>
       </button>
