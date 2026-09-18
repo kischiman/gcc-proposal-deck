@@ -1358,3 +1358,38 @@ p { line-height: 1.6; }
 }
 
 .mdiag .md-label.on { fill: var(--accent); }
+
+/* ------------------------------------ ask this document · collapsed by default
+   The field used to sit open in the bar at desktop width and hide behind the lens only
+   on a phone. Now it is the lens everywhere: click to open the field, click again or
+   click away to put it back. The phone's full-width row is re-asserted at the end,
+   because these rules come later in the file and would otherwise win at every width.
+   Nothing here sets `position`, so the phone row stays absolute as before. */
+
+.ask-toggle {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  flex: 0 0 auto;
+  border: 1px solid var(--rule);
+  border-radius: 7px;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.ask-toggle:hover { border-color: var(--accent); }
+.ask-toggle:hover svg { stroke: var(--accent); }
+
+.nav-ask[data-open="true"] .ask-toggle { border-color: var(--accent); background: var(--accent-soft); }
+.nav-ask[data-open="true"] .ask-toggle svg { stroke: var(--accent); }
+
+.nav-ask .ask-form { display: none; }
+.nav-ask[data-open="true"] .ask-form { display: flex; }
+
+@media (max-width: 640px) {
+  .ask-toggle { width: 46px; height: 46px; border-radius: 8px; }
+  .ask-toggle svg { width: 18px; height: 18px; }
+}

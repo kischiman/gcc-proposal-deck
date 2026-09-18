@@ -99,10 +99,17 @@
     input.setAttribute("aria-expanded", "true");
   }
 
-  function close() {
+  /** Put the answer away and leave the field open. Emptying what you typed should not
+   *  collapse the box you are typing into — which it would, now that the field lives
+   *  behind the lens at every width rather than only on a phone. */
+  function closePanel() {
     panel.hidden = true;
     panel.innerHTML = "";
     input.setAttribute("aria-expanded", "false");
+  }
+
+  function close() {
+    closePanel();
     wrap.removeAttribute("data-open");
   }
 
@@ -187,7 +194,7 @@
   });
 
   input.addEventListener("input", () => {
-    if (!input.value.trim()) close();
+    if (!input.value.trim()) closePanel();
   });
 
   panel.addEventListener("click", (e) => {
