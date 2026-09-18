@@ -1274,3 +1274,87 @@ p { line-height: 1.6; }
   .nav-brand { display: none; }
   .nav-item { padding: 0 9px; font-size: 12.5px; }
 }
+
+/* ------------------------------------------------- about · methods and diagrams
+   Each method gets a schematic rather than an illustration: the point is the shape of
+   the mechanism — across silos, along a timeline, through an archetype, lead before
+   lag — so the drawings share one vocabulary of nodes, links and axes. */
+
+.about-lede {
+  margin: -8px 0 26px;
+  max-width: 78ch;
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+.about-lede b { color: var(--ink); font-weight: 600; }
+
+.methods { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+
+@media (max-width: 900px) {
+  .methods { grid-template-columns: 1fr; }
+}
+
+.method {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 18px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.method h2 { margin: 0; font-size: 19px; }
+.method p { margin: 0; font-size: 14px; line-height: 1.6; color: var(--muted); }
+
+.method .tell {
+  margin-top: auto;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.mdiag {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+}
+
+.mdiag .md-silo {
+  fill: var(--paper);
+  stroke: #cdc5b4;
+  stroke-width: 1.2;
+  stroke-dasharray: 4 3;
+}
+
+.mdiag .md-box { fill: #fff; stroke: #cdc5b4; stroke-width: 1.2; }
+.mdiag .md-node { fill: #b9b1a0; }
+.mdiag .md-node.on { fill: var(--accent); }
+.mdiag .md-dot { fill: #b9b1a0; }
+
+.mdiag .md-link { fill: none; stroke: #cdc5b4; stroke-width: 1.4; }
+.mdiag .md-link.on { stroke: var(--accent); stroke-width: 1.8; }
+.mdiag .md-axis { fill: none; stroke: #cdc5b4; stroke-width: 1.2; }
+.mdiag .dashed { stroke-dasharray: 4 4; }
+
+.mdiag .md-fill { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.2; }
+.mdiag .md-figure { fill: var(--accent); }
+.mdiag .md-figure-body { fill: none; stroke: var(--accent); stroke-width: 2.4; }
+
+.mdiag #mtip path, .mdiag marker path { fill: #cdc5b4; stroke: none; }
+
+.mdiag .md-label {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  fill: var(--muted);
+  text-anchor: middle;
+}
+
+.mdiag .md-label.on { fill: var(--accent); }
