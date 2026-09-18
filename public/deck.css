@@ -1141,13 +1141,6 @@ p { line-height: 1.6; }
   text-anchor: middle;
 }
 
-.outcome-sub {
-  font-family: var(--sans);
-  font-size: 13px;
-  fill: var(--muted);
-  text-anchor: middle;
-}
-
 .risers path { fill: none; stroke: var(--rule); stroke-width: 2; }
 
 .fnode { cursor: pointer; }
