@@ -1393,3 +1393,14 @@ p { line-height: 1.6; }
   .ask-toggle { width: 46px; height: 46px; border-radius: 8px; }
   .ask-toggle svg { width: 18px; height: 18px; }
 }
+
+/* The phase's own sentence, under the header and above the two columns. It used to sit
+   in .phase-title, where a full sentence was set at 20px serif as though it were a
+   headline; the headline slot now takes the phase's name and this takes the prose. */
+.phase-lede {
+  margin: 0 0 20px;
+  max-width: 78ch;
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--muted);
+}

@@ -36,18 +36,30 @@
     if (el) el.innerHTML = estimateRowsHtml(state);
   }
 
-  /** One phase, exactly as the panel describes it. */
-  function phaseArticle(p) {
+  /** One phase, exactly as the panel describes it.
+   *
+   *  The header has three slots and they are not interchangeable: .phase-num is a small
+   *  mono label, .phase-title is the serif headline that takes the width, .phase-dur is
+   *  the mono figure on the right. A title like "Phase 2 · Design" carries both the
+   *  label and the headline, so it is split — "Phase 2" to the label, "Design" to the
+   *  headline — and the description drops to a lede, where a sentence can breathe
+   *  instead of being set at 20px serif as though it were a title. */
+  function phaseArticle(p, index) {
     const items = (list) => (list || []).map((s) => `<li>${esc(s)}</li>`).join("");
+    const parts = String(p.title || "").split("·");
+    const label = parts.length > 1 ? parts[0].trim() : `Phase ${index + 1}`;
+    const headline = parts.length > 1 ? parts.slice(1).join("·").trim() : String(p.title || "").trim();
+
     return `<article class="phase" data-open="true">
       <button class="phase-head" type="button" aria-expanded="true">
-        <span class="phase-num">${esc(p.title || "Phase")}</span>
-        <span class="phase-title">${esc(p.note || "")}</span>
+        <span class="phase-num">${esc(label)}</span>
+        <span class="phase-title">${esc(headline)}</span>
         <span class="phase-dur">${esc([p.duration, p.fee].filter(Boolean).join(" · "))}</span>
         <span class="phase-owner">${esc(p.owner || "")}</span>
         <span class="chev" aria-hidden="true"></span>
       </button>
       <div class="phase-body">
+        ${p.note ? `<p class="phase-lede">${esc(p.note)}</p>` : ""}
         <div class="phase-top">
           <div><h3>Objectives</h3><ul>${items(p.objectives)}</ul></div>
           <div><h3>Outcomes</h3><ul>${items(p.outcomes)}</ul></div>
@@ -76,7 +88,7 @@
   function renderSteps(state) {
     // Replace the fallback with what the panel actually holds.
     if (phasesHost && Array.isArray(state.phases) && state.phases.length) {
-      phasesHost.innerHTML = state.phases.map(phaseArticle).join("");
+      phasesHost.innerHTML = state.phases.map((p, i) => phaseArticle(p, i)).join("");
     }
 
     for (const host of [...document.querySelectorAll("[data-budget-phases]")]) {
