@@ -254,7 +254,7 @@ function render() {
 
 render();
 
-// -- drag to prioritise
+// -- drag to prioritize
 let dragged = null;
 
 list.addEventListener("dragstart", (e) => {
