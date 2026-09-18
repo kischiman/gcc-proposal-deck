@@ -983,3 +983,50 @@ h3 {
    terms take the space rather than leaving a gap where a figure used to be. */
 .proposal.scope-only { grid-template-columns: minmax(90px, auto) 1fr auto; }
 .other.scope-only { grid-template-columns: minmax(80px, auto) 1fr; }
+
+/* ------------------------------------------------- phase editor (admin panel)
+   The deck's process slide is written from these fields, so this is an editor, not a
+   header. Tokens are given fallbacks: this block must hold whatever budget.css defines. */
+
+.phase-edit { display: flex; flex-direction: column; gap: 8px; flex: 1; min-width: 0; }
+
+.phase-namerow { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+
+.phase-edit input,
+.phase-edit textarea {
+  font: inherit;
+  color: inherit;
+  background: var(--paper, #fff);
+  border: 1px solid var(--rule, rgba(23, 21, 15, 0.16));
+  border-radius: 6px;
+  padding: 7px 9px;
+  min-width: 0;
+}
+
+.phase-edit input:focus,
+.phase-edit textarea:focus { outline: none; border-color: var(--accent, #b03a1a); }
+
+.phase-name { flex: 1 1 220px; font-size: 17px; font-weight: 600; }
+.phase-when { flex: 0 0 120px; font-size: 13px; }
+.phase-sub { width: 100%; font-size: 13.5px; }
+
+.phase-lists { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+@media (max-width: 720px) {
+  .phase-lists { grid-template-columns: 1fr; }
+}
+
+.phase-lists label { display: flex; flex-direction: column; gap: 5px; }
+
+.phase-lists span {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted, #6e675a);
+}
+
+.phase-lists textarea { resize: vertical; font-size: 13px; line-height: 1.5; }
+
+.phase-head-right { display: flex; align-items: flex-start; gap: 10px; flex: 0 0 auto; }
+
+.phase-add { display: flex; justify-content: center; padding: 18px 0 4px; }

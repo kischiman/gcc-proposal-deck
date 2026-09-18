@@ -325,9 +325,21 @@ export async function handle(req, res) {
     if (pathname.startsWith("/api/admin/")) {
       if (!adminAllowed(req)) return json(res, 401, { error: "sign in at /admin" });
       const action = pathname.slice("/api/admin/".length);
+
+      // Removing a phase can be refused for a reason worth reading — "3 lines are still
+      // on it" — so it answers on its own rather than through the yes/no map below.
+      if (action === "phase-remove") {
+        const outcome = budget.removePhase(body.id);
+        if (!outcome.ok) return json(res, 409, { error: outcome.error });
+        await persistAll();
+        return json(res, 200, { ok: true, totals: budget.totals() });
+      }
       const ok =
         action === "rate" ? budget.setRate(body.key, body.value)
         : action === "phase-owner" ? budget.setPhaseOwner(body.phase, body.name)
+        : action === "phase-add" ? budget.addPhase(body)
+        : action === "phase-update" ? budget.updatePhase(body.id, body)
+        : action === "phase-reorder" ? budget.reorderPhases(body.ids)
         : action === "expense" ? budget.setExpense(body.id, body.value)
         : action === "prefill" ? budget.setPrefill(body.id, body.value)
         : action === "prefill-all" ? budget.setPrefillAll(body.value)

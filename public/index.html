@@ -167,7 +167,10 @@
 
     <div class="panel" data-active="true">
 
-      <div class="phases">
+      <!-- The blocks below are the no-server fallback: the static build keeps them.
+           With a server, deck-budget.js replaces them with the phases the admin panel
+           holds, so adding a phase there adds a section here. -->
+      <div class="phases" id="deck-phases">
         <article class="phase" data-open="true">
           <button class="phase-head" type="button" aria-expanded="true">
             <span class="phase-num">Phase 1</span>

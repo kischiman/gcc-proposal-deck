@@ -249,21 +249,50 @@ function render() {
   renderRates();
   renderPeople();
 
-  $("phases").innerHTML = state.phases
-    .map((p) => {
-      const tasks = state.tasks.filter((t) => t.phase === p.id);
-      return `<section class="phase" data-phase="${esc(p.id)}">
+  // The deck's process slide is rendered from these fields, so this header is where
+  // that slide is written: a phase's name, how long it runs, what it is for, and the
+  // objectives and outcomes shown beside its lines.
+  $("phases").innerHTML =
+    state.phases
+      .map((p) => {
+        const tasks = state.tasks.filter((t) => t.phase === p.id);
+        return `<section class="phase" data-phase="${esc(p.id)}">
         <header>
-          <div>
-            <h2>${esc(p.title)}</h2>
-            <p class="note">${esc(p.note)}</p>
+          <div class="phase-edit">
+            <div class="phase-namerow">
+              <input class="phase-name" type="text" maxlength="90" value="${esc(p.title)}"
+                     data-phase-field="title" data-id="${esc(p.id)}"
+                     placeholder="Phase name" aria-label="Phase name" />
+              <input class="phase-when" type="text" maxlength="40" value="${esc(p.duration || "")}"
+                     data-phase-field="duration" data-id="${esc(p.id)}"
+                     placeholder="3 months" aria-label="Duration" />
+            </div>
+            <input class="phase-sub" type="text" maxlength="300" value="${esc(p.note || "")}"
+                   data-phase-field="note" data-id="${esc(p.id)}"
+                   placeholder="What this phase is for" aria-label="What this phase is for" />
+            <div class="phase-lists">
+              <label>
+                <span>Objectives · one per line</span>
+                <textarea rows="3" data-phase-field="objectives" data-id="${esc(p.id)}"
+                          placeholder="One per line">${esc((p.objectives || []).join("\n"))}</textarea>
+              </label>
+              <label>
+                <span>Outcomes · one per line</span>
+                <textarea rows="3" data-phase-field="outcomes" data-id="${esc(p.id)}"
+                          placeholder="One per line">${esc((p.outcomes || []).join("\n"))}</textarea>
+              </label>
+            </div>
             <label class="owner">
               <span>Owner</span>
               <input type="text" maxlength="60" data-owner="${esc(p.id)}"
                      value="${esc(p.owner || "")}" placeholder="Nobody yet" />
             </label>
           </div>
-          <span class="amount">${money(state.totals.effective.byPhase[p.id])}</span>
+          <div class="phase-head-right">
+            <span class="amount">${money(state.totals.effective.byPhase[p.id])}</span>
+            <button class="remove" data-phase-remove="${esc(p.id)}"
+                    title="Remove phase" aria-label="Remove phase">&times;</button>
+          </div>
         </header>
         ${tasks.map(lineHtml).join("")}
         <div class="phase-foot">
@@ -271,8 +300,9 @@ function render() {
           <button class="btn ghost small" data-newdivider="${esc(p.id)}">+ Add divider</button>
         </div>
       </section>`;
-    })
-    .join("");
+      })
+      .join("") +
+    `<div class="phase-add"><button class="btn ghost" id="add-phase" type="button">+ Add phase</button></div>`;
 
   const eff = state.totals.effective;
   const base = state.totals.base;
@@ -585,7 +615,25 @@ let dragged = null;
 
 $("phases").addEventListener("change", (e) => {
   const field = e.target.closest("[data-owner]");
-  if (field) mutate("phase-owner", { phase: field.dataset.owner, name: field.value });
+  if (field) return mutate("phase-owner", { phase: field.dataset.owner, name: field.value });
+
+  // One field at a time: the server touches only what it is sent, so saving a title
+  // cannot blank the objectives sitting next to it.
+  const pf = e.target.closest("[data-phase-field]");
+  if (pf) return mutate("phase-update", { id: pf.dataset.id, [pf.dataset.phaseField]: pf.value });
+});
+
+$("phases").addEventListener("click", (e) => {
+  if (e.target.closest("#add-phase")) return mutate("phase-add", {});
+
+  const rm = e.target.closest("[data-phase-remove]");
+  if (!rm) return;
+  const p = state.phases.find((x) => x.id === rm.dataset.phaseRemove);
+  // The server refuses to take a phase that still carries lines, and says how many —
+  // reportFailure puts that in front of whoever clicked.
+  if (p && confirm(`Remove "${p.title || "this phase"}" from the proposal?`)) {
+    mutate("phase-remove", { id: rm.dataset.phaseRemove });
+  }
 });
 
 $("phases").addEventListener("dragstart", (e) => {

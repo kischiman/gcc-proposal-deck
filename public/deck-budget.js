@@ -18,9 +18,12 @@
   const board = document.getElementById("deck-budget-board");
   const summary = document.getElementById("deck-budget-summary");
   const liveEl = document.getElementById("deck-budget-live");
-  const stepHosts = [...document.querySelectorAll("[data-budget-phases]")];
+  // The process slide is written from the phases the admin panel holds. The markup
+  // ships hand-written blocks as the no-server fallback; this replaces them the moment
+  // real phases arrive, so adding a phase in the panel adds a section to the proposal.
+  const phasesHost = document.getElementById("deck-phases");
 
-  if (!board && !stepHosts.length) return;
+  if (!board && !phasesHost) return;
 
   const { esc, money, lineHtml, lineNumbers, segmentSumHtml, phaseTotalHtml, estimateRowsHtml } = Budget;
 
@@ -33,13 +36,52 @@
     if (el) el.innerHTML = estimateRowsHtml(state);
   }
 
+  /** One phase, exactly as the panel describes it. */
+  function phaseArticle(p) {
+    const items = (list) => (list || []).map((s) => `<li>${esc(s)}</li>`).join("");
+    return `<article class="phase" data-open="true">
+      <button class="phase-head" type="button" aria-expanded="true">
+        <span class="phase-num">${esc(p.title || "Phase")}</span>
+        <span class="phase-title">${esc(p.note || "")}</span>
+        <span class="phase-dur">${esc(p.duration || "")}</span>
+        <span class="phase-owner">${esc(p.owner || "")}</span>
+        <span class="chev" aria-hidden="true"></span>
+      </button>
+      <div class="phase-body">
+        <div class="phase-top">
+          <div><h3>Objectives</h3><ul>${items(p.objectives)}</ul></div>
+          <div><h3>Outcomes</h3><ul>${items(p.outcomes)}</ul></div>
+        </div>
+        <div class="phase-process">
+          <h3>Process</h3>
+          <div class="plines" data-budget-phases="${esc(p.id)}"></div>
+        </div>
+      </div>
+    </article>`;
+  }
+
+  // These blocks are drawn after deck.js wired its collapse handlers, so the toggle is
+  // delegated from the container rather than bound to buttons that did not exist yet.
+  if (phasesHost) {
+    phasesHost.addEventListener("click", (e) => {
+      const head = e.target.closest(".phase-head");
+      if (!head) return;
+      const phase = head.closest(".phase");
+      const open = phase.dataset.open !== "true";
+      phase.dataset.open = String(open);
+      head.setAttribute("aria-expanded", String(open));
+    });
+  }
+
   function renderSteps(state) {
-    for (const host of stepHosts) {
+    // Replace the fallback with what the panel actually holds.
+    if (phasesHost && Array.isArray(state.phases) && state.phases.length) {
+      phasesHost.innerHTML = state.phases.map(phaseArticle).join("");
+    }
+
+    for (const host of [...document.querySelectorAll("[data-budget-phases]")]) {
       const phases = host.dataset.budgetPhases.split(/\s+/);
       const lines = state.tasks.filter((t) => phases.includes(t.phase));
-      // No lines for this phase yet — leave the static list alone rather than replacing
-      // a readable fallback with an empty box.
-      if (!lines.length) continue;
 
       // The work first, in the order set in the admin panel, then what the phase costs
       // to run underneath it. Splitting them is the one ordering this page imposes:
@@ -92,12 +134,6 @@
           </button>
         </div>`;
       host.classList.add("budget-scope", "plines-live");
-
-      // The phase headers on this slide are written by hand, not rendered from the
-      // board, so the owner has to be placed into the one above this list.
-      const owner = state.phases.find((p) => phases.includes(p.id))?.owner || "";
-      const slot = host.closest(".phase")?.querySelector(".phase-owner");
-      if (slot) slot.textContent = owner ? `${owner}` : "";
     }
 
     renderProcessSummary(state);
