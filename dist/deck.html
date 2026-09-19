@@ -1407,6 +1407,26 @@ p { line-height: 1.6; }
   color: var(--muted);
 }
 
+/* ------------------------------------------------------------ capabilities
+   Three disciplines, so three columns — the methods grid is two, which would strand
+   the third card on a row of its own. Cards reuse .method; the diagrams reuse .mdiag,
+   so the drawing vocabulary is the same one the About page uses. */
+
+.caps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+
+@media (max-width: 1040px) { .caps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 700px)  { .caps { grid-template-columns: 1fr; } }
+
+.cap-list {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: var(--ink);
+}
+
+.cap-list li::marker { color: var(--accent); }
+
 
 .companion-card { max-width: 340px; }
 .bottleneck { cursor: grab; }
@@ -1671,6 +1691,110 @@ p { line-height: 1.6; }
 
     <div class="panel" data-active="true">
       <h1>Capabilities</h1>
+
+      <div class="caps">
+
+        <article class="method">
+          <svg class="mdiag" viewBox="0 0 320 150" role="img"
+               aria-label="Three linked boxes as the system, feeding a screen as the interface, feeding a person beside rising bars as learning and development.">
+            <defs>
+              <marker id="ctip" viewBox="0 0 10 10" refX="9" refY="5"
+                      markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M0 1 L9 5 L0 9 z" />
+              </marker>
+            </defs>
+
+            <rect class="md-box" x="20" y="38" width="36" height="22" rx="3" />
+            <rect class="md-box" x="62" y="38" width="36" height="22" rx="3" />
+            <rect class="md-box" x="41" y="80" width="36" height="22" rx="3" />
+            <path class="md-link" d="M56 49 L62 49" />
+            <path class="md-link" d="M38 60 L55 80" />
+            <path class="md-link" d="M80 60 L64 80" />
+            <text class="md-label" x="59" y="126">systems</text>
+
+            <path class="md-link" d="M104 66 L120 66" marker-end="url(#ctip)" />
+
+            <rect class="md-fill" x="126" y="34" width="68" height="62" rx="5" />
+            <path class="md-axis" d="M126 50 L194 50" />
+            <path class="md-link" d="M138 64 L182 64" />
+            <path class="md-link" d="M138 76 L168 76" />
+            <text class="md-label on" x="160" y="126">UI/UX</text>
+
+            <path class="md-link" d="M200 66 L216 66" marker-end="url(#ctip)" />
+
+            <circle class="md-node on" cx="240" cy="52" r="8" />
+            <path class="md-figure-body" d="M226 78 q14 -15 28 0" />
+            <rect class="md-box" x="268" y="78" width="10" height="16" />
+            <rect class="md-box" x="284" y="68" width="10" height="26" />
+            <rect class="md-box" x="300" y="58" width="10" height="36" />
+            <text class="md-label" x="268" y="126">L&amp;D</text>
+          </svg>
+          <h2>Design</h2>
+          <ul class="cap-list">
+            <li>Systems design</li>
+            <li>UI/UX design</li>
+            <li>Learning &amp; development design</li>
+          </ul>
+          <p>From the structure underneath to the surface people actually touch, and the
+          learning that makes both hold once we leave.</p>
+        </article>
+
+        <article class="method">
+          <svg class="mdiag" viewBox="0 0 320 150" role="img"
+               aria-label="A project spine with four milestones, and stakeholders above it each tied back to the milestone they care about.">
+            <text class="md-label" x="160" y="16">stakeholders</text>
+            <circle class="md-node" cx="70" cy="38" r="7" />
+            <circle class="md-node" cx="132" cy="30" r="7" />
+            <circle class="md-node" cx="196" cy="40" r="7" />
+            <circle class="md-node" cx="252" cy="32" r="7" />
+
+            <path class="md-link dashed" d="M70 45 L62 85" />
+            <path class="md-link dashed" d="M132 37 L122 85" />
+            <path class="md-link dashed" d="M196 47 L184 85" />
+            <path class="md-link dashed" d="M252 39 L242 85" />
+
+            <path class="md-axis" d="M28 92 L292 92" marker-end="url(#ctip)" />
+            <circle class="md-node on" cx="60" cy="92" r="5.5" />
+            <circle class="md-node on" cx="120" cy="92" r="5.5" />
+            <circle class="md-node on" cx="182" cy="92" r="5.5" />
+            <circle class="md-node on" cx="240" cy="92" r="5.5" />
+            <text class="md-label on" x="160" y="124">milestones</text>
+          </svg>
+          <h2>Ops</h2>
+          <ul class="cap-list">
+            <li>Project management</li>
+            <li>Stakeholder management</li>
+          </ul>
+          <p>Keeping the work moving, and keeping everyone with a stake in it tied to the
+          point where their stake actually lands.</p>
+        </article>
+
+        <article class="method">
+          <svg class="mdiag" viewBox="0 0 320 150" role="img"
+               aria-label="A closed feedback loop on the left, and on the right a trajectory rising past a horizon line toward a distant point.">
+            <path class="md-link on" d="M88 36 A36 36 0 0 1 88 108" marker-end="url(#ctip)" />
+            <path class="md-link" d="M88 108 A36 36 0 0 1 88 36" marker-end="url(#ctip)" />
+            <circle class="md-node on" cx="88" cy="36" r="5" />
+            <circle class="md-node" cx="124" cy="72" r="5" />
+            <circle class="md-node" cx="88" cy="108" r="5" />
+            <circle class="md-node" cx="52" cy="72" r="5" />
+            <text class="md-label" x="88" y="132">feedback</text>
+
+            <path class="md-axis" d="M176 100 L306 100" />
+            <path class="md-link on dashed" d="M186 100 Q238 42 286 58" marker-end="url(#ctip)" />
+            <circle class="md-node on" cx="296" cy="56" r="6" />
+            <text class="md-label" x="240" y="132">horizon</text>
+          </svg>
+          <h2>R&amp;D</h2>
+          <ul class="cap-list">
+            <li>Future of work</li>
+            <li>Cybernetics</li>
+          </ul>
+          <p>Where the practice is going, and the theory of feedback and control that
+          explains why any of it works.</p>
+        </article>
+
+      </div>
     </div>
 
   </div>

@@ -1404,3 +1404,23 @@ p { line-height: 1.6; }
   line-height: 1.65;
   color: var(--muted);
 }
+
+/* ------------------------------------------------------------ capabilities
+   Three disciplines, so three columns — the methods grid is two, which would strand
+   the third card on a row of its own. Cards reuse .method; the diagrams reuse .mdiag,
+   so the drawing vocabulary is the same one the About page uses. */
+
+.caps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+
+@media (max-width: 1040px) { .caps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 700px)  { .caps { grid-template-columns: 1fr; } }
+
+.cap-list {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: var(--ink);
+}
+
+.cap-list li::marker { color: var(--accent); }
