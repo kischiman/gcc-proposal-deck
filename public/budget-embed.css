@@ -640,3 +640,76 @@
 .proposal.scope-only { grid-template-columns: minmax(90px, auto) 1fr auto; }
 
 .other.scope-only { grid-template-columns: minmax(80px, auto) 1fr; }
+
+.budget-scope .phase-edit { display: flex; flex-direction: column; gap: 8px; flex: 1; min-width: 0; }
+
+.budget-scope .phase-namerow { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+
+.budget-scope .phase-edit input,
+.budget-scope .phase-edit textarea {
+  font: inherit;
+  color: inherit;
+  background: var(--paper, #fff);
+  border: 1px solid var(--rule, rgba(23, 21, 15, 0.16));
+  border-radius: 6px;
+  padding: 7px 9px;
+  min-width: 0;
+}
+
+.budget-scope .phase-edit input:focus,
+.budget-scope .phase-edit textarea:focus { outline: none; border-color: var(--accent, #b03a1a); }
+
+.budget-scope .phase-name { flex: 1 1 220px; font-size: 17px; font-weight: 600; }
+
+.budget-scope .phase-when { flex: 0 0 120px; font-size: 13px; }
+
+.budget-scope .phase-sub { width: 100%; font-size: 13.5px; }
+
+.budget-scope .phase-lists { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+@media (max-width: 720px) {
+  .budget-scope .phase-lists { grid-template-columns: 1fr; }
+}
+
+.budget-scope .phase-lists label { display: flex; flex-direction: column; gap: 5px; }
+
+.budget-scope .phase-lists span {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted, #6e675a);
+}
+
+.budget-scope .phase-lists textarea { resize: vertical; font-size: 13px; line-height: 1.5; }
+
+.budget-scope .phase-head-right { display: flex; align-items: flex-start; gap: 10px; flex: 0 0 auto; }
+
+.budget-scope .phase-add { display: flex; justify-content: center; padding: 18px 0 4px; }
+
+.budget-scope .hide-toggle {
+  font: inherit;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted, #6e675a);
+  background: none;
+  border: 1px solid var(--rule, rgba(23, 21, 15, 0.16));
+  border-radius: 4px;
+  padding: 3px 7px;
+  cursor: pointer;
+}
+
+.budget-scope .hide-toggle:hover { color: var(--ink, #17150f); border-color: var(--ink, #17150f); }
+
+.budget-scope .hide-toggle.on {
+  color: var(--accent, #b03a1a);
+  border-color: var(--accent, #b03a1a);
+  background: var(--accent-soft, #f6ebe5);
+}
+
+.budget-scope .hidden-tag {
+  color: var(--accent, #b03a1a);
+  border-color: var(--accent, #b03a1a);
+}
+
+.budget-scope .line[data-hidden="true"] { opacity: 0.72; }

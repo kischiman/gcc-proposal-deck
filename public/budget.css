@@ -1030,3 +1030,39 @@ h3 {
 .phase-head-right { display: flex; align-items: flex-start; gap: 10px; flex: 0 0 auto; }
 
 .phase-add { display: flex; justify-content: center; padding: 18px 0 4px; }
+
+/* --------------------------------------------- hidden from the public board
+   A line can be kept off the public board and the deck without being deleted. The
+   admin panel toggles it; the team view still shows the line, marked, because the
+   team needs to see what the client will not. The public payload never carries these
+   lines at all, so this tag can only ever appear on a view that asked for everything. */
+
+.hide-toggle {
+  font: inherit;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted, #6e675a);
+  background: none;
+  border: 1px solid var(--rule, rgba(23, 21, 15, 0.16));
+  border-radius: 4px;
+  padding: 3px 7px;
+  cursor: pointer;
+}
+
+.hide-toggle:hover { color: var(--ink, #17150f); border-color: var(--ink, #17150f); }
+
+.hide-toggle.on {
+  color: var(--accent, #b03a1a);
+  border-color: var(--accent, #b03a1a);
+  background: var(--accent-soft, #f6ebe5);
+}
+
+.hidden-tag {
+  color: var(--accent, #b03a1a);
+  border-color: var(--accent, #b03a1a);
+}
+
+/* The whole row reads as set aside, so it is obvious at a glance which lines the
+   client is not seeing. */
+.line[data-hidden="true"] { opacity: 0.72; }

@@ -342,6 +342,7 @@ export async function handle(req, res) {
         : action === "phase-reorder" ? budget.reorderPhases(body.ids)
         : action === "expense" ? budget.setExpense(body.id, body.value)
         : action === "prefill" ? budget.setPrefill(body.id, body.value)
+        : action === "hidden" ? budget.setHidden(body.id, body.value)
         : action === "prefill-all" ? budget.setPrefillAll(body.value)
         : action === "public-money" ? budget.setPublicMoney(body.value)
         : action === "public-proposals" ? budget.setPublicProposals(body.value)

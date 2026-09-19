@@ -238,6 +238,13 @@ function lineHtml(t) {
     </div>
     <div class="num amount">${money(t.effective)}</div>
     <div class="line-actions">
+      <button class="hide-toggle${t.hidden ? " on" : ""}" data-hidden="${esc(t.id)}"
+              aria-pressed="${t.hidden ? "true" : "false"}"
+              title="${
+                t.hidden
+                  ? "Hidden from the public board and the deck — still here and on the team view"
+                  : "Visible to anyone with the public link"
+              }">${t.hidden ? "hidden" : "public"}</button>
       <button class="btn ghost small" data-edit="${esc(t.id)}">Edit</button>
       <button class="remove" data-remove="${esc(t.id)}" title="Remove line" aria-label="Remove line">×</button>
     </div>
@@ -569,6 +576,12 @@ document.addEventListener("click", (e) => {
   if (pf) {
     const t = state.tasks.find((x) => x.id === pf.dataset.prefill);
     return mutate("prefill", { id: pf.dataset.prefill, value: !t.prefill });
+  }
+
+  const hid = e.target.closest("[data-hidden]");
+  if (hid) {
+    const t = state.tasks.find((x) => x.id === hid.dataset.hidden);
+    return mutate("hidden", { id: hid.dataset.hidden, value: !t.hidden });
   }
 
   const all = e.target.closest("[data-prefill-all]");
