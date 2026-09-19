@@ -430,21 +430,16 @@ p { line-height: 1.6; }
 
 /* ------------------------------------------------------- proposal, one screen */
 
-.proposal-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.05fr;
-  gap: 26px;
-  align-items: start;
-}
-
-.proposal-grid .col { display: flex; flex-direction: column; gap: 14px; }
+/* The goal the whole slide answers to, above the diagram rather than beside it. */
+.goal-card { margin: 0 0 24px; max-width: 78ch; }
 
 .card.tight { padding: 18px 20px; }
 .card.tight ul { font-size: 13.5px; line-height: 1.55; padding-left: 16px; }
 .card.tight li + li { margin-top: 6px; }
 
-.proposal-grid .note { margin: 0; font-size: 12.5px; line-height: 1.55; font-style: normal; }
-.proposal-grid .note b { color: var(--ink); font-weight: 600; }
+/* Upright, not the global .note's italic — this is a statement, not an aside. */
+.goal-card .note { margin: 0; font-size: 12.5px; line-height: 1.55; font-style: normal; }
+.goal-card .note b { color: var(--ink); font-weight: 600; }
 
 /* ------------------------------------------------------------ budget slide */
 
@@ -1016,7 +1011,6 @@ p { line-height: 1.6; }
 @media (max-width: 1100px) {
   .phase-body { grid-template-columns: 1fr; gap: 20px; }
   .case-body { grid-template-columns: 1fr; gap: 22px; }
-  .proposal-grid { grid-template-columns: 1fr; }
 }
 
 /* below this the two-column case is too tight — photo goes back on top, still uncropped */
@@ -1191,7 +1185,9 @@ p { line-height: 1.6; }
   text-anchor: middle;
 }
 
-.flow-legend { display: flex; flex-direction: column; gap: 8px; }
+/* Three across, under a diagram that now runs the full width. The 900px rule further
+   up collapses this to one column. */
+.flow-legend { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
 
 .flow-legend button {
   text-align: left;

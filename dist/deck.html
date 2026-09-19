@@ -432,21 +432,16 @@ p { line-height: 1.6; }
 
 /* ------------------------------------------------------- proposal, one screen */
 
-.proposal-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.05fr;
-  gap: 26px;
-  align-items: start;
-}
-
-.proposal-grid .col { display: flex; flex-direction: column; gap: 14px; }
+/* The goal the whole slide answers to, above the diagram rather than beside it. */
+.goal-card { margin: 0 0 24px; max-width: 78ch; }
 
 .card.tight { padding: 18px 20px; }
 .card.tight ul { font-size: 13.5px; line-height: 1.55; padding-left: 16px; }
 .card.tight li + li { margin-top: 6px; }
 
-.proposal-grid .note { margin: 0; font-size: 12.5px; line-height: 1.55; font-style: normal; }
-.proposal-grid .note b { color: var(--ink); font-weight: 600; }
+/* Upright, not the global .note's italic — this is a statement, not an aside. */
+.goal-card .note { margin: 0; font-size: 12.5px; line-height: 1.55; font-style: normal; }
+.goal-card .note b { color: var(--ink); font-weight: 600; }
 
 /* ------------------------------------------------------------ budget slide */
 
@@ -1018,7 +1013,6 @@ p { line-height: 1.6; }
 @media (max-width: 1100px) {
   .phase-body { grid-template-columns: 1fr; gap: 20px; }
   .case-body { grid-template-columns: 1fr; gap: 22px; }
-  .proposal-grid { grid-template-columns: 1fr; }
 }
 
 /* below this the two-column case is too tight — photo goes back on top, still uncropped */
@@ -1193,7 +1187,9 @@ p { line-height: 1.6; }
   text-anchor: middle;
 }
 
-.flow-legend { display: flex; flex-direction: column; gap: 8px; }
+/* Three across, under a diagram that now runs the full width. The 900px rule further
+   up collapses this to one column. */
+.flow-legend { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
 
 .flow-legend button {
   text-align: left;
@@ -1462,114 +1458,107 @@ p { line-height: 1.6; }
     <h1>Organic, sustainable scaling strategy for GCC</h1>
 
     <div class="panel" data-active="true">
-      <div class="proposal-grid">
-        <div class="col">
-          <div class="flow-wrap">
-            <svg viewBox="0 0 1000 400" role="img"
-                 aria-label="Flowchart: hiring and onboarding feed three goals — training, a KPI system and retention — which together support revenue growth, with a feedback loop from retention back to hiring.">
+      <div class="card tight goal-card">
+        <h3>The goal this serves</h3>
+        <p class="note"><b>Revenue growth in economic uncertainty.</b>
+        Every part of the system below is judged against that, not against activity.</p>
+      </div>
 
-              <!-- the outcome the three goals hold up -->
-              <g class="outcome">
-                <rect x="400" y="24" width="560" height="72" rx="10" />
-                <text class="outcome-label" x="680" y="69">Revenue growth</text>
-              </g>
+      <div class="flow-wrap">
+        <svg viewBox="0 0 1000 400" role="img"
+             aria-label="Flowchart: hiring and onboarding feed three goals — training, talent retention and a KPI system — which together support revenue growth. Retention loops back to hiring, and the KPI system loops back to training.">
 
-              <!-- goals carrying the outcome -->
-              <g class="risers">
-                <path d="M485 196 L485 96" />
-                <path d="M680 196 L680 96" />
-                <path d="M875 196 L875 96" />
-              </g>
+          <!-- the outcome the three goals hold up -->
+          <g class="outcome">
+            <rect x="400" y="24" width="560" height="72" rx="10" />
+            <text class="outcome-label" x="680" y="69">Revenue growth</text>
+          </g>
 
-              <!-- acquisition -->
-              <g class="fnode" data-node="hire" tabindex="0" role="button" aria-pressed="false"
-                 aria-label="Attract and hire">
-                <rect x="40" y="196" width="160" height="76" rx="9" />
-                <text class="fnode-label" x="120" y="230">Attract</text>
-                <text class="fnode-label" x="120" y="252">&amp; hire</text>
-              </g>
+          <!-- goals carrying the outcome -->
+          <g class="risers">
+            <path d="M485 196 L485 96" />
+            <path d="M680 196 L680 96" />
+            <path d="M875 196 L875 96" />
+          </g>
 
-              <g class="fnode" data-node="onboard" tabindex="0" role="button" aria-pressed="false"
-                 aria-label="Onboard">
-                <rect x="225" y="196" width="150" height="76" rx="9" />
-                <text class="fnode-label" x="300" y="241">Onboard</text>
-              </g>
+          <!-- acquisition -->
+          <g class="fnode" data-node="hire" tabindex="0" role="button" aria-pressed="false"
+             aria-label="Attract and hire">
+            <rect x="40" y="196" width="160" height="76" rx="9" />
+            <text class="fnode-label" x="120" y="230">Attract</text>
+            <text class="fnode-label" x="120" y="252">&amp; hire</text>
+          </g>
 
-              <!-- the three goals -->
-              <g class="fnode goal" data-node="training" tabindex="0" role="button" aria-pressed="false"
-                 aria-label="Goal one, training">
-                <rect x="400" y="196" width="170" height="76" rx="9" />
-                <text class="fnode-num" x="416" y="220">01</text>
-                <text class="fnode-label" x="485" y="248">Training</text>
-              </g>
+          <g class="fnode" data-node="onboard" tabindex="0" role="button" aria-pressed="false"
+             aria-label="Onboard">
+            <rect x="225" y="196" width="150" height="76" rx="9" />
+            <text class="fnode-label" x="300" y="241">Onboard</text>
+          </g>
 
-              <g class="fnode goal" data-node="kpi" tabindex="0" role="button" aria-pressed="false"
-                 aria-label="Goal two, KPI system">
-                <rect x="595" y="196" width="170" height="76" rx="9" />
-                <text class="fnode-num" x="611" y="220">02</text>
-                <text class="fnode-label" x="680" y="248">KPI system</text>
-              </g>
+          <!-- the three goals -->
+          <g class="fnode goal" data-node="training" tabindex="0" role="button" aria-pressed="false"
+             aria-label="Goal one, training">
+            <rect x="400" y="196" width="170" height="76" rx="9" />
+            <text class="fnode-num" x="416" y="220">01</text>
+            <text class="fnode-label" x="485" y="248">Training</text>
+          </g>
 
-              <g class="fnode goal" data-node="retention" tabindex="0" role="button" aria-pressed="false"
-                 aria-label="Goal three, talent retention">
-                <rect x="790" y="196" width="170" height="76" rx="9" />
-                <text class="fnode-num" x="806" y="220">03</text>
-                <text class="fnode-label" x="875" y="248">Retention</text>
-              </g>
+          <g class="fnode goal" data-node="retention" tabindex="0" role="button" aria-pressed="false"
+             aria-label="Goal two, talent retention">
+            <rect x="595" y="196" width="170" height="76" rx="9" />
+            <text class="fnode-num" x="611" y="220">02</text>
+            <text class="fnode-label" x="680" y="248">Retention</text>
+          </g>
 
-              <!-- the spine -->
-              <g class="flow-arrows">
-                <path d="M200 234 L219 234" marker-end="url(#tip)" />
-                <path d="M375 234 L394 234" marker-end="url(#tip)" />
-                <path d="M570 234 L589 234" marker-end="url(#tip)" />
-                <path d="M765 234 L784 234" marker-end="url(#tip)" />
-              </g>
+          <g class="fnode goal" data-node="kpi" tabindex="0" role="button" aria-pressed="false"
+             aria-label="Goal three, KPI system">
+            <rect x="790" y="196" width="170" height="76" rx="9" />
+            <text class="fnode-num" x="806" y="220">03</text>
+            <text class="fnode-label" x="875" y="248">KPI system</text>
+          </g>
 
-              <!-- what measurement sends back to training -->
-              <g class="flow-arrows back-short">
-                <path d="M680 272 L680 300 L485 300 L485 278" marker-end="url(#tip)" />
-                <text class="flow-note" x="582" y="318">what the numbers say to teach next</text>
-              </g>
+          <!-- the spine -->
+          <g class="flow-arrows">
+            <path d="M200 234 L219 234" marker-end="url(#tip)" />
+            <path d="M375 234 L394 234" marker-end="url(#tip)" />
+            <path d="M570 234 L589 234" marker-end="url(#tip)" />
+            <path d="M765 234 L784 234" marker-end="url(#tip)" />
+          </g>
 
-              <!-- the loop that makes hiring cheaper -->
-              <g class="flow-arrows feedback">
-                <path d="M875 272 L875 350 L120 350 L120 278" marker-end="url(#tip)" />
-                <text class="flow-note" x="497" y="370">people who stay refer, mentor and move up</text>
-              </g>
+          <!-- what measurement sends back to training -->
+          <g class="flow-arrows back-short">
+            <path d="M875 272 L875 305 L485 305 L485 278" marker-end="url(#tip)" />
+            <text class="flow-note" x="560" y="324">what the numbers say to teach next</text>
+          </g>
 
-              <defs>
-                <marker id="tip" viewBox="0 0 10 10" refX="9" refY="5"
-                        markerWidth="7" markerHeight="7" orient="auto">
-                  <path d="M0 1 L9 5 L0 9 z" />
-                </marker>
-              </defs>
-            </svg>
-          </div>
+          <!-- the loop that makes hiring cheaper -->
+          <g class="flow-arrows feedback">
+            <path d="M680 272 L680 350 L120 350 L120 278" marker-end="url(#tip)" />
+            <text class="flow-note" x="400" y="370">people who stay refer, mentor and move up</text>
+          </g>
 
-          <div class="flow-legend">
-            <button type="button" data-node="training" aria-pressed="false">
-              <b>01 · Training</b>
-              <span>What people are taught, when, and who is accountable for them being able to do the work.</span>
-            </button>
-            <button type="button" data-node="kpi" aria-pressed="false">
-              <b>02 · KPI system</b>
-              <span>The measures that say whether any of it is working, and how often they are looked at.</span>
-            </button>
-            <button type="button" data-node="retention" aria-pressed="false">
-              <b>03 · Talent retention</b>
-              <span>Why a good person stays a third year — and what it costs when they do not.</span>
-            </button>
-          </div>
-        </div>
+          <defs>
+            <marker id="tip" viewBox="0 0 10 10" refX="9" refY="5"
+                    markerWidth="7" markerHeight="7" orient="auto">
+              <path d="M0 1 L9 5 L0 9 z" />
+            </marker>
+          </defs>
+        </svg>
+      </div>
 
-        <div class="col">
-          <div class="card tight">
-            <h3>The goal this serves</h3>
-            <p class="note"><b>Revenue growth in economic uncertainty.</b>
-            Every part of the system below is judged against that, not against activity.</p>
-          </div>
-
-        </div>
+      <div class="flow-legend">
+        <button type="button" data-node="training" aria-pressed="false">
+          <b>01 · Training</b>
+          <span>What people are taught, when, and who is accountable for them being able to do the work.</span>
+        </button>
+        <button type="button" data-node="retention" aria-pressed="false">
+          <b>02 · Talent retention</b>
+          <span>Why a good person stays a third year — and what it costs when they do not.</span>
+        </button>
+        <button type="button" data-node="kpi" aria-pressed="false">
+          <b>03 · KPI system</b>
+          <span>The measures that say whether any of it is working, and how often they are looked at.</span>
+        </button>
       </div>
     </div>
 
