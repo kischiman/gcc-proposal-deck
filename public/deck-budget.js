@@ -50,8 +50,12 @@
     const label = parts.length > 1 ? parts[0].trim() : `Phase ${index + 1}`;
     const headline = parts.length > 1 ? parts.slice(1).join("·").trim() : String(p.title || "").trim();
 
-    return `<article class="phase" data-open="true">
-      <button class="phase-head" type="button" aria-expanded="true">
+    // Only the first phase opens. Six expanded phases is a wall of text to scroll past
+    // before the slide says anything; the rest open when someone asks for them.
+    const open = index === 0;
+
+    return `<article class="phase" data-open="${open}">
+      <button class="phase-head" type="button" aria-expanded="${open}">
         <span class="phase-num">${esc(label)}</span>
         <span class="phase-title">${esc(headline)}</span>
         <span class="phase-dur">${esc([p.duration, p.fee].filter(Boolean).join(" · "))}</span>
