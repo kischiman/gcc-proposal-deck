@@ -2,14 +2,13 @@
 //
 // It does not listen. server.js opens the port first and loads this afterwards, so a
 // fault in here cannot stop the host seeing a live port — it reports the fault instead.
-// Serves the big-screen deck (/) and the phone companion (/m), and keeps the two
-// in sync over Server-Sent Events. No database, no build step — state lives in memory
-// for the duration of the talk.
+// Serves the deck, the public budget board, and the gated admin and team views. No
+// database and no build step: state lives in the persisted document, and pages re-read
+// it rather than being pushed to.
 
 import "./lib/env.js";
 import fs from "node:fs";
 import path from "node:path";
-import os from "node:os";
 import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { generateSolutions } from "./lib/generate.js";
@@ -93,23 +92,7 @@ function serveStatic(res, relPath) {
   });
 }
 
-function lanAddress() {
-  for (const iface of Object.values(os.networkInterfaces()).flat()) {
-    if (iface && iface.family === "IPv4" && !iface.internal) return iface.address;
-  }
-  return "localhost";
-}
 
-// The address to put on the big screen for the phone to open.
-// Deployed, that is whatever host the browser used; locally it is the LAN IP,
-// since a phone cannot reach "localhost".
-function companionUrl(req) {
-  const host = req.headers["x-forwarded-host"] || req.headers.host || "";
-  const proto = req.headers["x-forwarded-proto"] || "http";
-  const local = /^(localhost|127\.0\.0\.1|0\.0\.0\.0|\[::1\])(:\d+)?$/i.test(host);
-  if (host && !local) return `${proto}://${host}/m`;
-  return `http://${lanAddress()}:${PORT}/m`;
-}
 
 // ---------------------------------------------------------------- admin access
 //
@@ -246,7 +229,6 @@ export async function handle(req, res) {
 
   // --- pages
   if (pathname === "/") return serveStatic(res, "index.html");
-  if (pathname === "/m" || pathname === "/mobile") return serveStatic(res, "mobile.html");
   if (pathname === "/budget") return serveStatic(res, "budget.html");
   // The budget panel and the team view are gated — they write to the shared board.
   if (pathname === "/admin" || pathname === "/budgets" || pathname === "/budget-admin") {
@@ -292,7 +274,6 @@ export async function handle(req, res) {
 
   if (pathname === "/api/info") {
     return json(res, 200, {
-      companionUrl: companionUrl(req),
       provider: providerLabel(),
     });
   }
@@ -521,4 +502,3 @@ export const init = () => budget.init();
 
 export const storageInfo = () => budget.storageInfo();
 export const provider = () => providerLabel();
-export const lan = () => lanAddress();

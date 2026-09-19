@@ -201,13 +201,6 @@ async function post(path, body) {
   }
 }
 
-fetch("/api/info")
-  .then((r) => r.json())
-  .then(({ companionUrl }) => {
-    document.getElementById("companion-url").textContent = companionUrl;
-  })
-  .catch(() => {});
-
 // No stream: the host answers a request and forgets. Read the shared content now,
 // again whenever this tab comes back to the front, and after anything you do to it.
 const refresh = () =>

@@ -9,14 +9,6 @@
     {
       "source": "/budget",
       "destination": "/budget.html"
-    },
-    {
-      "source": "/m",
-      "destination": "/mobile.html"
-    },
-    {
-      "source": "/mobile",
-      "destination": "/mobile.html"
     }
   ]
 }

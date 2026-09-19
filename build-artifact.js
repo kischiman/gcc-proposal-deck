@@ -37,16 +37,6 @@ html = html.replace(/<script src="\/deck-budget\.js"><\/script>\n?/, "");
 // --- inline every image
 html = html.replace(/src="(\/img\/[^"]+)"/g, (_, p) => `src="${dataUri(p)}"`);
 
-// --- the phone companion has no counterpart in a static page.
-// The capture form itself is real markup in index.html, so nothing needs injecting here —
-// only the two places that point at a phone need rewording.
-const replace = (pattern, replacement) => {
-  if (!pattern.test(html)) throw new Error(`build: pattern no longer matches — ${pattern}`);
-  html = html.replace(pattern, replacement);
-};
-
-// no phone to point at, and the page explains itself — drop the card entirely
-replace(/<div class="companion-card">[\s\S]*?<\/div>/, "");
 
 
 // --- example marks, keyed by domain slug. None are bundled with this proposal yet;
@@ -351,7 +341,6 @@ ${askJs}
 
 // .capture now lives in deck.css — only the static copy's own quirks belong here
 const extraCss = `
-.companion-card { max-width: 340px; }
 .bottleneck { cursor: grab; }
 `;
 

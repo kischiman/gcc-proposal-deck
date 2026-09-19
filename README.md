@@ -1,8 +1,8 @@
 # General Construction Co. · Talent acquisition &amp; retention
 
-A five-slide, semi-interactive client proposal with a phone capture companion. Several
-people can be on it at once from anywhere, each browsing on their own. Runs entirely on
-your machine — no hosting, no accounts, no build step.
+A five-slide, semi-interactive client proposal. Several people can be on it at once from
+anywhere, each browsing on their own. Runs entirely on your machine — no hosting, no
+accounts, no build step.
 
 ## Run it
 
@@ -13,10 +13,9 @@ npm start
 
 ```
 Big screen   http://localhost:4400
-Phone        http://<your-lan-ip>:4400/m     ← printed on start, and shown in the deck's top bar
 ```
 
-The phone must be on the same Wi-Fi. Change the port with `PORT=5000 npm start`.
+Change the port with `PORT=5000 npm start`.
 
 ## The slides
 
@@ -25,7 +24,7 @@ The phone must be on the same Wi-Fi. Change the port with `PORT=5000 npm start`.
 | **01** | Overview | The flowchart: hiring and onboarding feed the three goals — training, a KPI system, retention — which hold up revenue growth. Click any step to light it. |
 | **02** | Process | Three phases. The process lines fill themselves from whatever you add under each phase in the admin panel. |
 | **03** | Capabilities | Empty, waiting for content. |
-| **04** | Q&A | Capture questions from the room, on the big screen or from a phone, then answer them live. |
+| **04** | Q&A | Capture what the room raises on the big screen, then answer it live. |
 | **05** | About Us | Empty, waiting for content. |
 
 Slides have addresses — `#/overview`, `#/process`, `#/capabilities` — so a link can be sent
@@ -38,7 +37,6 @@ panel at `/admin`. The proposal ships empty: no phases titled, no lines, all rat
 
 ```
 /           the deck                                              open
-/m          phone companion                                       open
 /budget     the public board — propose yourself for a line        open
 /team       proposals and comments together                       password
 /admin      rates, lines, assignment, and the public switches     password
@@ -90,11 +88,11 @@ can confirm before a session.
 
 ## Where it can run
 
-| | Deck | Phone companion | Live model calls |
-|---|---|---|---|
-| **Local** (`npm start`) | ✅ | ✅ same Wi-Fi | ✅ |
-| **Deployed** (Vercel, Fly, Render, Docker) | ✅ | ✅ anywhere | ✅ |
-| **Static** (`npm run build` → `docs/index.html`) | ✅ | ❌ no server | ❌ offline fallbacks |
+| | Deck | Live model calls |
+|---|---|---|
+| **Local** (`npm start`) | ✅ | ✅ |
+| **Deployed** (Vercel, Fly, Render, Docker) | ✅ | ✅ |
+| **Static** (`npm run build` → `docs/index.html`) | ✅ | ❌ offline fallbacks |
 
 The static copy carries `noindex`: the link works for anyone who has it, search engines
 leave it alone. It drops the budget slide, since that needs a server.

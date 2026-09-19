@@ -77,7 +77,6 @@ const loading = import("./app.js")
     console.log("  General Construction Co. · talent acquisition & retention");
     console.log("  ─────────────────────────────────────────────");
     console.log(`  Big screen   http://localhost:${PORT}`);
-    console.log(`  Phone        http://${mod.lan()}:${PORT}/m`);
     console.log("");
     const label = mod.provider();
     console.log(
