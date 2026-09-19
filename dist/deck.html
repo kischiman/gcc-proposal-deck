@@ -432,8 +432,24 @@ p { line-height: 1.6; }
 
 /* ------------------------------------------------------- proposal, one screen */
 
-/* The goal the whole slide answers to, above the diagram rather than beside it. */
-.goal-card { margin: 0 0 24px; max-width: 78ch; }
+/* The goal the whole slide answers to, sitting above the diagram in the left column.
+   The column's gap does the spacing, so the card carries no margin of its own. */
+.goal-card { margin: 0; }
+
+/* Diagram and its goal on the left, the three entries stacked on the right. The
+   diagram takes the larger share: it is 1000 units wide and full of labels. */
+.overview-grid {
+  display: grid;
+  grid-template-columns: 1.55fr 1fr;
+  gap: 26px;
+  align-items: start;
+}
+
+.overview-grid .col { display: flex; flex-direction: column; gap: 18px; }
+
+@media (max-width: 1100px) {
+  .overview-grid { grid-template-columns: 1fr; }
+}
 
 .card.tight { padding: 18px 20px; }
 .card.tight ul { font-size: 13.5px; line-height: 1.55; padding-left: 16px; }
@@ -1187,9 +1203,8 @@ p { line-height: 1.6; }
   text-anchor: middle;
 }
 
-/* Three across, under a diagram that now runs the full width. The 900px rule further
-   up collapses this to one column. */
-.flow-legend { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+/* Stacked in the right-hand column, beside the diagram rather than under it. */
+.flow-legend { display: flex; flex-direction: column; gap: 10px; }
 
 .flow-legend button {
   text-align: left;
@@ -1458,6 +1473,9 @@ p { line-height: 1.6; }
     <h1>Organic, sustainable scaling strategy for GCC</h1>
 
     <div class="panel" data-active="true">
+      <div class="overview-grid">
+      <div class="col">
+
       <div class="card tight goal-card">
         <h3>The goal this serves</h3>
         <p class="note"><b>Revenue growth in economic uncertainty.</b>
@@ -1546,6 +1564,9 @@ p { line-height: 1.6; }
         </svg>
       </div>
 
+      </div>
+      <div class="col">
+
       <div class="flow-legend">
         <button type="button" data-node="training" aria-pressed="false">
           <b>01 · Training</b>
@@ -1559,6 +1580,9 @@ p { line-height: 1.6; }
           <b>03 · KPI system</b>
           <span>The measures that say whether any of it is working, and how often they are looked at.</span>
         </button>
+      </div>
+
+      </div>
       </div>
     </div>
 
@@ -1776,12 +1800,37 @@ p { line-height: 1.6; }
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════════ 4 · Q&A ══ -->
-<section class="slide" data-slide="3" data-title="Q&amp;A">
+<!-- ══════════════════════════════════════════════════════ 4 · ABOUT US ══ -->
+<section class="slide" data-slide="3" data-title="About Us">
+  <div class="inner">
+    <p class="eyebrow">04 · About</p>
+
+    <div class="panel" data-active="true">
+      <h1>Asilo</h1>
+
+      <p class="about-lede">We work with narrative: what people across an organization
+      actually say about how the work goes, captured at scale through
+      <b>organizational storytelling</b> and read as systemic patterns rather than opinions.</p>
+
+      <p class="about-lede">Our process will prioritize the most important elements of the
+      system to achieve your goal. Since the decisions will be made only by the workshop
+      participants who take part in the design sessions, it is important to us that as many
+      stakeholders as possible are present and undistracted at the sessions.</p>
+
+      <p class="about-lede">If you anticipate the need for additional work, please confirm
+      with us before the start of each phase so we can include them in the scope.</p>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ 5 · Q&A ══ -->
+<section class="slide" data-slide="4" data-title="Q&amp;A">
   <div class="inner">
     <div class="workshop-head">
       <div>
-        <p class="eyebrow">04 · Live</p>
+        <p class="eyebrow">05 · Live</p>
         <h1>Q&amp;A</h1>
       </div>
       
@@ -1811,31 +1860,6 @@ p { line-height: 1.6; }
       <div id="rows"></div>
       <p class="source-note" id="source-note"></p>
     </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════ 5 · ABOUT US ══ -->
-<section class="slide" data-slide="4" data-title="About Us">
-  <div class="inner">
-    <p class="eyebrow">05 · About</p>
-
-    <div class="panel" data-active="true">
-      <h1>Asilo</h1>
-
-      <p class="about-lede">We work with narrative: what people across an organization
-      actually say about how the work goes, captured at scale through
-      <b>organizational storytelling</b> and read as systemic patterns rather than opinions.</p>
-
-      <p class="about-lede">Our process will prioritize the most important elements of the
-      system to achieve your goal. Since the decisions will be made only by the workshop
-      participants who take part in the design sessions, it is important to us that as many
-      stakeholders as possible are present and undistracted at the sessions.</p>
-
-      <p class="about-lede">If you anticipate the need for additional work, please confirm
-      with us before the start of each phase so we can include them in the scope.</p>
-
-    </div>
-
   </div>
 </section>
 

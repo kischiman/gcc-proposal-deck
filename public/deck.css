@@ -430,8 +430,24 @@ p { line-height: 1.6; }
 
 /* ------------------------------------------------------- proposal, one screen */
 
-/* The goal the whole slide answers to, above the diagram rather than beside it. */
-.goal-card { margin: 0 0 24px; max-width: 78ch; }
+/* The goal the whole slide answers to, sitting above the diagram in the left column.
+   The column's gap does the spacing, so the card carries no margin of its own. */
+.goal-card { margin: 0; }
+
+/* Diagram and its goal on the left, the three entries stacked on the right. The
+   diagram takes the larger share: it is 1000 units wide and full of labels. */
+.overview-grid {
+  display: grid;
+  grid-template-columns: 1.55fr 1fr;
+  gap: 26px;
+  align-items: start;
+}
+
+.overview-grid .col { display: flex; flex-direction: column; gap: 18px; }
+
+@media (max-width: 1100px) {
+  .overview-grid { grid-template-columns: 1fr; }
+}
 
 .card.tight { padding: 18px 20px; }
 .card.tight ul { font-size: 13.5px; line-height: 1.55; padding-left: 16px; }
@@ -1185,9 +1201,8 @@ p { line-height: 1.6; }
   text-anchor: middle;
 }
 
-/* Three across, under a diagram that now runs the full width. The 900px rule further
-   up collapses this to one column. */
-.flow-legend { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+/* Stacked in the right-hand column, beside the diagram rather than under it. */
+.flow-legend { display: flex; flex-direction: column; gap: 10px; }
 
 .flow-legend button {
   text-align: left;
