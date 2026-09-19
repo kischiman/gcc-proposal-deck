@@ -1208,7 +1208,6 @@ p { line-height: 1.6; }
 .flow-legend b { display: block; font-size: 13.5px; margin-bottom: 3px; }
 .flow-legend span { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
 
-.goals { margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.9; }
 
 /* --------------------------------------------- one answer per question, not two */
 
