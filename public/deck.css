@@ -1421,3 +1421,7 @@ p { line-height: 1.6; }
 }
 
 .cap-list li::marker { color: var(--accent); }
+
+/* .about-lede pulls up by 8px to sit under the heading. A second paragraph should not,
+   or it crowds the one above it. */
+.about-lede + .about-lede { margin-top: 0; }

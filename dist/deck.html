@@ -1424,6 +1424,10 @@ p { line-height: 1.6; }
 
 .cap-list li::marker { color: var(--accent); }
 
+/* .about-lede pulls up by 8px to sit under the heading. A second paragraph should not,
+   or it crowds the one above it. */
+.about-lede + .about-lede { margin-top: 0; }
+
 
 .companion-card { max-width: 340px; }
 .bottleneck { cursor: grab; }
@@ -1838,6 +1842,11 @@ p { line-height: 1.6; }
       <p class="about-lede">We work with narrative: what people across an organization
       actually say about how the work goes, captured at scale through
       <b>organizational storytelling</b> and read as systemic patterns rather than opinions.</p>
+
+      <p class="about-lede">Our process will prioritize the most important elements of the
+      system to achieve your goal. Since the decisions will be made only by the workshop
+      participants who take part in the design sessions, it is important to us that as many
+      stakeholders as possible are present and undistracted at the sessions.</p>
 
     </div>
 
