@@ -1478,8 +1478,9 @@ p { line-height: 1.6; }
 
 .flow-note.side { text-anchor: start; }
 
-/* the AI step is the second phase, so it reads apart from the four human ones */
-.fnode.ai rect { stroke: var(--ink); stroke-width: 1.5; stroke-dasharray: 6 4; }
+/* implementation steps are the second phase, so they read apart from the human ones */
+.fnode.impl rect { stroke: var(--ink); stroke-width: 1.5; stroke-dasharray: 6 4; }
+.approach-wrap .fnode-label { font-size: 16px; }
 
 .bracket path { fill: none; stroke: var(--rule); stroke-width: 2; }
 
@@ -1497,7 +1498,7 @@ p { line-height: 1.6; }
 
 .approach-legend {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
 }
 
