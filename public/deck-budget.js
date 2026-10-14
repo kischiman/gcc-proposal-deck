@@ -143,14 +143,12 @@
       if (phaseTotal) rows.push(phaseTotalHtml(phaseTotal));
 
 
-      host.innerHTML =
-        rows.join("") +
-        `<div class="plines-add">
-          <button class="btn ghost small" data-add="${phases[0]}" data-add-choices="${phases.join(" ")}" data-add-process="1">
-            + Add task
-          </button>
-        </div>`;
+      // The proposal is read, not edited: lines are added in the admin panel. A phase
+      // with no lines yet drops its Process heading rather than showing an empty box.
+      host.innerHTML = rows.join("");
       host.classList.add("budget-scope", "plines-live");
+      const section = host.closest(".phase-process");
+      if (section) section.style.display = rows.length ? "" : "none";
     }
 
     renderProcessSummary(state);
