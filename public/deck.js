@@ -129,7 +129,7 @@ document.addEventListener("keydown", (e) => {
   if (e.target.matches("input, textarea")) return;
   if (e.key === "ArrowRight" || e.key === "PageDown") step(1);
   else if (e.key === "ArrowLeft" || e.key === "PageUp") step(-1);
-  else if (/^[1-5]$/.test(e.key)) go(Number(e.key) - 1, 0);
+  else if (/^[1-9]$/.test(e.key)) go(Number(e.key) - 1, 0);
 });
 
 // Sub-slide tabs. Keyed on position rather than data-sub, so a panel can be

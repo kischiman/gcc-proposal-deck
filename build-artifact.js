@@ -178,7 +178,7 @@ document.addEventListener("keydown", (e) => {
   if (e.target.matches("input, textarea")) return;
   if (e.key === "ArrowRight" || e.key === "PageDown") step(1);
   else if (e.key === "ArrowLeft" || e.key === "PageUp") step(-1);
-  else if (/^[1-5]$/.test(e.key)) go(Number(e.key) - 1, 0);
+  else if (/^[1-9]$/.test(e.key)) go(Number(e.key) - 1, 0);
 });
 
 // keyed on position, so a stripped panel needs no renumbering

@@ -1430,10 +1430,9 @@ p { line-height: 1.6; }
   color: var(--muted);
 }
 
-.bottlenecks { gap: 16px; }
-.bottleneck { position: relative; }
-.bottleneck h3 { color: var(--ink); margin-bottom: 8px; }
-.bottleneck p { font-size: 14px; line-height: 1.55; }
+.pain-grid { gap: 16px; }
+.pain-card h3 { color: var(--ink); margin-bottom: 8px; }
+.pain-card p { font-size: 14px; line-height: 1.55; }
 .bn-num {
   display: block;
   font-family: var(--mono);
@@ -1452,6 +1451,64 @@ p { line-height: 1.6; }
   color: var(--muted);
 }
 .outcome-line b { color: var(--ink); font-weight: 600; }
+
+/* ------------------------------------------------------ approach diagram */
+
+.approach-wrap { margin-bottom: 18px; }
+
+.band-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  fill: var(--muted);
+}
+
+.pnode rect { fill: var(--paper-2); stroke: #cdc5b4; stroke-width: 1.5; }
+
+.friction circle { fill: var(--accent); }
+
+.cost rect { fill: #fff; stroke: var(--ink); stroke-width: 1.5; stroke-dasharray: 5 4; }
+.cost-label { font-family: var(--serif); font-size: 22px; fill: var(--ink); text-anchor: middle; }
+
+.intercept { stroke: var(--accent); stroke-width: 5; stroke-linecap: round; }
+.intercept-note { font-family: var(--mono); font-size: 11px; fill: var(--accent); text-anchor: middle; }
+
+.flow-arrows.reach path { stroke: var(--accent); }
+#atip path { fill: #b9b1a0; stroke: none; }
+#rtip path { fill: var(--accent); stroke: none; }
+
+.flow-note.side { text-anchor: start; }
+
+/* the AI step is the second phase, so it reads apart from the four human ones */
+.fnode.ai rect { stroke: var(--ink); stroke-width: 1.5; stroke-dasharray: 6 4; }
+
+.bracket path { fill: none; stroke: var(--rule); stroke-width: 2; }
+
+.phase-label {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  fill: var(--accent);
+  text-anchor: middle;
+}
+
+.outcome-sm { font-family: var(--serif); font-size: 18px; fill: var(--accent); text-anchor: middle; }
+
+.approach-legend {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+@media (max-width: 1100px) {
+  .approach-legend { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .approach-legend { grid-template-columns: 1fr; }
+}
 
 
 .bottleneck { cursor: grab; }
@@ -1488,26 +1545,26 @@ p { line-height: 1.6; }
     <p class="lede">GCC knows the inefficiency is there. Nobody has measured how much it costs,
     or where it starts. This work begins with the people doing the work.</p>
 
-    <div class="grid g2 bottlenecks">
-      <div class="card tight bottleneck">
+    <div class="grid g2 pain-grid">
+      <div class="card tight pain-card">
         <b class="bn-num">01</b>
         <h3>Unmeasured inefficiency</h3>
         <p>Losses and lost profit are felt across the company but never sized, so nobody can
         say what to fix first.</p>
       </div>
-      <div class="card tight bottleneck">
+      <div class="card tight pain-card">
         <b class="bn-num">02</b>
         <h3>Costly mistakes</h3>
         <p>The recent pricing error on a tender and award is one example. Until it's clear where
         mistakes cluster, the same kind can happen again, and cost more as projects get bigger.</p>
       </div>
-      <div class="card tight bottleneck">
+      <div class="card tight pain-card">
         <b class="bn-num">03</b>
         <h3>Uneven departments</h3>
         <p>Some teams draw people in and others don't. The reason, often how a team is led,
         stays hidden until someone leaves.</p>
       </div>
-      <div class="card tight bottleneck">
+      <div class="card tight pain-card">
         <b class="bn-num">04</b>
         <h3>Routine work without AI</h3>
         <p>There's no shared guideline on which admin, finance and accounts tasks AI should take
@@ -1521,10 +1578,172 @@ p { line-height: 1.6; }
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════════════════ 2 · PROCESS ══ -->
-<section class="slide" data-slide="1" data-title="Process">
+<!-- ═════════════════════════════════════════════════════ 2 · APPROACH ══ -->
+<section class="slide" data-slide="1" data-title="Approach">
   <div class="inner">
-    <p class="eyebrow">02 · Process</p>
+    <p class="eyebrow">02 · Approach</p>
+    <h1>Human friction first. Then AI.</h1>
+
+    <p class="lede">Costs rarely start in a spreadsheet. They start where people hand work to each
+    other. We find those points in one department, close them before they become costs, and only
+    then automate what is left.</p>
+
+    <div class="flow-wrap approach-wrap">
+      <svg viewBox="0 0 1000 432" role="img"
+           aria-label="Diagram. Top row, the problem space: daily work between people produces friction points — unclear hand-offs, unseen mistakes, uneven teams — which, left unaddressed, become costs: rework, errors and people leaving. Bottom row, our approach: one, a workshop to scope one department; two, observe how people interact; three, interview people to uncover inefficiencies; four, design solutions for the gaps, which intercept friction before it becomes cost; five, automate routine work with AI, which reduces cost further. Steps one to four are human-facing; step five is AI, leading to getting ahead of the competition.">
+
+        <!-- ── the problem space ── -->
+        <text class="band-label" x="40" y="26">The problem space</text>
+
+        <g class="pnode">
+          <rect x="40" y="44" width="190" height="80" rx="9" />
+          <text class="fnode-label" x="135" y="80">Daily work</text>
+          <text class="flow-note" x="135" y="102">hand-offs · decisions</text>
+        </g>
+
+        <!-- friction travels toward cost -->
+        <g class="flow-arrows">
+          <path d="M230 84 L640 84" />
+        </g>
+        <g class="flow-arrows feedback">
+          <path d="M640 84 L748 84" marker-end="url(#atip)" />
+        </g>
+        <text class="flow-note" x="713" y="108">left alone</text>
+
+        <g class="friction">
+          <circle cx="320" cy="84" r="7" />
+          <text class="flow-note" x="320" y="66">unclear hand-offs</text>
+          <circle cx="450" cy="84" r="7" />
+          <text class="flow-note" x="450" y="66">unseen mistakes</text>
+          <circle cx="580" cy="84" r="7" />
+          <text class="flow-note" x="580" y="66">uneven teams</text>
+        </g>
+
+        <g class="cost">
+          <rect x="756" y="44" width="210" height="80" rx="9" />
+          <text class="cost-label" x="861" y="82">Costs</text>
+          <text class="flow-note" x="861" y="104">rework · errors · attrition</text>
+        </g>
+
+        <!-- where the design work catches friction -->
+        <line class="intercept" x1="672" y1="64" x2="672" y2="104" />
+        <text class="intercept-note" x="672" y="160">closed before it becomes cost</text>
+
+        <!-- ── our approach ── -->
+        <text class="band-label" x="40" y="198">Our approach</text>
+
+        <!-- what each step reaches up to -->
+        <g class="flow-arrows feedback">
+          <path d="M185 214 L185 130" marker-end="url(#atip)" />
+          <path d="M320 214 L320 98" marker-end="url(#atip)" />
+          <path d="M450 214 L450 98" marker-end="url(#atip)" />
+          <path d="M540 214 L540 140 L580 140 L580 98" marker-end="url(#atip)" />
+          <path d="M865 214 L865 130" marker-end="url(#atip)" />
+        </g>
+        <g class="flow-arrows reach">
+          <path d="M672 214 L672 172" />
+          <path d="M672 146 L672 110" marker-end="url(#rtip)" />
+        </g>
+        <text class="flow-note side" x="876" y="168">automates</text>
+        <text class="flow-note side" x="876" y="182">routine work</text>
+
+        <g class="fnode" data-node="workshop" tabindex="0" role="button" aria-pressed="false" aria-label="Step one, workshop">
+          <rect x="40" y="214" width="160" height="76" rx="9" />
+          <text class="fnode-num" x="54" y="234">01</text>
+          <text class="fnode-label" x="120" y="256">Workshop</text>
+          <text class="flow-note" x="120" y="276">scope one department</text>
+        </g>
+        <g class="fnode" data-node="observe" tabindex="0" role="button" aria-pressed="false" aria-label="Step two, observe">
+          <rect x="225" y="214" width="160" height="76" rx="9" />
+          <text class="fnode-num" x="239" y="234">02</text>
+          <text class="fnode-label" x="305" y="256">Observe</text>
+          <text class="flow-note" x="305" y="276">how people interact</text>
+        </g>
+        <g class="fnode" data-node="interview" tabindex="0" role="button" aria-pressed="false" aria-label="Step three, interview">
+          <rect x="410" y="214" width="160" height="76" rx="9" />
+          <text class="fnode-num" x="424" y="234">03</text>
+          <text class="fnode-label" x="490" y="256">Interview</text>
+          <text class="flow-note" x="490" y="276">uncover inefficiencies</text>
+        </g>
+        <g class="fnode goal" data-node="design" tabindex="0" role="button" aria-pressed="false" aria-label="Step four, design solutions">
+          <rect x="595" y="214" width="160" height="76" rx="9" />
+          <text class="fnode-num" x="609" y="234">04</text>
+          <text class="fnode-label" x="675" y="256">Design</text>
+          <text class="flow-note" x="675" y="276">solutions for the gaps</text>
+        </g>
+        <g class="fnode ai" data-node="automate" tabindex="0" role="button" aria-pressed="false" aria-label="Step five, automate with AI">
+          <rect x="780" y="214" width="160" height="76" rx="9" />
+          <text class="fnode-num" x="794" y="234">05</text>
+          <text class="fnode-label" x="860" y="256">Automate</text>
+          <text class="flow-note" x="860" y="276">with AI</text>
+        </g>
+
+        <g class="flow-arrows">
+          <path d="M200 252 L219 252" marker-end="url(#atip)" />
+          <path d="M385 252 L404 252" marker-end="url(#atip)" />
+          <path d="M570 252 L589 252" marker-end="url(#atip)" />
+          <path d="M755 252 L774 252" marker-end="url(#atip)" />
+        </g>
+
+        <!-- the two phases -->
+        <g class="bracket">
+          <path d="M40 302 L40 312 L755 312 L755 302" />
+          <path d="M780 302 L780 312 L940 312 L940 302" />
+        </g>
+        <text class="phase-label" x="397" y="336">Human-facing first</text>
+        <text class="flow-note" x="397" y="356">find friction before it becomes cost · fewer mistakes · teams people stay in</text>
+        <text class="phase-label" x="860" y="336">Then AI</text>
+        <text class="flow-note" x="860" y="356">less inefficiency</text>
+
+        <g class="flow-arrows">
+          <path d="M860 364 L860 380" marker-end="url(#atip)" />
+        </g>
+        <g class="outcome">
+          <rect x="770" y="386" width="180" height="40" rx="8" />
+          <text class="outcome-sm" x="860" y="412">Ahead of competitors</text>
+        </g>
+
+        <defs>
+          <marker id="atip" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M0 1 L9 5 L0 9 z" />
+          </marker>
+          <marker id="rtip" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M0 1 L9 5 L0 9 z" />
+          </marker>
+        </defs>
+      </svg>
+    </div>
+
+    <div class="flow-legend approach-legend">
+      <button type="button" data-node="workshop" aria-pressed="false">
+        <b>01 · Workshop</b>
+        <span>Start with one department. With its lead and team, map how work is meant to flow and where they already feel it stall.</span>
+      </button>
+      <button type="button" data-node="observe" aria-pressed="false">
+        <b>02 · Observe</b>
+        <span>Watch the real hand-offs: who waits on whom, where decisions get stuck, where information is retyped or lost.</span>
+      </button>
+      <button type="button" data-node="interview" aria-pressed="false">
+        <b>03 · Interview</b>
+        <span>One-to-one conversations, including each person's last and biggest mistake. The patterns show where friction turns into cost.</span>
+      </button>
+      <button type="button" data-node="design" aria-pressed="false">
+        <b>04 · Design</b>
+        <span>Small, contained changes to roles, routines or meetings, tested in that department before anything goes wider.</span>
+      </button>
+      <button type="button" data-node="automate" aria-pressed="false">
+        <b>05 · Automate with AI</b>
+        <span>With the human gaps clear, decide which admin, finance and accounts tasks AI takes on, and with which tools.</span>
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════ 3 · PROCESS ══ -->
+<section class="slide" data-slide="2" data-title="Process">
+  <div class="inner">
+    <p class="eyebrow">03 · Process</p>
 
     <div class="panel" data-active="true">
 
@@ -1623,9 +1842,9 @@ p { line-height: 1.6; }
 </section>
 
 <!-- ═════════════════════════════════════════════════════ 3 · CAPABILITIES ══ -->
-<section class="slide" data-slide="2" data-title="Capabilities">
+<section class="slide" data-slide="3" data-title="Capabilities">
   <div class="inner">
-    <p class="eyebrow">03 · Capabilities</p>
+    <p class="eyebrow">04 · Capabilities</p>
 
     <div class="panel" data-active="true">
       <h1>Capabilities</h1>
@@ -1733,9 +1952,9 @@ p { line-height: 1.6; }
 </section>
 
 <!-- ══════════════════════════════════════════════════════ 4 · ABOUT US ══ -->
-<section class="slide" data-slide="3" data-title="About Us">
+<section class="slide" data-slide="4" data-title="About Us">
   <div class="inner">
-    <p class="eyebrow">04 · About</p>
+    <p class="eyebrow">05 · About</p>
 
     <div class="panel" data-active="true">
       <h1>Asilo</h1>
@@ -1761,11 +1980,11 @@ p { line-height: 1.6; }
 </section>
 
 <!-- ══════════════════════════════════════════════════════════ 5 · Q&A ══ -->
-<section class="slide" data-slide="4" data-title="Q&amp;A">
+<section class="slide" data-slide="5" data-title="Q&amp;A">
   <div class="inner">
     <div class="workshop-head">
       <div>
-        <p class="eyebrow">05 · Live</p>
+        <p class="eyebrow">06 · Live</p>
         <h1>Q&amp;A</h1>
       </div>
     </div>
@@ -1971,7 +2190,7 @@ document.addEventListener("keydown", (e) => {
   if (e.target.matches("input, textarea")) return;
   if (e.key === "ArrowRight" || e.key === "PageDown") step(1);
   else if (e.key === "ArrowLeft" || e.key === "PageUp") step(-1);
-  else if (/^[1-5]$/.test(e.key)) go(Number(e.key) - 1, 0);
+  else if (/^[1-9]$/.test(e.key)) go(Number(e.key) - 1, 0);
 });
 
 // keyed on position, so a stripped panel needs no renumbering

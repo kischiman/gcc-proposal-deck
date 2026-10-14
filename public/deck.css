@@ -1428,10 +1428,9 @@ p { line-height: 1.6; }
   color: var(--muted);
 }
 
-.bottlenecks { gap: 16px; }
-.bottleneck { position: relative; }
-.bottleneck h3 { color: var(--ink); margin-bottom: 8px; }
-.bottleneck p { font-size: 14px; line-height: 1.55; }
+.pain-grid { gap: 16px; }
+.pain-card h3 { color: var(--ink); margin-bottom: 8px; }
+.pain-card p { font-size: 14px; line-height: 1.55; }
 .bn-num {
   display: block;
   font-family: var(--mono);
@@ -1450,3 +1449,61 @@ p { line-height: 1.6; }
   color: var(--muted);
 }
 .outcome-line b { color: var(--ink); font-weight: 600; }
+
+/* ------------------------------------------------------ approach diagram */
+
+.approach-wrap { margin-bottom: 18px; }
+
+.band-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  fill: var(--muted);
+}
+
+.pnode rect { fill: var(--paper-2); stroke: #cdc5b4; stroke-width: 1.5; }
+
+.friction circle { fill: var(--accent); }
+
+.cost rect { fill: #fff; stroke: var(--ink); stroke-width: 1.5; stroke-dasharray: 5 4; }
+.cost-label { font-family: var(--serif); font-size: 22px; fill: var(--ink); text-anchor: middle; }
+
+.intercept { stroke: var(--accent); stroke-width: 5; stroke-linecap: round; }
+.intercept-note { font-family: var(--mono); font-size: 11px; fill: var(--accent); text-anchor: middle; }
+
+.flow-arrows.reach path { stroke: var(--accent); }
+#atip path { fill: #b9b1a0; stroke: none; }
+#rtip path { fill: var(--accent); stroke: none; }
+
+.flow-note.side { text-anchor: start; }
+
+/* the AI step is the second phase, so it reads apart from the four human ones */
+.fnode.ai rect { stroke: var(--ink); stroke-width: 1.5; stroke-dasharray: 6 4; }
+
+.bracket path { fill: none; stroke: var(--rule); stroke-width: 2; }
+
+.phase-label {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  fill: var(--accent);
+  text-anchor: middle;
+}
+
+.outcome-sm { font-family: var(--serif); font-size: 18px; fill: var(--accent); text-anchor: middle; }
+
+.approach-legend {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+@media (max-width: 1100px) {
+  .approach-legend { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .approach-legend { grid-template-columns: 1fr; }
+}

@@ -28,7 +28,7 @@ Change the port with `PORT=5000 npm start`.
 | **05** | About Us | Empty, waiting for content. |
 
 Slides have addresses — `#/overview`, `#/process`, `#/capabilities` — so a link can be sent
-to one place in the deck. Arrow keys step through; number keys 1–5 jump.
+to one place in the deck. Arrow keys step through; number keys 1–6 jump.
 
 ## Filling it in
 
