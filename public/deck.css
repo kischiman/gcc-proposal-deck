@@ -1418,3 +1418,35 @@ p { line-height: 1.6; }
 /* .about-lede pulls up by 8px to sit under the heading. A second paragraph should not,
    or it crowds the one above it. */
 .about-lede + .about-lede { margin-top: 0; }
+
+/* ------------------------------------------------- overview, four bottlenecks */
+
+.lede {
+  max-width: 68ch;
+  margin: -10px 0 28px;
+  font-size: 16px;
+  color: var(--muted);
+}
+
+.bottlenecks { gap: 16px; }
+.bottleneck { position: relative; }
+.bottleneck h3 { color: var(--ink); margin-bottom: 8px; }
+.bottleneck p { font-size: 14px; line-height: 1.55; }
+.bn-num {
+  display: block;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+
+.outcome-line {
+  margin: 26px 0 0;
+  padding-top: 18px;
+  border-top: 1px solid var(--rule);
+  font-size: 14.5px;
+  color: var(--muted);
+}
+.outcome-line b { color: var(--ink); font-weight: 600; }

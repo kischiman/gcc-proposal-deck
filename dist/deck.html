@@ -1421,6 +1421,38 @@ p { line-height: 1.6; }
    or it crowds the one above it. */
 .about-lede + .about-lede { margin-top: 0; }
 
+/* ------------------------------------------------- overview, four bottlenecks */
+
+.lede {
+  max-width: 68ch;
+  margin: -10px 0 28px;
+  font-size: 16px;
+  color: var(--muted);
+}
+
+.bottlenecks { gap: 16px; }
+.bottleneck { position: relative; }
+.bottleneck h3 { color: var(--ink); margin-bottom: 8px; }
+.bottleneck p { font-size: 14px; line-height: 1.55; }
+.bn-num {
+  display: block;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+
+.outcome-line {
+  margin: 26px 0 0;
+  padding-top: 18px;
+  border-top: 1px solid var(--rule);
+  font-size: 14.5px;
+  color: var(--muted);
+}
+.outcome-line b { color: var(--ink); font-weight: 600; }
+
 
 .bottleneck { cursor: grab; }
 
@@ -1451,121 +1483,40 @@ p { line-height: 1.6; }
 <section class="slide" data-slide="0" data-title="Overview" data-active="true">
   <div class="inner">
     <p class="eyebrow">01 · Overview</p>
-    <h1>Organic, sustainable scaling strategy for GCC</h1>
+    <h1>Make the losses visible before they become costs.</h1>
 
-    <div class="panel" data-active="true">
-      <div class="overview-grid">
-      <div class="col">
+    <p class="lede">GCC knows the inefficiency is there. Nobody has measured how much it costs,
+    or where it starts. This work begins with the people doing the work.</p>
 
-      <div class="card tight goal-card">
-        <h3>The goal this serves</h3>
-        <p class="note"><b>Revenue growth in economic uncertainty.</b>
-        Every part of the system below is judged against that, not against activity.</p>
+    <div class="grid g2 bottlenecks">
+      <div class="card tight bottleneck">
+        <b class="bn-num">01</b>
+        <h3>Unmeasured inefficiency</h3>
+        <p>Losses and lost profit are felt across the company but never sized, so nobody can
+        say what to fix first.</p>
       </div>
-
-      <div class="flow-wrap">
-        <svg viewBox="0 0 1000 400" role="img"
-             aria-label="Flowchart: hiring and onboarding feed three goals — training, talent retention and a KPI system — which together support revenue growth. Retention loops back to hiring, and the KPI system loops back to training.">
-
-          <!-- the outcome the three goals hold up -->
-          <g class="outcome">
-            <rect x="400" y="24" width="560" height="72" rx="10" />
-            <text class="outcome-label" x="680" y="69">Revenue growth</text>
-          </g>
-
-          <!-- goals carrying the outcome -->
-          <g class="risers">
-            <path d="M485 196 L485 96" />
-            <path d="M680 196 L680 96" />
-            <path d="M875 196 L875 96" />
-          </g>
-
-          <!-- acquisition -->
-          <g class="fnode" data-node="hire" tabindex="0" role="button" aria-pressed="false"
-             aria-label="Attract and hire">
-            <rect x="40" y="196" width="160" height="76" rx="9" />
-            <text class="fnode-label" x="120" y="230">Attract</text>
-            <text class="fnode-label" x="120" y="252">&amp; hire</text>
-          </g>
-
-          <g class="fnode" data-node="onboard" tabindex="0" role="button" aria-pressed="false"
-             aria-label="Onboard">
-            <rect x="225" y="196" width="150" height="76" rx="9" />
-            <text class="fnode-label" x="300" y="241">Onboard</text>
-          </g>
-
-          <!-- the three goals -->
-          <g class="fnode goal" data-node="training" tabindex="0" role="button" aria-pressed="false"
-             aria-label="Goal one, training">
-            <rect x="400" y="196" width="170" height="76" rx="9" />
-            <text class="fnode-num" x="416" y="220">01</text>
-            <text class="fnode-label" x="485" y="248">Training</text>
-          </g>
-
-          <g class="fnode goal" data-node="retention" tabindex="0" role="button" aria-pressed="false"
-             aria-label="Goal two, talent retention">
-            <rect x="595" y="196" width="170" height="76" rx="9" />
-            <text class="fnode-num" x="611" y="220">02</text>
-            <text class="fnode-label" x="680" y="248">Retention</text>
-          </g>
-
-          <g class="fnode goal" data-node="kpi" tabindex="0" role="button" aria-pressed="false"
-             aria-label="Goal three, KPI system">
-            <rect x="790" y="196" width="170" height="76" rx="9" />
-            <text class="fnode-num" x="806" y="220">03</text>
-            <text class="fnode-label" x="875" y="248">KPI system</text>
-          </g>
-
-          <!-- the spine -->
-          <g class="flow-arrows">
-            <path d="M200 234 L219 234" marker-end="url(#tip)" />
-            <path d="M375 234 L394 234" marker-end="url(#tip)" />
-            <path d="M570 234 L589 234" marker-end="url(#tip)" />
-            <path d="M765 234 L784 234" marker-end="url(#tip)" />
-          </g>
-
-          <!-- what measurement sends back to training -->
-          <g class="flow-arrows back-short">
-            <path d="M875 272 L875 305 L485 305 L485 278" marker-end="url(#tip)" />
-            <text class="flow-note" x="560" y="324">what the numbers say to teach next</text>
-          </g>
-
-          <!-- the loop that makes hiring cheaper -->
-          <g class="flow-arrows feedback">
-            <path d="M680 272 L680 350 L120 350 L120 278" marker-end="url(#tip)" />
-            <text class="flow-note" x="400" y="370">people who stay refer, mentor and move up</text>
-          </g>
-
-          <defs>
-            <marker id="tip" viewBox="0 0 10 10" refX="9" refY="5"
-                    markerWidth="7" markerHeight="7" orient="auto">
-              <path d="M0 1 L9 5 L0 9 z" />
-            </marker>
-          </defs>
-        </svg>
+      <div class="card tight bottleneck">
+        <b class="bn-num">02</b>
+        <h3>Costly mistakes</h3>
+        <p>The recent pricing error on a tender and award is one example. Until it's clear where
+        mistakes cluster, the same kind can happen again, and cost more as projects get bigger.</p>
       </div>
-
+      <div class="card tight bottleneck">
+        <b class="bn-num">03</b>
+        <h3>Uneven departments</h3>
+        <p>Some teams draw people in and others don't. The reason, often how a team is led,
+        stays hidden until someone leaves.</p>
       </div>
-      <div class="col">
-
-      <div class="flow-legend">
-        <button type="button" data-node="training" aria-pressed="false">
-          <b>01 · Training</b>
-          <span>What people are taught, when, and who is accountable for them being able to do the work.</span>
-        </button>
-        <button type="button" data-node="retention" aria-pressed="false">
-          <b>02 · Talent retention</b>
-          <span>Why a good person stays a third year — and what it costs when they do not.</span>
-        </button>
-        <button type="button" data-node="kpi" aria-pressed="false">
-          <b>03 · KPI system</b>
-          <span>The measures that say whether any of it is working, and how often they are looked at.</span>
-        </button>
-      </div>
-
-      </div>
+      <div class="card tight bottleneck">
+        <b class="bn-num">04</b>
+        <h3>Routine work without AI</h3>
+        <p>There's no shared guideline on which admin, finance and accounts tasks AI should take
+        on, or with which tools. Construction-specific software stays with specialists.</p>
       </div>
     </div>
+
+    <p class="outcome-line"><b>What this builds toward:</b> KPIs every team can work to, and a
+    company good people choose to stay in.</p>
 
   </div>
 </section>
