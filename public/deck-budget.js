@@ -91,7 +91,8 @@
 
   function renderSteps(state) {
     // Replace the fallback with what the panel actually holds.
-    if (phasesHost && Array.isArray(state.phases) && state.phases.length) {
+    // An empty list is real too — every phase hidden — and must not bring the fallback back.
+    if (phasesHost && Array.isArray(state.phases)) {
       phasesHost.innerHTML = state.phases.map((p, i) => phaseArticle(p, i)).join("");
     }
 

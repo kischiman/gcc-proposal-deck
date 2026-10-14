@@ -261,9 +261,9 @@ function render() {
   // objectives and outcomes shown beside its lines.
   $("phases").innerHTML =
     state.phases
-      .map((p) => {
+      .map((p, i) => {
         const tasks = state.tasks.filter((t) => t.phase === p.id);
-        return `<section class="phase" data-phase="${esc(p.id)}">
+        return `<section class="phase" data-phase="${esc(p.id)}" data-phase-hidden="${p.hidden ? "true" : "false"}">
         <header>
           <div class="phase-edit">
             <div class="phase-namerow">
@@ -300,6 +300,19 @@ function render() {
           </div>
           <div class="phase-head-right">
             <span class="amount">${money(state.totals.effective.byPhase[p.id])}</span>
+            <span class="phase-move">
+              <button class="move" data-phase-move="-1" data-id="${esc(p.id)}" ${i === 0 ? "disabled" : ""}
+                      title="Move phase up" aria-label="Move phase up">&uarr;</button>
+              <button class="move" data-phase-move="1" data-id="${esc(p.id)}" ${i === state.phases.length - 1 ? "disabled" : ""}
+                      title="Move phase down" aria-label="Move phase down">&darr;</button>
+            </span>
+            <button class="hide-toggle${p.hidden ? " on" : ""}" data-phase-hidden-toggle="${esc(p.id)}"
+                    aria-pressed="${p.hidden ? "true" : "false"}"
+                    title="${
+                      p.hidden
+                        ? "Hidden from the public proposal, with all its lines — still here and on the team view"
+                        : "Shown on the public proposal"
+                    }">${p.hidden ? "hidden" : "public"}</button>
             <button class="remove" data-phase-remove="${esc(p.id)}"
                     title="Remove phase" aria-label="Remove phase">&times;</button>
           </div>
@@ -320,7 +333,7 @@ function render() {
     state.phases
       .map(
         (p) =>
-          `<div class="row"><span>${esc(p.title)}</span><span class="v">${money(eff.byPhase[p.id])}</span></div>`
+          `<div class="row"><span>${esc(p.title)}${p.hidden ? ` <span class="hidden-tag">hidden</span>` : ""}</span><span class="v">${money(eff.byPhase[p.id])}</span></div>`
       )
       .join("") +
     `<div class="row sub"><span>Subtotal</span><span class="v">${money(eff.net)}</span></div>
@@ -641,6 +654,24 @@ $("phases").addEventListener("change", (e) => {
 
 $("phases").addEventListener("click", (e) => {
   if (e.target.closest("#add-phase")) return mutate("phase-add", {});
+
+  // The order here is the order the proposal shows, so moving a phase moves its section
+  // on the process slide and on the public board.
+  const mv = e.target.closest("[data-phase-move]");
+  if (mv) {
+    const ids = state.phases.map((p) => p.id);
+    const from = ids.indexOf(mv.dataset.id);
+    const to = from + Number(mv.dataset.phaseMove);
+    if (from < 0 || to < 0 || to >= ids.length) return;
+    [ids[from], ids[to]] = [ids[to], ids[from]];
+    return mutate("phase-reorder", { ids });
+  }
+
+  const hp = e.target.closest("[data-phase-hidden-toggle]");
+  if (hp) {
+    const p = state.phases.find((x) => x.id === hp.dataset.phaseHiddenToggle);
+    return mutate("phase-hidden", { id: hp.dataset.phaseHiddenToggle, value: !p?.hidden });
+  }
 
   const rm = e.target.closest("[data-phase-remove]");
   if (!rm) return;

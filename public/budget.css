@@ -1066,3 +1066,29 @@ h3 {
 /* The whole row reads as set aside, so it is obvious at a glance which lines the
    client is not seeing. */
 .line[data-hidden="true"] { opacity: 0.72; }
+
+/* ---------------------------------------------------------- phase order and visibility
+   Arrows rather than dragging: a phase header is full of fields, and a drag that starts
+   in one would fight the text selection. A hidden phase stays editable here, dimmed so
+   it reads as off the public proposal at a glance. */
+
+.phase-move { display: inline-flex; gap: 2px; }
+
+.phase-move .move {
+  font: inherit;
+  font-size: 12px;
+  line-height: 1;
+  width: 24px;
+  height: 22px;
+  color: var(--muted, #6e675a);
+  background: none;
+  border: 1px solid var(--rule, rgba(23, 21, 15, 0.16));
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.phase-move .move:hover:not(:disabled) { color: var(--ink, #17150f); border-color: var(--ink, #17150f); }
+.phase-move .move:disabled { opacity: 0.35; cursor: default; }
+
+.phase[data-phase-hidden="true"] > header .phase-edit,
+.phase[data-phase-hidden="true"] > .line { opacity: 0.55; }

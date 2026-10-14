@@ -321,6 +321,7 @@ export async function handle(req, res) {
         : action === "phase-add" ? budget.addPhase(body)
         : action === "phase-update" ? budget.updatePhase(body.id, body)
         : action === "phase-reorder" ? budget.reorderPhases(body.ids)
+        : action === "phase-hidden" ? budget.setPhaseHidden(body.id, body.value)
         : action === "expense" ? budget.setExpense(body.id, body.value)
         : action === "prefill" ? budget.setPrefill(body.id, body.value)
         : action === "hidden" ? budget.setHidden(body.id, body.value)
