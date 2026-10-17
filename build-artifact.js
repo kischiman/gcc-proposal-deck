@@ -344,7 +344,7 @@ const extraCss = `
 .bottleneck { cursor: grab; }
 `;
 
-const page = `<title>GCC · Talent Proposal</title>
+const page = `<title>GCC · Proposal</title>
 <style>
 ${css}
 ${extraCss}
