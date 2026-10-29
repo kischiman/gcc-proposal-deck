@@ -96,20 +96,17 @@ function serveStatic(res, relPath) {
 
 // ---------------------------------------------------------------- admin access
 //
-// The admin panel and the team view change shared state, so they cannot stand open on a
-// public URL. ADMIN_PASSWORD gates them.
-//
-// Unset behaves differently by where this runs: locally it stays open, because a laptop
-// with no password set is a laptop, not an exposure; on a managed host it is treated as
-// "not configured" and the routes answer 404. Forgetting to set the variable therefore
-// hides the panel rather than publishing it.
+// The admin panel and the team view are open to anyone with the URL, by choice: there is
+// no password gate. Anyone who finds /admin or /team can change the shared board.
+// The sign-in code below is kept unused, so a gate can come back by restoring
+// adminAvailable and adminAllowed.
 
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "";
 const hosted = () => Boolean(process.env.VERCEL);
 const adminConfigured = () => ADMIN_PASSWORD.length > 0;
 
 /** Is there an admin surface at all on this deployment? */
-const adminAvailable = () => adminConfigured() || !hosted();
+const adminAvailable = () => true;
 
 /** The cookie carries a digest of the password, so the password itself is never stored
  *  in the browser and never travels on anything but the sign-in request. */
@@ -130,8 +127,8 @@ function signedIn(req) {
   return Boolean(hit) && sameSecret(hit.slice("deck_admin=".length), adminToken());
 }
 
-/** Open locally with nothing configured; otherwise the cookie decides. */
-const adminAllowed = (req) => (!adminConfigured() && !hosted()) || signedIn(req);
+/** Open to everyone; signedIn is no longer consulted. */
+const adminAllowed = () => true;
 
 const SIGN_IN_PAGE = `<!doctype html>
 <html lang="en">

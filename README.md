@@ -38,17 +38,12 @@ panel at `/admin`. The proposal ships empty: no phases titled, no lines, all rat
 ```
 /           the deck                                              open
 /budget     the public board — propose yourself for a line        open
-/team       proposals and comments together                       password
-/admin      rates, lines, assignment, and the public switches     password
+/team       proposals and comments together                       open
+/admin      rates, lines, assignment, and the public switches     open
 ```
 
-`/team` and `/admin` write to the shared board, so they ask for `ADMIN_PASSWORD` and
-keep a cookie for twelve hours. The cookie holds a digest, never the password.
-
-Unset behaves differently by where it runs. On a managed host, no password means those
-two routes answer **404** — unavailable rather than open, so forgetting the variable
-hides the panel instead of publishing it. Locally, unset leaves them open on your own
-machine.
+`/team` and `/admin` write to the shared board and have no password: anyone with the
+URL can edit it. `ADMIN_PASSWORD` is no longer checked.
 
 ## Deploying
 
@@ -56,7 +51,6 @@ The app needs three things in the host's environment:
 
 | Variable | Why |
 |---|---|
-| `ADMIN_PASSWORD` | Gates `/admin` and `/team`. Without it they 404 in production. |
 | `GIST_ID` + `GITHUB_TOKEN` | Durable state. A serverless host never writes the local file, so without a gist every admin and team edit is lost when the function freezes. |
 | `GEMINI_API_KEY` *(or OpenAI / Anthropic)* | Live answers on the Q&A slide and "Ask this document". Optional — both fall back gracefully. |
 
