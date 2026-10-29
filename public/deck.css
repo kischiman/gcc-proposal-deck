@@ -1454,6 +1454,24 @@ p { line-height: 1.6; }
 
 .approach-wrap { margin-bottom: 18px; }
 
+/* three ways to address growth; the third is ours */
+.growth-label {
+  margin: 0 0 10px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.growth-grid { gap: 14px; margin-bottom: 26px; }
+.growth-card h3 { color: var(--ink); margin-bottom: 6px; }
+.growth-card p { font-size: 14px; line-height: 1.55; }
+.growth-card.pick { border-color: var(--accent); background: var(--accent-soft); }
+.growth-card.pick h3 { color: var(--accent); }
+@media (max-width: 900px) {
+  .growth-grid { grid-template-columns: 1fr; }
+}
+
 .band-label {
   font-family: var(--mono);
   font-size: 11px;

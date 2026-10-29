@@ -1464,6 +1464,24 @@ p { line-height: 1.6; }
 
 .approach-wrap { margin-bottom: 18px; }
 
+/* three ways to address growth; the third is ours */
+.growth-label {
+  margin: 0 0 10px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.growth-grid { gap: 14px; margin-bottom: 26px; }
+.growth-card h3 { color: var(--ink); margin-bottom: 6px; }
+.growth-card p { font-size: 14px; line-height: 1.55; }
+.growth-card.pick { border-color: var(--accent); background: var(--accent-soft); }
+.growth-card.pick h3 { color: var(--accent); }
+@media (max-width: 900px) {
+  .growth-grid { grid-template-columns: 1fr; }
+}
+
 .band-label {
   font-family: var(--mono);
   font-size: 11px;
@@ -1585,9 +1603,6 @@ p { line-height: 1.6; }
       </div>
     </div>
 
-    <p class="outcome-line"><b>What this builds toward:</b> KPIs every team can work to, and a
-    company good people choose to stay in.</p>
-
   </div>
 </section>
 
@@ -1599,6 +1614,26 @@ p { line-height: 1.6; }
 
     <p class="lede">Costs start where people hand work to each other. We find those points in the
     department, close them before they become costs, and then automate what is left.</p>
+
+    <p class="growth-label">Three ways to address growth</p>
+    <div class="grid g3 growth-grid">
+      <div class="card tight growth-card">
+        <b class="bn-num">01</b>
+        <h3>Let people go</h3>
+        <p>Simple and fast, but the knowledge and relationships leave with them.</p>
+      </div>
+      <div class="card tight growth-card">
+        <b class="bn-num">02</b>
+        <h3>Lower costs</h3>
+        <p>Simple and fast, but cuts reach the same work that creates value.</p>
+      </div>
+      <div class="card tight growth-card pick">
+        <b class="bn-num">03 · Our approach</b>
+        <h3>Re-orient the team</h3>
+        <p>Retain the best talent, point them at the work that matters, and automate repetitive
+        work to lower costs. It takes more care than the first two, and yields greater results.</p>
+      </div>
+    </div>
 
     <div class="flow-wrap approach-wrap">
       <svg viewBox="0 0 1000 456" role="img"
@@ -1742,7 +1777,7 @@ p { line-height: 1.6; }
     <div class="flow-legend approach-legend">
       <button type="button" data-node="workshop" aria-pressed="false">
         <b>01 · Workshop</b>
-        <span>Start with one department. With its lead and team, map how work is meant to flow and where they already feel it stall.</span>
+        <span>The only session your three stakeholders attend: they see our presentation and answer our questions, and we scope one department together. We take care of everything after it.</span>
       </button>
       <button type="button" data-node="observe" aria-pressed="false">
         <b>02 · Observe</b>
@@ -1765,6 +1800,9 @@ p { line-height: 1.6; }
         <span>With the human gaps clear, decide which admin, finance and accounts tasks AI takes on, and with which tools.</span>
       </button>
     </div>
+
+    <p class="outcome-line"><b>What we need from you:</b> your three stakeholders, at the
+    initial workshop only. From step 02 on, we take care of the rest entirely.</p>
 
   </div>
 </section>
@@ -1992,12 +2030,10 @@ p { line-height: 1.6; }
       actually say about how the work goes, captured at scale through
       <b>organizational storytelling</b> and read as systemic patterns rather than opinions.</p>
 
-      <p class="about-lede">Our projects consist of multiple hands-on collaborative
-      workshops and prioritize the most important elements to achieve your goal.</p>
-
-      <p class="about-lede">Since the decisions will be made only by the workshop
-      participants who take part in the design sessions, it is important to us that as many
-      stakeholders as possible are present and undistracted at the sessions.</p>
+      <p class="about-lede">We ask very little of your time. Your three stakeholders attend
+      one initial workshop: they see our presentation and answer our questions. We take care
+      of the rest entirely, from observation and interviews through design, KPIs and
+      automation.</p>
 
       <p class="about-lede">If you anticipate the need for additional elements, please
       confirm with us before the start of each milestone so we can include them in the
