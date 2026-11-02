@@ -21,6 +21,8 @@ const RATE_LABELS = {
   apartment: "Apartment · month",
   perdiem: "Per diem · day",
   contingency: "Contingency · %",
+  discount: "Discount · %",
+  discountFixed: "Discount · fixed $",
 };
 
 // ---------------------------------------------------------------- auth
@@ -95,11 +97,21 @@ function renderStorage() {
 
 function renderRates() {
   // Roles no longer drive any figure — each line carries its own rate — so the only
-  // project-wide number left is contingency.
+  // project-wide numbers left are contingency and the discount.
   $("rate-grid").innerHTML = `<div class="rate">
       <label for="r-contingency">Contingency · %</label>
       <input id="r-contingency" data-rate="contingency" type="number" min="0" step="1"
              value="${state.rates.contingency}" />
+    </div>
+    <div class="rate">
+      <label for="r-discount">Discount · %</label>
+      <input id="r-discount" data-rate="discount" type="number" min="0" max="100" step="1"
+             value="${state.rates.discount || 0}" />
+    </div>
+    <div class="rate">
+      <label for="r-discount-fixed">Discount · fixed $</label>
+      <input id="r-discount-fixed" data-rate="discountFixed" type="number" min="0" step="100"
+             value="${state.rates.discountFixed || 0}" />
     </div>`;
 
   const on = state.tasks.filter((t) => t.prefill).length;
@@ -338,6 +350,7 @@ function render() {
       .join("") +
     `<div class="row sub"><span>Subtotal</span><span class="v">${money(eff.net)}</span></div>
      <div class="row sub"><span>Contingency at ${state.rates.contingency}%</span><span class="v">${money(eff.contingency)}</span></div>
+     ${eff.discount ? `<div class="row sub"><span>Discount${state.rates.discount ? ` at ${state.rates.discount}%` : ""}${state.rates.discountFixed ? `${state.rates.discount ? " +" : " ·"} ${money(state.rates.discountFixed)} off` : ""}</span><span class="v">−${money(eff.discount)}</span></div>` : ""}
      <div class="row total"><span>Committed total</span><span class="v">${money(eff.total)}</span></div>
      <div class="row sub"><span>Against base rate card</span><span class="v">${money(base.total)}</span></div>`;
 }

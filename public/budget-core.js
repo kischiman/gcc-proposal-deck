@@ -117,8 +117,19 @@ window.Budget = (function () {
     const net = byPhase.reduce((a, p) => a + p.total, 0);
     const pct = Number(state.contingency) || 0;
     const contingency = net * (pct / 100);
-    return { byPhase, net, pct, contingency, total: net + contingency };
+    // The discount comes off after contingency, never past zero — the server does the same.
+    const gross = net + contingency;
+    const discountPct = Number(state.discount) || 0;
+    const discountFixed = Number(state.discountFixed) || 0;
+    const discount = Math.min(gross, gross * (discountPct / 100) + discountFixed);
+    return { byPhase, net, pct, contingency, discountPct, discountFixed, discount, total: gross - discount };
   }
+
+  /** "Discount at 10%", "Discount · $500 off", or both together. */
+  const discountLabel = (pct, fixed) =>
+    "Discount" +
+    (pct ? ` at ${pct}%` : "") +
+    (fixed ? `${pct ? " +" : " ·"} ${money(fixed)} off` : "");
 
   /** The summary box's rows. Identical on both pages, because it is one function. */
   function estimateRowsHtml(state) {
@@ -128,9 +139,9 @@ window.Budget = (function () {
       `<div class="row${cls ? " " + cls : ""}"><span>${esc(label)}</span><span class="v">${value}</span></div>`;
     return (
       e.byPhase.map((p) => row(p.title, money(p.total))).join("") +
-      (e.pct
-        ? row("Subtotal", money(e.net), "sub") + row(`Contingency at ${e.pct}%`, money(e.contingency), "sub")
-        : "") +
+      (e.pct || e.discount ? row("Subtotal", money(e.net), "sub") : "") +
+      (e.pct ? row(`Contingency at ${e.pct}%`, money(e.contingency), "sub") : "") +
+      (e.discount ? row(discountLabel(e.discountPct, e.discountFixed), "−" + money(e.discount), "sub discount") : "") +
       row("Total", money(e.total), "total")
     );
   }
