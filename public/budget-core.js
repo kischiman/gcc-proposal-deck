@@ -122,7 +122,8 @@ window.Budget = (function () {
     const discountPct = Number(state.discount) || 0;
     const discountFixed = Number(state.discountFixed) || 0;
     const discount = Math.min(gross, gross * (discountPct / 100) + discountFixed);
-    return { byPhase, net, pct, contingency, discountPct, discountFixed, discount, total: gross - discount };
+    const discountNote = String(state.discountNote || "").trim();
+    return { byPhase, net, pct, contingency, discountPct, discountFixed, discountNote, discount, total: gross - discount };
   }
 
   /** "Discount at 10%", "Discount · $500 off", or both together. */
@@ -135,13 +136,15 @@ window.Budget = (function () {
   function estimateRowsHtml(state) {
     const e = estimateTotals(state);
     if (!e.net) return "";
-    const row = (label, value, cls) =>
-      `<div class="row${cls ? " " + cls : ""}"><span>${esc(label)}</span><span class="v">${value}</span></div>`;
+    const row = (label, value, cls, note) =>
+      `<div class="row${cls ? " " + cls : ""}"><span>${esc(label)}${
+        note ? `<span class="row-note">${esc(note)}</span>` : ""
+      }</span><span class="v">${value}</span></div>`;
     return (
       e.byPhase.map((p) => row(p.title, money(p.total))).join("") +
       (e.pct || e.discount ? row("Subtotal", money(e.net), "sub") : "") +
       (e.pct ? row(`Contingency at ${e.pct}%`, money(e.contingency), "sub") : "") +
-      (e.discount ? row(discountLabel(e.discountPct, e.discountFixed), "−" + money(e.discount), "sub discount") : "") +
+      (e.discount ? row(discountLabel(e.discountPct, e.discountFixed), "−" + money(e.discount), "sub discount", e.discountNote) : "") +
       row("Total", money(e.total), "total")
     );
   }

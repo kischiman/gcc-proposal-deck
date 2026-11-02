@@ -112,6 +112,12 @@ function renderRates() {
       <label for="r-discount-fixed">Discount · fixed $</label>
       <input id="r-discount-fixed" data-rate="discountFixed" type="number" min="0" step="100"
              value="${state.rates.discountFixed || 0}" />
+    </div>
+    <div class="rate rate-wide">
+      <label for="r-discount-note">Discount · note</label>
+      <input id="r-discount-note" data-setting="discount-note" type="text" maxlength="160"
+             placeholder="What the discount is for, e.g. founding-client rate"
+             value="${esc(state.settings?.discountNote || "")}" />
     </div>`;
 
   const on = state.tasks.filter((t) => t.prefill).length;
@@ -350,7 +356,7 @@ function render() {
       .join("") +
     `<div class="row sub"><span>Subtotal</span><span class="v">${money(eff.net)}</span></div>
      <div class="row sub"><span>Contingency at ${state.rates.contingency}%</span><span class="v">${money(eff.contingency)}</span></div>
-     ${eff.discount ? `<div class="row sub"><span>Discount${state.rates.discount ? ` at ${state.rates.discount}%` : ""}${state.rates.discountFixed ? `${state.rates.discount ? " +" : " ·"} ${money(state.rates.discountFixed)} off` : ""}</span><span class="v">−${money(eff.discount)}</span></div>` : ""}
+     ${eff.discount ? `<div class="row sub"><span>Discount${state.rates.discount ? ` at ${state.rates.discount}%` : ""}${state.rates.discountFixed ? `${state.rates.discount ? " +" : " ·"} ${money(state.rates.discountFixed)} off` : ""}${state.settings?.discountNote ? `<span class="row-note">${esc(state.settings.discountNote)}</span>` : ""}</span><span class="v">−${money(eff.discount)}</span></div>` : ""}
      <div class="row total"><span>Committed total</span><span class="v">${money(eff.total)}</span></div>
      <div class="row sub"><span>Against base rate card</span><span class="v">${money(base.total)}</span></div>`;
 }
@@ -645,6 +651,8 @@ document.addEventListener("click", (e) => {
 document.addEventListener("change", (e) => {
   const rate = e.target.closest("[data-rate]");
   if (rate) return mutate("rate", { key: rate.dataset.rate, value: rate.value });
+  const setting = e.target.closest("[data-setting]");
+  if (setting) return mutate(setting.dataset.setting, { value: setting.value });
 });
 
 // ---------------------------------------------------------------- re-arrange

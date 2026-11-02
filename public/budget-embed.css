@@ -279,6 +279,8 @@
 .budget-scope .summary .row .v { font-family: var(--mono); font-variant-numeric: tabular-nums; }
 
 .budget-scope .summary .row.sub { color: var(--muted); font-size: 13px; }
+/* what a figure is for, e.g. the reason for the discount, under its label */
+.budget-scope .summary .row-note { display: block; margin-top: 2px; font-size: 12px; font-style: italic; color: var(--muted); }
 
 .scrim {
   position: fixed;

@@ -323,6 +323,7 @@ export async function handle(req, res) {
         : action === "prefill" ? budget.setPrefill(body.id, body.value)
         : action === "hidden" ? budget.setHidden(body.id, body.value)
         : action === "prefill-all" ? budget.setPrefillAll(body.value)
+        : action === "discount-note" ? budget.setDiscountNote(body.value)
         : action === "public-money" ? budget.setPublicMoney(body.value)
         : action === "public-proposals" ? budget.setPublicProposals(body.value)
         : action === "public-comments" ? budget.setPublicComments(body.value)
