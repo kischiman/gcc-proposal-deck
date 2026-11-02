@@ -123,7 +123,8 @@ function applyAddress() {
   // / and closes the regex early, breaking the whole file's parse.
   const parts = (location.hash || "").replace(/^#\\/?/, "").split("/").filter(Boolean);
   if (!parts.length) return false;
-  const index = slides.findIndex((s) => slug(s.dataset.title) === parts[0]);
+  // data-alias keeps an old address working after a slide is renamed
+  const index = slides.findIndex((s) => slug(s.dataset.title) === parts[0] || s.dataset.alias === parts[0]);
   if (index < 0) return false;
   let sub = 0;
   if (parts[1]) {
