@@ -1584,3 +1584,7 @@ h1, h2 { letter-spacing: -0.02em; }
 .fnode .fglyph rect.fill, .fnode:hover .fglyph rect.fill { fill: var(--node); stroke: none; }
 .fnode[data-selected="true"] .fglyph rect { fill: none; stroke: var(--accent); }
 .fnode[data-selected="true"] .fglyph rect.fill { fill: var(--accent); }
+
+.about-link { margin: 28px 0 0; font-family: var(--sans); font-size: 15px; font-weight: 500; }
+.about-link a { color: var(--accent); text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; }
+.about-link a:hover { text-decoration: underline; text-underline-offset: 0.18em; }
