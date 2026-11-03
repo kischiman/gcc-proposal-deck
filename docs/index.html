@@ -1735,11 +1735,11 @@ h1, h2 { letter-spacing: -0.02em; }
   .os-head { grid-area: head; margin: 14px 2px 0; }
   .os-head h3 { font-size: 17px; }
   .os-head p { font-size: 15px; }
-  .os-canvas { grid-area: canvas; width: 100%; max-width: 680px; justify-self: start; }
+  .os-canvas { grid-area: canvas; width: 100%; max-width: 580px; justify-self: end; }
   /* the figure is drawn smaller here, so its labels are set a little larger to stay readable */
-  .os-label { font-size: 15.5px; }
-  .os-dept { font-size: 15px; }
-  .os-leader { font-size: 15.5px; }
+  .os-label { font-size: 17px; }
+  .os-dept { font-size: 16px; }
+  .os-leader { font-size: 17px; }
 }
 
 
@@ -2374,7 +2374,7 @@ window.addEventListener("hashchange", applyAddress);
   layer("path", { d: curve([792, 196], [659, 208], -10, 0, 0), class: "os-fric", "marker-end": "url(#os-a-f)" }, "0,1,2", "1");
   layer("path", { d: "M650 196 V220", class: "os-block" }, "0,1,2", "1");
 
-  label(342, 268, "Missed hand-offs", "0", "os-fric-label", "end");
+  label(333, 270, "Missed hand-offs", "0", "os-fric-label", "end");
   label(662, 234, "Disagreements", "0", "os-fric-label", "start");
   label(662, 407, "Inefficiencies", "0", "os-fric-label", "start");
   // ...converging on cost, down the gaps between departments
@@ -2385,7 +2385,7 @@ window.addEventListener("hashchange", applyAddress);
 
   // 02 recorded: where the friction was seen
   [[350, 286], [650, 208], [650, 361]].forEach(([x, y]) => layer("circle", { cx: x, cy: y, r: 17, class: "os-record" }, "2"));
-  label(342, 268, "Waiting", "2", "os-rec-label", "end");
+  label(333, 270, "Waiting", "2", "os-rec-label", "end");
   label(662, 234, "Disagreement", "2", "os-rec-label", "start");
   label(662, 407, "Rework", "2", "os-rec-label", "start");
 
@@ -2397,14 +2397,14 @@ window.addEventListener("hashchange", applyAddress);
   bridge(curve("V3", "O5", -22), "3,4,5,6", { class: "os-bridge back", "marker-end": "url(#os-a-i)" });
   const B4 = bridge(curve("O2", "V0", -18), "3,4,5,6", { "marker-end": "url(#os-a-i)" });
   layer("circle", { cx: 500, cy: 190, r: 15, class: "os-owner" }, "3,4,5,6", "4,5,6");
-  label(342, 268, "Clear hand-off", "3", "os-ind-label", "end");
+  label(333, 270, "Clear hand-off", "3", "os-ind-label", "end");
   label(488, 228, "Decision owner", "3", "os-ind-label", "end");
   label(662, 407, "Feedback loop", "3", "os-ind-label", "start");
 
   // 04 checkpoints on the redesigned routes, feeding back into design
   [[350, 279], [650, 205], [650, 347]].forEach(([x, y]) =>
     layer("rect", { x: x - 6, y: y - 6, width: 12, height: 12, transform: `rotate(45 ${x} ${y})`, class: "os-check" }, "4,5", "5"));
-  label(342, 268, "Handoff time", "4", "os-ind-label", "end");
+  label(333, 270, "Handoff time", "4", "os-ind-label", "end");
   label(662, 234, "Decision clarity", "4", "os-ind-label", "start");
   label(662, 407, "Rework", "4", "os-ind-label", "start");
   layer("path", { d: "M486 512 A16 16 0 1 1 488 530", class: "os-loop", "marker-end": "url(#os-a-i)" }, "4");
@@ -2413,7 +2413,7 @@ window.addEventListener("hashchange", applyAddress);
   // 05 automation on improved routes, with people reviewing
   [[398, 276, 398, 304], [698, 346, 698, 374], [698, 276, 698, 304]].forEach(([x1, y1, x2, y2]) =>
     layer("path", { d: `M${x1} ${y1} V${y2}`, class: "os-gate" }, "5"));
-  label(342, 268, "Automated, then reviewed", "5", "os-ind-label", "end");
+  label(333, 270, "Automated, then reviewed", "5", "os-ind-label", "end");
   label(662, 234, "Owner still decides", "5", "os-ind-label", "start");
   label(662, 407, "Human review gate", "5", "os-ind-label", "start");
   const tokens = [B1, B3, B4].map((path) => ({ path, n: layer("rect", { width: 8, height: 8, x: -4, y: -4, class: "os-token" }, "5") }));

@@ -1725,9 +1725,9 @@ h1, h2 { letter-spacing: -0.02em; }
   .os-head { grid-area: head; margin: 14px 2px 0; }
   .os-head h3 { font-size: 17px; }
   .os-head p { font-size: 15px; }
-  .os-canvas { grid-area: canvas; width: 100%; max-width: 680px; justify-self: start; }
+  .os-canvas { grid-area: canvas; width: 100%; max-width: 580px; justify-self: end; }
   /* the figure is drawn smaller here, so its labels are set a little larger to stay readable */
-  .os-label { font-size: 15.5px; }
-  .os-dept { font-size: 15px; }
-  .os-leader { font-size: 15.5px; }
+  .os-label { font-size: 17px; }
+  .os-dept { font-size: 16px; }
+  .os-leader { font-size: 17px; }
 }
