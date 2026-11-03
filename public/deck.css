@@ -1588,3 +1588,10 @@ h1, h2 { letter-spacing: -0.02em; }
 .about-link { margin: 28px 0 0; font-family: var(--sans); font-size: 15px; font-weight: 500; }
 .about-link a { color: var(--accent); text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; }
 .about-link a:hover { text-decoration: underline; text-underline-offset: 0.18em; }
+
+/* Overview and Approach share one slide: the approach follows as its second part */
+.part { margin-top: 72px; padding-top: 28px; border-top: 1px solid var(--ink); }
+.part-head {
+  font-family: var(--display); font-weight: 500; font-size: clamp(25px, 2.5vw, 33px);
+  line-height: 1.14; letter-spacing: -0.02em; margin: 0 0 26px; text-wrap: balance;
+}
