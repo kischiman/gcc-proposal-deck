@@ -7,3 +7,5 @@ dist/deck-internal.html
 
 # runtime state — the live copy is the gist, or the server's own file
 budget-state.json
+.vercel
+.env*
