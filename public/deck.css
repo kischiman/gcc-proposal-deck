@@ -1711,3 +1711,23 @@ h1, h2 { letter-spacing: -0.02em; }
 @media (prefers-reduced-motion: reduce) {
   .os-el, .os-person { transition: none; }
 }
+
+/* wide screens: stage buttons in a column on the left, a smaller figure to their right */
+@media (min-width: 1000px) {
+  .org-story {
+    display: grid; grid-template-columns: 220px minmax(0, 1fr); column-gap: 32px;
+    grid-template-areas: "bar canvas" "head canvas"; grid-template-rows: auto 1fr; align-items: start;
+  }
+  .os-bar { grid-area: bar; flex-direction: column; align-items: stretch; gap: 10px; }
+  .os-nav { flex-direction: column; flex-wrap: nowrap; }
+  .os-step { text-align: left; }
+  .os-play { align-self: flex-start; }
+  .os-head { grid-area: head; margin: 14px 2px 0; }
+  .os-head h3 { font-size: 17px; }
+  .os-head p { font-size: 15px; }
+  .os-canvas { grid-area: canvas; width: 100%; max-width: 680px; justify-self: start; }
+  /* the figure is drawn smaller here, so its labels are set a little larger to stay readable */
+  .os-label { font-size: 15.5px; }
+  .os-dept { font-size: 15px; }
+  .os-leader { font-size: 15.5px; }
+}
