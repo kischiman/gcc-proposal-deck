@@ -58,21 +58,9 @@ const MARKS = ${JSON.stringify(marks)};
 
 const slides = [...document.querySelectorAll(".slide")];
 const navItems = document.getElementById("nav-items");
-const list = document.getElementById("bottlenecks");
-const empty = document.getElementById("bottlenecks-empty");
-const generateBtn = document.getElementById("generate");
-const resetBtn = document.getElementById("reset");
-const genStatus = document.getElementById("gen-status");
-const results = document.getElementById("results");
-const rowsEl = document.getElementById("rows");
-const sourceNote = document.getElementById("source-note");
-const form = document.getElementById("capture");
-const entry = document.getElementById("entry");
 
 let current = 0;
 let currentSub = 0;
-let items = [];
-let nextId = 1;
 
 const panelsFor = (i) => [...slides[i].querySelectorAll(".panel")];
 const tabsFor = (i) => [...slides[i].querySelectorAll(".subnav button")];
@@ -219,119 +207,6 @@ function selectNode(name) {
 fnodes.forEach((n) => n.addEventListener("click", () => selectNode(n.dataset.node)));
 flowLegend.forEach((b) => b.addEventListener("click", () => selectNode(b.dataset.node)));
 
-// -- capture
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const text = entry.value.trim();
-  if (!text) return;
-  items.push({ id: nextId++, text });
-  entry.value = "";
-  render();
-});
-
-function render() {
-  empty.hidden = items.length > 0;
-  generateBtn.disabled = items.length === 0;
-  list.innerHTML = items
-    .map(
-      (item, i) =>
-        '<li class="bottleneck" draggable="true" data-id="' + item.id + '">' +
-        '<span class="rank">' + (i + 1) + '</span>' +
-        '<span class="text">' + esc(item.text) + '</span>' +
-        '<span class="grip">···</span></li>'
-    )
-    .join("");
-}
-
-render();
-
-// -- drag to prioritize
-let dragged = null;
-
-list.addEventListener("dragstart", (e) => {
-  dragged = e.target.closest(".bottleneck");
-  if (!dragged) return;
-  dragged.dataset.dragging = "true";
-  e.dataTransfer.effectAllowed = "move";
-});
-
-list.addEventListener("dragover", (e) => {
-  e.preventDefault();
-  const over = e.target.closest(".bottleneck");
-  if (!over || !dragged || over === dragged) return;
-  const { top, height } = over.getBoundingClientRect();
-  list.insertBefore(dragged, e.clientY > top + height / 2 ? over.nextSibling : over);
-});
-
-list.addEventListener("dragend", () => {
-  if (!dragged) return;
-  delete dragged.dataset.dragging;
-  dragged = null;
-  const order = [...list.children].map((li) => Number(li.dataset.id));
-  items = order.map((id) => items.find((b) => b.id === id)).filter(Boolean);
-  render();
-});
-
-// -- generate
-function markHtml(url) {
-  let host;
-  try { host = new URL(url).host; } catch { return ""; }
-  const slug = host.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-  const src = MARKS[slug];
-  return src ? '<img class="ex-mark" src="' + src + '" alt="" />' : "";
-}
-
-function cellHtml(cell, kind) {
-  const examples = (cell.examples || [])
-    .map((ex) => {
-      const link = '<a href="' + esc(ex.url) + '" target="_blank" rel="noreferrer">' + esc(ex.name) + '</a>';
-      return '<li>' + markHtml(ex.url) + '<span>' + link + ' — <em>' + esc(ex.note) + '</em></span></li>';
-    })
-    .join("");
-  return '<div class="cell ' + kind + '">' +
-    '<p class="solution">' + esc(cell.solution) + '</p>' +
-    '<ul class="examples">' + examples + '</ul></div>';
-}
-
-generateBtn.addEventListener("click", () => {
-  genStatus.innerHTML = '<span class="spinner"></span>matching';
-  generateBtn.disabled = true;
-
-  setTimeout(() => {
-    const rows = libraryRows(items.map((b) => b.text));
-    rowsEl.innerHTML = rows
-      .map(
-        (row) =>
-          '<div class="row"><p class="row-title">' + esc(row.question) + '</p>' +
-          '<p class="row-theme">' + esc(row.theme) + '</p>' +
-          '<div class="cells">' + cellHtml(row.answer, "answer") + '</div></div>'
-      )
-      .join("");
-    results.hidden = false;
-    genStatus.textContent = rows.length + (rows.length === 1 ? " answer" : " answers");
-    generateBtn.disabled = false;
-    sourceNote.textContent =
-      "Matched against the library bundled into this page. In the live version these answers are written by Claude, with web search, against whatever the room actually asked.";
-  }, 400);
-});
-
-let clearArmed = null;
-resetBtn.addEventListener("click", () => {
-  if (clearArmed) {
-    clearTimeout(clearArmed);
-    clearArmed = null;
-    resetBtn.textContent = "Clear";
-    items = [];
-    results.hidden = true;
-    genStatus.textContent = "";
-    render();
-    return;
-  }
-  resetBtn.textContent = "Tap again to clear";
-  clearArmed = setTimeout(() => { clearArmed = null; resetBtn.textContent = "Clear"; }, 3000);
-});
-
-
 window.deckGo = (slide, sub) => go(slide, sub);
 
 applyAddress();
@@ -342,7 +217,6 @@ ${askJs}
 
 // .capture now lives in deck.css — only the static copy's own quirks belong here
 const extraCss = `
-.bottleneck { cursor: grab; }
 `;
 
 const page = `<title>GCC · Proposal</title>

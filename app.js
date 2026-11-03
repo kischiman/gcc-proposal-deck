@@ -382,7 +382,7 @@ export async function handle(req, res) {
         return json(res, 200, { answer: await answerFromDeck(q, passages) });
       } catch (err) {
         console.error("[ask] falling back to passages:", err.message);
-        return json(res, 200, { answer: null });
+        return json(res, 200, { answer: null, reason: String(err.message || err).slice(0, 160) });
       }
     }
 

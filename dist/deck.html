@@ -1598,12 +1598,38 @@ h1, h2 { letter-spacing: -0.02em; }
   line-height: 1.14; letter-spacing: -0.02em; margin: 0 0 26px; text-wrap: balance;
 }
 
+/* ---------------------------------------------------------------- Asilo mark in the nav */
+.nav-mark { width: 22px; height: 22px; flex: none; }
+.nav-mark .bm-link { fill: none; stroke: var(--accent); stroke-width: 1.6; }
+.nav-mark .bm-node { fill: var(--ink); }
 
-.bottleneck { cursor: grab; }
+/* ---------------------------------------------------------------- Ask this document */
+.doc-ask { display: flex; gap: 10px; align-items: stretch; margin: 32px 0 14px; max-width: 820px; }
+.doc-ask textarea {
+  flex: 1; resize: vertical; min-height: 56px; padding: 14px 16px;
+  font: 400 17px/1.45 var(--serif); color: var(--ink);
+  background: var(--surface); border: 1px solid var(--line); border-radius: 2px;
+}
+.doc-ask textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.doc-ask .btn { min-width: 96px; }
+.doc-suggest { display: flex; flex-wrap: wrap; gap: 8px; max-width: 820px; }
+.doc-suggest button {
+  font: 500 13.5px/1 var(--sans); color: var(--muted); background: none; cursor: pointer;
+  border: 1px solid var(--rule); border-radius: 2px; padding: 9px 12px; min-height: 36px;
+}
+.doc-suggest button:hover { color: var(--accent); border-color: var(--accent); }
+.doc-thread { list-style: none; margin: 40px 0 0; padding: 0; max-width: 820px; }
+.doc-turn { border-top: 1px solid var(--ink); padding: 18px 0 30px; }
+.doc-q { font: 500 19px/1.35 var(--display); margin: 0 0 12px; letter-spacing: -0.01em; }
+.doc-a .ask-answer p { font: 400 17px/1.55 var(--serif); margin: 0 0 10px; }
+.doc-a .ask-sources { margin-top: 12px; }
+@media (max-width: 640px) { .doc-ask { flex-direction: column; } }
+
+
 
 </style>
 <nav class="nav">
-  <div class="nav-brand">Asilo <span>· General Construction Co.</span></div>
+  <div class="nav-brand"><svg class="nav-mark" viewBox="0 0 26 26" aria-hidden="true"><path class="bm-link" d="M4.5 20.5 13 5.5l8.5 15z"/><circle class="bm-node" cx="4.5" cy="20.5" r="3"/><circle class="bm-node" cx="13" cy="5.5" r="3"/><circle class="bm-node" cx="21.5" cy="20.5" r="3"/></svg>Asilo <span>· General Construction Co.</span></div>
   <span class="nav-current" id="nav-current"></span>
   <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-items">
     <span class="bars" aria-hidden="true"><span></span><span></span><span></span></span>
@@ -2025,39 +2051,28 @@ h1, h2 { letter-spacing: -0.02em; }
 </section>
 
 <!-- ══════════════════════════════════════════════════════════ 5 · Q&A ══ -->
-<section class="slide" data-slide="4" data-title="Q&amp;A">
+<section class="slide ask-slide" data-slide="4" data-title="Ask this document" data-alias="q-a">
   <div class="inner">
-    <div class="workshop-head">
-      <div>
-        <p class="eyebrow">05 · Live</p>
-        <h1>Q&amp;A</h1>
-      </div>
-    </div>
+    <p class="eyebrow">05 · Ask</p>
+    <h1>Ask this document</h1>
+    <p class="lede">Ask anything about this proposal. The answer comes only from what is written
+    here, with links to the slides it draws on. If the proposal doesn't cover it, it will say so.</p>
 
-    <form class="capture" id="capture">
-      <input id="entry" type="text" maxlength="240" autocomplete="off"
-             placeholder="What other problem spaces are keeping you up at night?" aria-label="Add a question" />
-      <button class="btn" type="submit">Add</button>
+    <form class="doc-ask" id="doc-ask">
+      <label class="sr" for="doc-q">Your question</label>
+      <textarea id="doc-q" rows="2" maxlength="300" autocomplete="off"
+                placeholder="For example: what do our stakeholders need to attend?"></textarea>
+      <button class="btn" type="submit">Ask</button>
     </form>
 
-    <div class="bottleneck-list">
-      <ul class="bottlenecks" id="bottlenecks"></ul>
-      <div class="empty" id="bottlenecks-empty">Nothing asked yet — type a question above.</div>
+    <div class="doc-suggest" id="doc-suggest" aria-label="Suggested questions">
+      <button type="button">What happens in the workshop?</button>
+      <button type="button">How much time does this take from our team?</button>
+      <button type="button">What does the investment cover?</button>
+      <button type="button">Where does AI come in?</button>
     </div>
 
-    <div class="actions">
-      <button class="btn" id="generate">Answer these</button>
-      <button class="btn ghost" id="reset">Clear</button>
-      <span class="status" id="gen-status"></span>
-    </div>
-
-    <div class="results" id="results" hidden>
-      <div class="results-head">
-        <div>Answer<span>Written against the questions in the order you put them</span></div>
-      </div>
-      <div id="rows"></div>
-      <p class="source-note" id="source-note"></p>
-    </div>
+    <ol class="doc-thread" id="doc-thread" aria-live="polite"></ol>
   </div>
 </section>
 
@@ -2115,21 +2130,9 @@ const MARKS = {};
 
 const slides = [...document.querySelectorAll(".slide")];
 const navItems = document.getElementById("nav-items");
-const list = document.getElementById("bottlenecks");
-const empty = document.getElementById("bottlenecks-empty");
-const generateBtn = document.getElementById("generate");
-const resetBtn = document.getElementById("reset");
-const genStatus = document.getElementById("gen-status");
-const results = document.getElementById("results");
-const rowsEl = document.getElementById("rows");
-const sourceNote = document.getElementById("source-note");
-const form = document.getElementById("capture");
-const entry = document.getElementById("entry");
 
 let current = 0;
 let currentSub = 0;
-let items = [];
-let nextId = 1;
 
 const panelsFor = (i) => [...slides[i].querySelectorAll(".panel")];
 const tabsFor = (i) => [...slides[i].querySelectorAll(".subnav button")];
@@ -2276,119 +2279,6 @@ function selectNode(name) {
 fnodes.forEach((n) => n.addEventListener("click", () => selectNode(n.dataset.node)));
 flowLegend.forEach((b) => b.addEventListener("click", () => selectNode(b.dataset.node)));
 
-// -- capture
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const text = entry.value.trim();
-  if (!text) return;
-  items.push({ id: nextId++, text });
-  entry.value = "";
-  render();
-});
-
-function render() {
-  empty.hidden = items.length > 0;
-  generateBtn.disabled = items.length === 0;
-  list.innerHTML = items
-    .map(
-      (item, i) =>
-        '<li class="bottleneck" draggable="true" data-id="' + item.id + '">' +
-        '<span class="rank">' + (i + 1) + '</span>' +
-        '<span class="text">' + esc(item.text) + '</span>' +
-        '<span class="grip">···</span></li>'
-    )
-    .join("");
-}
-
-render();
-
-// -- drag to prioritize
-let dragged = null;
-
-list.addEventListener("dragstart", (e) => {
-  dragged = e.target.closest(".bottleneck");
-  if (!dragged) return;
-  dragged.dataset.dragging = "true";
-  e.dataTransfer.effectAllowed = "move";
-});
-
-list.addEventListener("dragover", (e) => {
-  e.preventDefault();
-  const over = e.target.closest(".bottleneck");
-  if (!over || !dragged || over === dragged) return;
-  const { top, height } = over.getBoundingClientRect();
-  list.insertBefore(dragged, e.clientY > top + height / 2 ? over.nextSibling : over);
-});
-
-list.addEventListener("dragend", () => {
-  if (!dragged) return;
-  delete dragged.dataset.dragging;
-  dragged = null;
-  const order = [...list.children].map((li) => Number(li.dataset.id));
-  items = order.map((id) => items.find((b) => b.id === id)).filter(Boolean);
-  render();
-});
-
-// -- generate
-function markHtml(url) {
-  let host;
-  try { host = new URL(url).host; } catch { return ""; }
-  const slug = host.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-  const src = MARKS[slug];
-  return src ? '<img class="ex-mark" src="' + src + '" alt="" />' : "";
-}
-
-function cellHtml(cell, kind) {
-  const examples = (cell.examples || [])
-    .map((ex) => {
-      const link = '<a href="' + esc(ex.url) + '" target="_blank" rel="noreferrer">' + esc(ex.name) + '</a>';
-      return '<li>' + markHtml(ex.url) + '<span>' + link + ' — <em>' + esc(ex.note) + '</em></span></li>';
-    })
-    .join("");
-  return '<div class="cell ' + kind + '">' +
-    '<p class="solution">' + esc(cell.solution) + '</p>' +
-    '<ul class="examples">' + examples + '</ul></div>';
-}
-
-generateBtn.addEventListener("click", () => {
-  genStatus.innerHTML = '<span class="spinner"></span>matching';
-  generateBtn.disabled = true;
-
-  setTimeout(() => {
-    const rows = libraryRows(items.map((b) => b.text));
-    rowsEl.innerHTML = rows
-      .map(
-        (row) =>
-          '<div class="row"><p class="row-title">' + esc(row.question) + '</p>' +
-          '<p class="row-theme">' + esc(row.theme) + '</p>' +
-          '<div class="cells">' + cellHtml(row.answer, "answer") + '</div></div>'
-      )
-      .join("");
-    results.hidden = false;
-    genStatus.textContent = rows.length + (rows.length === 1 ? " answer" : " answers");
-    generateBtn.disabled = false;
-    sourceNote.textContent =
-      "Matched against the library bundled into this page. In the live version these answers are written by Claude, with web search, against whatever the room actually asked.";
-  }, 400);
-});
-
-let clearArmed = null;
-resetBtn.addEventListener("click", () => {
-  if (clearArmed) {
-    clearTimeout(clearArmed);
-    clearArmed = null;
-    resetBtn.textContent = "Clear";
-    items = [];
-    results.hidden = true;
-    genStatus.textContent = "";
-    render();
-    return;
-  }
-  resetBtn.textContent = "Tap again to clear";
-  clearArmed = setTimeout(() => { clearArmed = null; resetBtn.textContent = "Clear"; }, 3000);
-});
-
-
 window.deckGo = (slide, sub) => go(slide, sub);
 
 applyAddress();
@@ -2433,7 +2323,7 @@ window.addEventListener("hashchange", applyAddress);
   }
 
   function buildIndex() {
-    document.querySelectorAll(".slide").forEach((slide) => {
+    document.querySelectorAll(".slide:not(.ask-slide)").forEach((slide) => {
       const slideIndex = Number(slide.dataset.slide);
       const title = slide.dataset.title;
       const panels = [...slide.querySelectorAll(".panel")];
@@ -2442,6 +2332,13 @@ window.addEventListener("hashchange", applyAddress);
       scopes.forEach((scope, sub) => {
         const tab = slide.querySelectorAll(".subnav button")[sub];
         const label = tab ? `${title} · ${tab.textContent.trim()}` : title;
+
+        // the Approach step notes are buttons: index each under its step name
+        scope.querySelectorAll(".flow-legend button").forEach((el) => {
+          const step = el.querySelector("b")?.textContent.trim() || "";
+          const text = el.querySelector("span")?.textContent.replace(/\s+/g, " ").trim() || "";
+          if (text) index.push({ slide: slideIndex, sub, label, heading: step, text: `${step}: ${text}` });
+        });
 
         scope.querySelectorAll("p, li, dd, figcaption, .chip").forEach((el) => {
           if (el.closest(".ask-panel")) return;
@@ -2542,17 +2439,11 @@ window.addEventListener("hashchange", applyAddress);
 
   let pending = 0;
 
-  async function ask(question) {
+  /** Rank passages locally, then ask the server to answer from them. `answer` is null
+   *  when there is no server or no model, and the caller shows the passages instead. */
+  async function query(question) {
     const hits = rank(question, 8);
-
-    if (!hits.length) {
-      open(`<p class="ask-empty">Nothing in the deck matches that. Try a word from the slides — a phase, a goal, a capability.</p>`);
-      return;
-    }
-
-    const token = ++pending;
-    open(`<p class="ask-status"><span class="spinner"></span>Reading the deck…</p>`);
-
+    if (!hits.length) return { hits, answer: null };
     let answer = null;
     try {
       const res = await fetch("/api/ask", {
@@ -2564,12 +2455,29 @@ window.addEventListener("hashchange", applyAddress);
     } catch {
       // no server (the shared copy) — fall through to the passages
     }
+    return { hits, answer };
+  }
+
+  const answerHtml = (answer) => `<p>${esc(answer).replace(/\n+/g, "</p><p>")}</p>`;
+
+  async function ask(question) {
+    const hits = rank(question, 8);
+
+    if (!hits.length) {
+      open(`<p class="ask-empty">Nothing in the deck matches that. Try a word from the slides — a phase, a goal, a capability.</p>`);
+      return;
+    }
+
+    const token = ++pending;
+    open(`<p class="ask-status"><span class="spinner"></span>Reading the deck…</p>`);
+
+    const { answer } = await query(question);
 
     if (token !== pending) return; // a newer question overtook this one
 
     if (answer) {
       open(
-        `<div class="ask-answer">${esc(answer).replace(/\n+/g, "</p><p>").replace(/^/, "<p>") + "</p>"}</div>
+        `<div class="ask-answer">${answerHtml(answer)}</div>
          <div class="ask-sources"><span class="ask-label">In the deck</span>${sourcesHtml(hits)}</div>`
       );
     } else {
@@ -2577,6 +2485,59 @@ window.addEventListener("hashchange", applyAddress);
         `<div class="ask-sources"><span class="ask-label">From the deck</span></div>${passagesHtml(hits)}`
       );
     }
+  }
+
+  // ---------------------------------------------------------------- the Ask slide
+
+  const docForm = document.getElementById("doc-ask");
+  const docQ = document.getElementById("doc-q");
+  const thread = document.getElementById("doc-thread");
+  const suggest = document.getElementById("doc-suggest");
+
+  async function askOnSlide(question) {
+    const item = document.createElement("li");
+    item.className = "doc-turn";
+    item.innerHTML = `<p class="doc-q">${esc(question)}</p>
+      <div class="doc-a"><p class="ask-status"><span class="spinner"></span>Reading the proposal…</p></div>`;
+    thread.prepend(item);
+    const out = item.querySelector(".doc-a");
+
+    const { hits, answer } = await query(question);
+    if (!hits.length) {
+      out.innerHTML = `<p class="ask-empty">The proposal doesn't cover that. Try asking about the
+        approach, the process and investment, the capabilities or the team.</p>`;
+    } else if (answer) {
+      out.innerHTML = `<div class="ask-answer">${answerHtml(answer)}</div>
+        <div class="ask-sources"><span class="ask-label">In the proposal</span>${sourcesHtml(hits)}</div>`;
+    } else {
+      out.innerHTML = `<div class="ask-sources"><span class="ask-label">Closest passages in the proposal</span></div>${passagesHtml(hits)}`;
+    }
+  }
+
+  if (docForm) {
+    docForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const q = docQ.value.trim();
+      if (!q) return;
+      docQ.value = "";
+      askOnSlide(q);
+    });
+    docQ.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        docForm.requestSubmit();
+      }
+    });
+    suggest.addEventListener("click", (e) => {
+      const b = e.target.closest("button");
+      if (b) askOnSlide(b.textContent.trim());
+    });
+    thread.addEventListener("click", (e) => {
+      const target = e.target.closest("[data-slide]");
+      if (target && typeof window.deckGo === "function") {
+        window.deckGo(Number(target.dataset.slide), Number(target.dataset.sub));
+      }
+    });
   }
 
   // ---------------------------------------------------------------- wiring

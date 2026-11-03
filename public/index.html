@@ -10,7 +10,7 @@
 <body>
 
 <nav class="nav">
-  <div class="nav-brand">Asilo <span>· General Construction Co.</span></div>
+  <div class="nav-brand"><svg class="nav-mark" viewBox="0 0 26 26" aria-hidden="true"><path class="bm-link" d="M4.5 20.5 13 5.5l8.5 15z"/><circle class="bm-node" cx="4.5" cy="20.5" r="3"/><circle class="bm-node" cx="13" cy="5.5" r="3"/><circle class="bm-node" cx="21.5" cy="20.5" r="3"/></svg>Asilo <span>· General Construction Co.</span></div>
   <span class="nav-current" id="nav-current"></span>
   <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-items">
     <span class="bars" aria-hidden="true"><span></span><span></span><span></span></span>
@@ -432,39 +432,28 @@
 </section>
 
 <!-- ══════════════════════════════════════════════════════════ 5 · Q&A ══ -->
-<section class="slide" data-slide="4" data-title="Q&amp;A">
+<section class="slide ask-slide" data-slide="4" data-title="Ask this document" data-alias="q-a">
   <div class="inner">
-    <div class="workshop-head">
-      <div>
-        <p class="eyebrow">05 · Live</p>
-        <h1>Q&amp;A</h1>
-      </div>
-    </div>
+    <p class="eyebrow">05 · Ask</p>
+    <h1>Ask this document</h1>
+    <p class="lede">Ask anything about this proposal. The answer comes only from what is written
+    here, with links to the slides it draws on. If the proposal doesn't cover it, it will say so.</p>
 
-    <form class="capture" id="capture">
-      <input id="entry" type="text" maxlength="240" autocomplete="off"
-             placeholder="What other problem spaces are keeping you up at night?" aria-label="Add a question" />
-      <button class="btn" type="submit">Add</button>
+    <form class="doc-ask" id="doc-ask">
+      <label class="sr" for="doc-q">Your question</label>
+      <textarea id="doc-q" rows="2" maxlength="300" autocomplete="off"
+                placeholder="For example: what do our stakeholders need to attend?"></textarea>
+      <button class="btn" type="submit">Ask</button>
     </form>
 
-    <div class="bottleneck-list">
-      <ul class="bottlenecks" id="bottlenecks"></ul>
-      <div class="empty" id="bottlenecks-empty">Nothing asked yet — type a question above.</div>
+    <div class="doc-suggest" id="doc-suggest" aria-label="Suggested questions">
+      <button type="button">What happens in the workshop?</button>
+      <button type="button">How much time does this take from our team?</button>
+      <button type="button">What does the investment cover?</button>
+      <button type="button">Where does AI come in?</button>
     </div>
 
-    <div class="actions">
-      <button class="btn" id="generate">Answer these</button>
-      <button class="btn ghost" id="reset">Clear</button>
-      <span class="status" id="gen-status"></span>
-    </div>
-
-    <div class="results" id="results" hidden>
-      <div class="results-head">
-        <div>Answer<span>Written against the questions in the order you put them</span></div>
-      </div>
-      <div id="rows"></div>
-      <p class="source-note" id="source-note"></p>
-    </div>
+    <ol class="doc-thread" id="doc-thread" aria-live="polite"></ol>
   </div>
 </section>
 

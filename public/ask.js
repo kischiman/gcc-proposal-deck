@@ -37,7 +37,7 @@
   }
 
   function buildIndex() {
-    document.querySelectorAll(".slide").forEach((slide) => {
+    document.querySelectorAll(".slide:not(.ask-slide)").forEach((slide) => {
       const slideIndex = Number(slide.dataset.slide);
       const title = slide.dataset.title;
       const panels = [...slide.querySelectorAll(".panel")];
@@ -46,6 +46,13 @@
       scopes.forEach((scope, sub) => {
         const tab = slide.querySelectorAll(".subnav button")[sub];
         const label = tab ? `${title} · ${tab.textContent.trim()}` : title;
+
+        // the Approach step notes are buttons: index each under its step name
+        scope.querySelectorAll(".flow-legend button").forEach((el) => {
+          const step = el.querySelector("b")?.textContent.trim() || "";
+          const text = el.querySelector("span")?.textContent.replace(/\s+/g, " ").trim() || "";
+          if (text) index.push({ slide: slideIndex, sub, label, heading: step, text: `${step}: ${text}` });
+        });
 
         scope.querySelectorAll("p, li, dd, figcaption, .chip").forEach((el) => {
           if (el.closest(".ask-panel")) return;
@@ -146,17 +153,11 @@
 
   let pending = 0;
 
-  async function ask(question) {
+  /** Rank passages locally, then ask the server to answer from them. `answer` is null
+   *  when there is no server or no model, and the caller shows the passages instead. */
+  async function query(question) {
     const hits = rank(question, 8);
-
-    if (!hits.length) {
-      open(`<p class="ask-empty">Nothing in the deck matches that. Try a word from the slides — a phase, a goal, a capability.</p>`);
-      return;
-    }
-
-    const token = ++pending;
-    open(`<p class="ask-status"><span class="spinner"></span>Reading the deck…</p>`);
-
+    if (!hits.length) return { hits, answer: null };
     let answer = null;
     try {
       const res = await fetch("/api/ask", {
@@ -168,12 +169,29 @@
     } catch {
       // no server (the shared copy) — fall through to the passages
     }
+    return { hits, answer };
+  }
+
+  const answerHtml = (answer) => `<p>${esc(answer).replace(/\n+/g, "</p><p>")}</p>`;
+
+  async function ask(question) {
+    const hits = rank(question, 8);
+
+    if (!hits.length) {
+      open(`<p class="ask-empty">Nothing in the deck matches that. Try a word from the slides — a phase, a goal, a capability.</p>`);
+      return;
+    }
+
+    const token = ++pending;
+    open(`<p class="ask-status"><span class="spinner"></span>Reading the deck…</p>`);
+
+    const { answer } = await query(question);
 
     if (token !== pending) return; // a newer question overtook this one
 
     if (answer) {
       open(
-        `<div class="ask-answer">${esc(answer).replace(/\n+/g, "</p><p>").replace(/^/, "<p>") + "</p>"}</div>
+        `<div class="ask-answer">${answerHtml(answer)}</div>
          <div class="ask-sources"><span class="ask-label">In the deck</span>${sourcesHtml(hits)}</div>`
       );
     } else {
@@ -181,6 +199,59 @@
         `<div class="ask-sources"><span class="ask-label">From the deck</span></div>${passagesHtml(hits)}`
       );
     }
+  }
+
+  // ---------------------------------------------------------------- the Ask slide
+
+  const docForm = document.getElementById("doc-ask");
+  const docQ = document.getElementById("doc-q");
+  const thread = document.getElementById("doc-thread");
+  const suggest = document.getElementById("doc-suggest");
+
+  async function askOnSlide(question) {
+    const item = document.createElement("li");
+    item.className = "doc-turn";
+    item.innerHTML = `<p class="doc-q">${esc(question)}</p>
+      <div class="doc-a"><p class="ask-status"><span class="spinner"></span>Reading the proposal…</p></div>`;
+    thread.prepend(item);
+    const out = item.querySelector(".doc-a");
+
+    const { hits, answer } = await query(question);
+    if (!hits.length) {
+      out.innerHTML = `<p class="ask-empty">The proposal doesn't cover that. Try asking about the
+        approach, the process and investment, the capabilities or the team.</p>`;
+    } else if (answer) {
+      out.innerHTML = `<div class="ask-answer">${answerHtml(answer)}</div>
+        <div class="ask-sources"><span class="ask-label">In the proposal</span>${sourcesHtml(hits)}</div>`;
+    } else {
+      out.innerHTML = `<div class="ask-sources"><span class="ask-label">Closest passages in the proposal</span></div>${passagesHtml(hits)}`;
+    }
+  }
+
+  if (docForm) {
+    docForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const q = docQ.value.trim();
+      if (!q) return;
+      docQ.value = "";
+      askOnSlide(q);
+    });
+    docQ.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        docForm.requestSubmit();
+      }
+    });
+    suggest.addEventListener("click", (e) => {
+      const b = e.target.closest("button");
+      if (b) askOnSlide(b.textContent.trim());
+    });
+    thread.addEventListener("click", (e) => {
+      const target = e.target.closest("[data-slide]");
+      if (target && typeof window.deckGo === "function") {
+        window.deckGo(Number(target.dataset.slide), Number(target.dataset.sub));
+      }
+    });
   }
 
   // ---------------------------------------------------------------- wiring
