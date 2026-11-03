@@ -1553,3 +1553,34 @@ h1, h2 { letter-spacing: -0.02em; }
 .card { background: transparent; border: 0; border-top: 1px solid var(--ink); border-radius: 0; padding: 16px 0 0; }
 .card.tight { padding: 14px 0 0; }
 .bn-num { color: var(--muted); font-weight: 500; }
+
+/* ---------------------------------------------------------------- Approach figure: pictograms
+   Same grammar as asilo.solutions: grey for what exists, ultramarine for what we act on. */
+.fglyph { pointer-events: none; }
+.fglyph * { fill: none; stroke: var(--node); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.fglyph circle { fill: var(--node); stroke: none; }
+.fglyph .dash { fill: none; stroke: var(--node); stroke-width: 1.2; stroke-dasharray: 2 2.5; }
+.fglyph .fill { fill: var(--node); stroke: none; }
+.fnode[data-selected="true"] .fglyph * { stroke: var(--accent); }
+.fnode[data-selected="true"] .fglyph circle, .fnode[data-selected="true"] .fglyph .fill { fill: var(--accent); }
+.fnode[data-selected="true"] .fglyph .dash { fill: none; }
+.friction .fr-ring { fill: none; stroke: var(--accent); stroke-width: 1.2; stroke-dasharray: 2.5 3; }
+
+/* capability figures, redrawn for asilo.solutions */
+.mdiag .md-label.l { text-anchor: start; }
+.mdiag .md-label.r { text-anchor: end; }
+.mdiag .faint { opacity: 0.55; }
+.mdiag .mk { fill: var(--line); }
+.mdiag .mk.on { fill: var(--accent); }
+.mdiag .md-docline { fill: none; stroke: var(--line); stroke-width: 1; }
+.mdiag .md-docline.on { stroke: var(--accent); }
+.mdiag .md-fig { fill: var(--node); }
+.mdiag .md-fig.on { fill: var(--accent); }
+.mdiag .md-figbody { fill: none; stroke: var(--node); stroke-width: 2; stroke-linecap: round; }
+.mdiag .md-figbody.on { stroke: var(--accent); }
+.mdiag text { font-size: 11px; }
+/* the step boxes style every rect inside them; the pictograms opt out */
+.fnode .fglyph rect, .fnode.impl .fglyph rect, .fnode.goal .fglyph rect, .fnode:hover .fglyph rect { fill: none; stroke: var(--node); stroke-width: 1.4; stroke-dasharray: none; }
+.fnode .fglyph rect.fill, .fnode:hover .fglyph rect.fill { fill: var(--node); stroke: none; }
+.fnode[data-selected="true"] .fglyph rect { fill: none; stroke: var(--accent); }
+.fnode[data-selected="true"] .fglyph rect.fill { fill: var(--accent); }

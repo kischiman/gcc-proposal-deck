@@ -88,9 +88,13 @@
         <text class="band-label" x="40" y="26">The problem space</text>
 
         <g class="pnode">
-          <rect x="40" y="44" width="190" height="80" rx="9" />
-          <text class="fnode-label" x="135" y="80">Daily work</text>
-          <text class="flow-note" x="135" y="102">hand-offs · decisions</text>
+          <rect x="40" y="44" width="190" height="80" rx="2" />
+          <g class="fglyph">
+            <path d="M58 64 L88 60 L96 98 L66 104 Z M58 64 L96 98" />
+            <circle cx="58" cy="64" r="4" /><circle cx="88" cy="60" r="4" /><circle cx="96" cy="98" r="4" /><circle cx="66" cy="104" r="4" />
+          </g>
+          <text class="fnode-label" x="116" y="80" style="text-anchor:start">Daily work</text>
+          <text class="flow-note" x="116" y="102" style="text-anchor:start">hand-offs · decisions</text>
         </g>
 
         <!-- friction travels toward cost -->
@@ -103,18 +107,23 @@
         <text class="flow-note" x="694" y="108">left alone</text>
 
         <g class="friction">
-          <circle cx="312" cy="84" r="7" />
+          <circle class="fr-ring" cx="312" cy="84" r="13" /><circle cx="312" cy="84" r="7" />
           <text class="flow-note" x="312" y="66">unclear hand-offs</text>
-          <circle cx="446" cy="84" r="7" />
+          <circle class="fr-ring" cx="446" cy="84" r="13" /><circle cx="446" cy="84" r="7" />
           <text class="flow-note" x="446" y="66">unseen mistakes</text>
-          <circle cx="580" cy="84" r="7" />
+          <circle class="fr-ring" cx="580" cy="84" r="13" /><circle cx="580" cy="84" r="7" />
           <text class="flow-note" x="580" y="66">uneven teams</text>
         </g>
 
         <g class="cost">
-          <rect x="756" y="44" width="210" height="80" rx="9" />
-          <text class="cost-label" x="861" y="82">Costs</text>
-          <text class="flow-note" x="861" y="104">rework · errors · attrition</text>
+          <rect x="756" y="44" width="210" height="80" rx="2" />
+          <g class="fglyph">
+            <path d="M784 62 a7 7 0 1 1 -3 -5.5" /><path class="fill" d="M778 53 l5 4.5 -6 1.5 z" />
+            <path d="M778 79 l12 12 M790 79 l-12 12" />
+            <circle cx="780" cy="110" r="4" /><path d="M786 110 h10" /><path class="fill" d="M796 106.5 l5 3.5 -5 3.5 z" />
+          </g>
+          <text class="cost-label" x="816" y="82" style="text-anchor:start">Costs</text>
+          <text class="flow-note" x="816" y="104" style="text-anchor:start">rework · errors · attrition</text>
         </g>
 
         <!-- where the design work catches friction -->
@@ -142,37 +151,43 @@
         <text class="flow-note side" x="900" y="182">routine work</text>
 
         <g class="fnode" data-node="workshop" tabindex="0" role="button" aria-pressed="false" aria-label="Step one, workshop">
-          <rect x="40" y="214" width="135" height="92" rx="9" />
+          <rect x="40" y="214" width="135" height="92" rx="2" />
+          <g class="fglyph"><circle class="dash" cx="153" cy="232" r="6" /><circle cx="153" cy="221" r="2.4" /><circle cx="164" cy="232" r="2.4" /><circle cx="153" cy="243" r="2.4" /><circle cx="142" cy="232" r="2.4" /></g>
           <text class="fnode-num" x="52" y="232">01</text>
           <text class="fnode-label" x="107.5" y="262">Workshop</text>
           <text class="flow-note" x="107.5" y="292">one department</text>
         </g>
         <g class="fnode" data-node="observe" tabindex="0" role="button" aria-pressed="false" aria-label="Step two, observe">
-          <rect x="197" y="214" width="135" height="92" rx="9" />
+          <rect x="197" y="214" width="135" height="92" rx="2" />
+          <g class="fglyph"><circle cx="297" cy="234" r="3" /><circle cx="321" cy="234" r="3" /><path d="M301 234 h14" /><path class="fill" d="M315 231 l4 3 -4 3 z" /><path class="dash" d="M301 224 q8 -6 16 0" /></g>
           <text class="fnode-num" x="209" y="232">02</text>
           <text class="fnode-label" x="264.5" y="262">Observe</text>
           <text class="flow-note" x="264.5" y="292">how people work</text>
         </g>
         <g class="fnode" data-node="interview" tabindex="0" role="button" aria-pressed="false" aria-label="Step three, interview">
-          <rect x="354" y="214" width="135" height="92" rx="9" />
+          <rect x="354" y="214" width="135" height="92" rx="2" />
+          <g class="fglyph"><circle cx="456" cy="238" r="3" /><circle cx="478" cy="238" r="3" /><rect x="458" y="220" width="16" height="10" /><path d="M462 230 l-2 4" /></g>
           <text class="fnode-num" x="366" y="232">03</text>
           <text class="fnode-label" x="421.5" y="262">Interview</text>
           <text class="flow-note" x="421.5" y="292">where work stalls</text>
         </g>
         <g class="fnode goal" data-node="design" tabindex="0" role="button" aria-pressed="false" aria-label="Step four, design">
-          <rect x="511" y="214" width="135" height="92" rx="9" />
+          <rect x="511" y="214" width="135" height="92" rx="2" />
+          <g class="fglyph"><rect x="608" y="226" width="9" height="9" /><rect class="fill" x="628" y="226" width="9" height="9" /><path d="M617 230.5 q5.5 -9 11 0" /></g>
           <text class="fnode-num" x="523" y="232">04</text>
           <text class="fnode-label" x="578.5" y="262">Design</text>
           <text class="flow-note" x="578.5" y="292">close the gaps</text>
         </g>
         <g class="fnode impl" data-node="kpis" tabindex="0" role="button" aria-pressed="false" aria-label="Step five, measure">
-          <rect x="668" y="214" width="135" height="92" rx="9" />
+          <rect x="668" y="214" width="135" height="92" rx="2" />
+          <g class="fglyph"><path d="M765 240 h29" /><rect x="768" y="233" width="5" height="7" /><rect x="776" y="228" width="5" height="12" /><rect class="fill" x="784" y="222" width="5" height="18" /></g>
           <text class="fnode-num" x="680" y="232">05</text>
           <text class="fnode-label" x="735.5" y="262">Measure</text>
           <text class="flow-note" x="735.5" y="292">track change</text>
         </g>
         <g class="fnode impl" data-node="automate" tabindex="0" role="button" aria-pressed="false" aria-label="Step six, automate with AI">
-          <rect x="825" y="214" width="135" height="92" rx="9" />
+          <rect x="825" y="214" width="135" height="92" rx="2" />
+          <g class="fglyph"><circle cx="938" cy="228" r="3.5" /><path d="M941.5 228 h6 M935 225.5 l-5 -4 M935 230.5 l-5 4" /><rect x="947" y="225.5" width="5" height="5" /><rect x="926" y="219" width="4.5" height="4.5" /><rect x="926" y="232.5" width="4.5" height="4.5" /></g>
           <text class="fnode-num" x="837" y="232">06</text>
           <text class="fnode-label" x="892.5" y="254">Automate</text>
           <text class="fnode-label" x="892.5" y="273">with AI</text>
@@ -203,7 +218,7 @@
           <path d="M814 380 L814 424 L716 424" marker-end="url(#atip)" />
         </g>
         <g class="outcome">
-          <rect x="290" y="402" width="420" height="44" rx="8" />
+          <rect x="290" y="402" width="420" height="44" rx="2" />
           <text class="outcome-sm" x="500" y="430">Seamless collaboration, cohesive company</text>
         </g>
 
@@ -360,40 +375,7 @@
       <div class="caps">
 
         <article class="method">
-          <svg class="mdiag" viewBox="0 0 320 150" role="img"
-               aria-label="Three linked boxes as the system, feeding a screen as the interface, feeding a person beside rising bars as learning and development.">
-            <defs>
-              <marker id="ctip" viewBox="0 0 10 10" refX="9" refY="5"
-                      markerWidth="6" markerHeight="6" orient="auto">
-                <path d="M0 1 L9 5 L0 9 z" />
-              </marker>
-            </defs>
-
-            <rect class="md-box" x="20" y="38" width="36" height="22" rx="3" />
-            <rect class="md-box" x="62" y="38" width="36" height="22" rx="3" />
-            <rect class="md-box" x="41" y="80" width="36" height="22" rx="3" />
-            <path class="md-link" d="M56 49 L62 49" />
-            <path class="md-link" d="M38 60 L55 80" />
-            <path class="md-link" d="M80 60 L64 80" />
-            <text class="md-label" x="59" y="126">systems</text>
-
-            <path class="md-link" d="M104 66 L120 66" marker-end="url(#ctip)" />
-
-            <rect class="md-fill" x="126" y="34" width="68" height="62" rx="5" />
-            <path class="md-axis" d="M126 50 L194 50" />
-            <path class="md-link" d="M138 64 L182 64" />
-            <path class="md-link" d="M138 76 L168 76" />
-            <text class="md-label on" x="160" y="126">UI/UX</text>
-
-            <path class="md-link" d="M200 66 L216 66" marker-end="url(#ctip)" />
-
-            <circle class="md-node on" cx="240" cy="52" r="8" />
-            <path class="md-figure-body" d="M226 78 q14 -15 28 0" />
-            <rect class="md-box" x="268" y="78" width="10" height="16" />
-            <rect class="md-box" x="284" y="68" width="10" height="26" />
-            <rect class="md-box" x="300" y="58" width="10" height="36" />
-            <text class="md-label" x="268" y="126">L&amp;D</text>
-          </svg>
+          <svg class="mdiag" viewBox="0 0 360 200" role="img" aria-label="Three linked boxes as the system, feeding an interface, in blue, feeding a person beside rising bars as learning and development."><defs><marker id="cd-a" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="mk" d="M0 1 L9 5 L0 9 z"/></marker><marker id="cd-b" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="mk on" d="M0 1 L9 5 L0 9 z"/></marker></defs><rect class="md-box" x="16" y="60" width="34" height="24"/><rect class="md-box" x="58" y="60" width="34" height="24"/><rect class="md-box" x="37" y="104" width="34" height="24"/><path class="md-axis" d="M50 72H58M33 84V94H54V104"/><text class="md-label" x="52" y="148">system</text><path class="md-link" d="M104 88H124" marker-end="url(#cd-a)"/><rect class="md-fill" x="130" y="52" width="92" height="68"/><path class="md-docline on" d="M130 64H222"/><path class="md-docline on" d="M140 76h40M140 86h60M140 96h30"/><rect class="md-box" x="190" y="102" width="24" height="10"/><text class="md-label on" x="176" y="148">interface</text><path class="md-link" d="M228 88H248" marker-end="url(#cd-a)"/><circle class="md-fig on" cx="268" cy="85" r="6"/><path class="md-figbody on" d="M257 105 q11 -15 22 0"/><rect class="md-box" x="292" y="106" width="10" height="14"/><rect class="md-box" x="308" y="96" width="10" height="24"/><rect class="md-box" x="324" y="84" width="10" height="36"/><path class="md-axis" d="M288 120H342"/><text class="md-label" x="312" y="148">learning</text></svg>
           <h2>Design</h2>
           <ul class="cap-list">
             <li>Systems design</li>
@@ -403,26 +385,7 @@
         </article>
 
         <article class="method">
-          <svg class="mdiag" viewBox="0 0 320 150" role="img"
-               aria-label="A project spine with four milestones, and stakeholders above it each tied back to the milestone they care about.">
-            <text class="md-label" x="160" y="16">stakeholders</text>
-            <circle class="md-node" cx="70" cy="38" r="7" />
-            <circle class="md-node" cx="132" cy="30" r="7" />
-            <circle class="md-node" cx="196" cy="40" r="7" />
-            <circle class="md-node" cx="252" cy="32" r="7" />
-
-            <path class="md-link dashed" d="M70 45 L62 85" />
-            <path class="md-link dashed" d="M132 37 L122 85" />
-            <path class="md-link dashed" d="M196 47 L184 85" />
-            <path class="md-link dashed" d="M252 39 L242 85" />
-
-            <path class="md-axis" d="M28 92 L292 92" marker-end="url(#ctip)" />
-            <circle class="md-node on" cx="60" cy="92" r="5.5" />
-            <circle class="md-node on" cx="120" cy="92" r="5.5" />
-            <circle class="md-node on" cx="182" cy="92" r="5.5" />
-            <circle class="md-node on" cx="240" cy="92" r="5.5" />
-            <text class="md-label on" x="160" y="124">milestones</text>
-          </svg>
+          <svg class="mdiag" viewBox="0 0 360 200" role="img" aria-label="A project timeline with four milestones. Stakeholders above are each tied to the milestone they care about; one tie and its milestone are in blue."><defs><marker id="co-a" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="mk" d="M0 1 L9 5 L0 9 z"/></marker><marker id="co-b" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="mk on" d="M0 1 L9 5 L0 9 z"/></marker></defs><path class="md-axis" d="M24 130 H336" marker-end="url(#co-a)"/><rect class="md-box" x="53" y="123" width="14" height="14" transform="rotate(45 60 130)"/><rect class="md-box" x="123" y="123" width="14" height="14" transform="rotate(45 130 130)"/><rect class="md-fill" x="193" y="123" width="14" height="14" transform="rotate(45 200 130)"/><rect class="md-box" x="263" y="123" width="14" height="14" transform="rotate(45 270 130)"/><path class="md-link dashed" d="M48 64 L60 120"/><circle class="md-node" cx="48" cy="58" r="4.6"/><path class="md-link dashed" d="M110 50 L130 120"/><circle class="md-node" cx="110" cy="44" r="4.6"/><path class="md-link dashed" d="M176 66 L200 120"/><circle class="md-node" cx="176" cy="60" r="4.6"/><path class="md-link dashed on" d="M236 48 L200 120"/><circle class="md-node on" cx="236" cy="42" r="4.6"/><path class="md-link dashed" d="M300 62 L270 120"/><circle class="md-node" cx="300" cy="56" r="4.6"/><text class="md-label" x="180" y="24">stakeholders</text><text class="md-label on" x="200" y="160">where a stake lands</text></svg>
           <h2>Ops</h2>
           <ul class="cap-list">
             <li>Project management</li>
@@ -431,21 +394,7 @@
         </article>
 
         <article class="method">
-          <svg class="mdiag" viewBox="0 0 320 150" role="img"
-               aria-label="A closed feedback loop on the left, and on the right a trajectory rising past a horizon line toward a distant point.">
-            <path class="md-link on" d="M88 36 A36 36 0 0 1 88 108" marker-end="url(#ctip)" />
-            <path class="md-link" d="M88 108 A36 36 0 0 1 88 36" marker-end="url(#ctip)" />
-            <circle class="md-node on" cx="88" cy="36" r="5" />
-            <circle class="md-node" cx="124" cy="72" r="5" />
-            <circle class="md-node" cx="88" cy="108" r="5" />
-            <circle class="md-node" cx="52" cy="72" r="5" />
-            <text class="md-label" x="88" y="132">feedback</text>
-
-            <path class="md-axis" d="M176 100 L306 100" />
-            <path class="md-link on dashed" d="M186 100 Q238 42 286 58" marker-end="url(#ctip)" />
-            <circle class="md-node on" cx="296" cy="56" r="6" />
-            <text class="md-label" x="240" y="132">horizon</text>
-          </svg>
+          <svg class="mdiag" viewBox="0 0 360 200" role="img" aria-label="A house with four residents living together, linked to a loop of build, live, learn and adjust; the build step is in blue."><defs><marker id="cr-a" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="mk" d="M0 1 L9 5 L0 9 z"/></marker><marker id="cr-b" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="mk on" d="M0 1 L9 5 L0 9 z"/></marker></defs><path class="md-silo" d="M30 150 V92 L80 56 L130 92 V150 Z"/><circle class="md-node" cx="62" cy="112" r="4.4"/><circle class="md-node" cx="98" cy="112" r="4.4"/><circle class="md-node" cx="62" cy="136" r="4.4"/><circle class="md-node" cx="98" cy="136" r="4.4"/><path class="md-link faint" d="M62 112H98M62 136H98M62 112V136M98 112V136M62 112L98 136"/><text class="md-label" x="80" y="172">residency</text><path class="md-link on" d="M250 54 A46 46 0 0 1 296 100" marker-end="url(#cr-b)"/><path class="md-link" d="M296 100 A46 46 0 0 1 250 146" marker-end="url(#cr-a)"/><path class="md-link" d="M250 146 A46 46 0 0 1 204 100" marker-end="url(#cr-a)"/><path class="md-link" d="M204 100 A46 46 0 0 1 250 54" marker-end="url(#cr-a)"/><text class="md-label on" x="250" y="46">build</text><text class="md-label l" x="304" y="104">live</text><text class="md-label" x="250" y="162">learn</text><text class="md-label r" x="198" y="86">adjust</text><path class="md-link dashed" d="M140 104 H196" marker-end="url(#cr-a)"/></svg>
           <h2>R&amp;D</h2>
           <ul class="cap-list">
             <li>Cohabitation</li>
