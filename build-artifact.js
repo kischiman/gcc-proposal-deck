@@ -26,11 +26,13 @@ let html = fs.readFileSync(path.join(PUB, "index.html"), "utf8");
 const css = fs.readFileSync(path.join(PUB, "deck.css"), "utf8");
 const library = fs.readFileSync(path.join(HERE, "lib", "library.js"), "utf8");
 const askJs = fs.readFileSync(path.join(PUB, "ask.js"), "utf8");
+const orgJs = fs.readFileSync(path.join(PUB, "org-story.js"), "utf8");
 
 // --- strip the document shell; the artifact host supplies it
 html = html.replace(/^[\s\S]*?<body>\s*/, "").replace(/\s*<\/body>[\s\S]*$/, "");
 html = html.replace(/<script src="\/?deck\.js"><\/script>/, "");
 html = html.replace(/<script src="\/?ask\.js"><\/script>/, "");
+html = html.replace(/<script src="\/?org-story\.js"><\/script>\n?/, "");
 html = html.replace(/<script src="\/?budget-core\.js"><\/script>\n?/, "");
 html = html.replace(/<script src="\/?deck-budget\.js"><\/script>\n?/, "");
 
@@ -211,6 +213,8 @@ window.deckGo = (slide, sub) => go(slide, sub);
 
 applyAddress();
 window.addEventListener("hashchange", applyAddress);
+
+${orgJs}
 
 ${askJs}
 `;

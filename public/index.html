@@ -74,185 +74,26 @@
     <p class="lede">Costs start where people hand work to each other. We find those points in the
     department, close them before they become costs, and then automate what is left.</p>
 
-    <div class="flow-wrap approach-wrap">
-      <svg viewBox="0 0 1000 456" role="img"
-           aria-label="Diagram. Top row, the problem space: daily work between people produces friction points — unclear hand-offs, unseen mistakes, uneven teams — which, left alone, become costs: rework, errors and attrition. Bottom row, our approach: one, a workshop to scope one department; two, observe how people interact; three, interview people to find inefficiencies; four, design, which closes friction before it becomes cost; five, measure, which makes cost visible; six, automate routine work with AI. Steps one to four are human-facing design; steps five and six are implementation. Both lead to seamless collaboration and a cohesive company.">
-
-        <!-- ── the problem space ── -->
-        <text class="band-label" x="40" y="26">The problem space</text>
-
-        <g class="pnode">
-          <rect x="40" y="44" width="190" height="80" rx="2" />
-          <g class="fglyph">
-            <path d="M58 64 L88 60 L96 98 L66 104 Z M58 64 L96 98" />
-            <circle cx="58" cy="64" r="4" /><circle cx="88" cy="60" r="4" /><circle cx="96" cy="98" r="4" /><circle cx="66" cy="104" r="4" />
-          </g>
-          <text class="fnode-label" x="116" y="80" style="text-anchor:start">Daily work</text>
-          <text class="flow-note" x="116" y="102" style="text-anchor:start">hand-offs · decisions</text>
-        </g>
-
-        <!-- friction travels toward cost -->
-        <g class="flow-arrows">
-          <path d="M230 84 L600 84" />
-        </g>
-        <g class="flow-arrows feedback">
-          <path d="M600 84 L748 84" marker-end="url(#atip)" />
-        </g>
-        <text class="flow-note" x="694" y="108">left alone</text>
-
-        <g class="friction">
-          <circle class="fr-ring" cx="312" cy="84" r="13" /><circle cx="312" cy="84" r="7" />
-          <text class="flow-note" x="312" y="66">unclear hand-offs</text>
-          <circle class="fr-ring" cx="446" cy="84" r="13" /><circle cx="446" cy="84" r="7" />
-          <text class="flow-note" x="446" y="66">unseen mistakes</text>
-          <circle class="fr-ring" cx="580" cy="84" r="13" /><circle cx="580" cy="84" r="7" />
-          <text class="flow-note" x="580" y="66">uneven teams</text>
-        </g>
-
-        <g class="cost">
-          <rect x="756" y="44" width="210" height="80" rx="2" />
-          <g class="fglyph">
-            <path d="M784 62 a7 7 0 1 1 -3 -5.5" /><path class="fill" d="M778 53 l5 4.5 -6 1.5 z" />
-            <path d="M778 79 l12 12 M790 79 l-12 12" />
-            <circle cx="780" cy="110" r="4" /><path d="M786 110 h10" /><path class="fill" d="M796 106.5 l5 3.5 -5 3.5 z" />
-          </g>
-          <text class="cost-label" x="816" y="82" style="text-anchor:start">Costs</text>
-          <text class="flow-note" x="816" y="104" style="text-anchor:start">rework · errors · attrition</text>
-        </g>
-
-        <!-- where the design work catches friction -->
-        <line class="intercept" x1="630" y1="64" x2="630" y2="104" />
-        <text class="intercept-note" x="630" y="160">closed before it becomes cost</text>
-
-        <!-- ── our approach ── -->
-        <text class="band-label" x="40" y="198">Our approach</text>
-
-        <!-- what each step reaches up to -->
-        <g class="flow-arrows feedback">
-          <path d="M160 214 L160 130" marker-end="url(#atip)" />
-          <path d="M312 214 L312 98" marker-end="url(#atip)" />
-          <path d="M446 214 L446 98" marker-end="url(#atip)" />
-          <path d="M478 214 L478 140 L580 140 L580 98" marker-end="url(#atip)" />
-          <path d="M780 214 L780 130" marker-end="url(#atip)" />
-          <path d="M892 214 L892 130" marker-end="url(#atip)" />
-        </g>
-        <g class="flow-arrows reach">
-          <path d="M630 214 L630 172" />
-          <path d="M630 146 L630 110" marker-end="url(#rtip)" />
-        </g>
-        <text class="flow-note side" x="788" y="176">made visible</text>
-        <text class="flow-note side" x="900" y="168">automates</text>
-        <text class="flow-note side" x="900" y="182">routine work</text>
-
-        <g class="fnode" data-node="workshop" tabindex="0" role="button" aria-pressed="false" aria-label="Step one, workshop">
-          <rect x="40" y="214" width="135" height="92" rx="2" />
-          <g class="fglyph"><circle class="dash" cx="153" cy="232" r="6" /><circle cx="153" cy="221" r="2.4" /><circle cx="164" cy="232" r="2.4" /><circle cx="153" cy="243" r="2.4" /><circle cx="142" cy="232" r="2.4" /></g>
-          <text class="fnode-num" x="52" y="232">01</text>
-          <text class="fnode-label" x="107.5" y="262">Workshop</text>
-          <text class="flow-note" x="107.5" y="292">one department</text>
-        </g>
-        <g class="fnode" data-node="observe" tabindex="0" role="button" aria-pressed="false" aria-label="Step two, observe">
-          <rect x="197" y="214" width="135" height="92" rx="2" />
-          <g class="fglyph"><circle cx="297" cy="234" r="3" /><circle cx="321" cy="234" r="3" /><path d="M301 234 h14" /><path class="fill" d="M315 231 l4 3 -4 3 z" /><path class="dash" d="M301 224 q8 -6 16 0" /></g>
-          <text class="fnode-num" x="209" y="232">02</text>
-          <text class="fnode-label" x="264.5" y="262">Observe</text>
-          <text class="flow-note" x="264.5" y="292">how people work</text>
-        </g>
-        <g class="fnode" data-node="interview" tabindex="0" role="button" aria-pressed="false" aria-label="Step three, interview">
-          <rect x="354" y="214" width="135" height="92" rx="2" />
-          <g class="fglyph"><circle cx="456" cy="238" r="3" /><circle cx="478" cy="238" r="3" /><rect x="458" y="220" width="16" height="10" /><path d="M462 230 l-2 4" /></g>
-          <text class="fnode-num" x="366" y="232">03</text>
-          <text class="fnode-label" x="421.5" y="262">Interview</text>
-          <text class="flow-note" x="421.5" y="292">where work stalls</text>
-        </g>
-        <g class="fnode goal" data-node="design" tabindex="0" role="button" aria-pressed="false" aria-label="Step four, design">
-          <rect x="511" y="214" width="135" height="92" rx="2" />
-          <g class="fglyph"><rect x="608" y="226" width="9" height="9" /><rect class="fill" x="628" y="226" width="9" height="9" /><path d="M617 230.5 q5.5 -9 11 0" /></g>
-          <text class="fnode-num" x="523" y="232">04</text>
-          <text class="fnode-label" x="578.5" y="262">Design</text>
-          <text class="flow-note" x="578.5" y="292">close the gaps</text>
-        </g>
-        <g class="fnode impl" data-node="kpis" tabindex="0" role="button" aria-pressed="false" aria-label="Step five, measure">
-          <rect x="668" y="214" width="135" height="92" rx="2" />
-          <g class="fglyph"><path d="M765 240 h29" /><rect x="768" y="233" width="5" height="7" /><rect x="776" y="228" width="5" height="12" /><rect class="fill" x="784" y="222" width="5" height="18" /></g>
-          <text class="fnode-num" x="680" y="232">05</text>
-          <text class="fnode-label" x="735.5" y="262">Measure</text>
-          <text class="flow-note" x="735.5" y="292">track change</text>
-        </g>
-        <g class="fnode impl" data-node="automate" tabindex="0" role="button" aria-pressed="false" aria-label="Step six, automate with AI">
-          <rect x="825" y="214" width="135" height="92" rx="2" />
-          <g class="fglyph"><circle cx="938" cy="228" r="3.5" /><path d="M941.5 228 h6 M935 225.5 l-5 -4 M935 230.5 l-5 4" /><rect x="947" y="225.5" width="5" height="5" /><rect x="926" y="219" width="4.5" height="4.5" /><rect x="926" y="232.5" width="4.5" height="4.5" /></g>
-          <text class="fnode-num" x="837" y="232">06</text>
-          <text class="fnode-label" x="892.5" y="254">Automate</text>
-          <text class="fnode-label" x="892.5" y="273">with AI</text>
-          <text class="flow-note" x="892.5" y="292">routine work</text>
-        </g>
-
-        <g class="flow-arrows">
-          <path d="M175 260 L191 260" marker-end="url(#atip)" />
-          <path d="M332 260 L348 260" marker-end="url(#atip)" />
-          <path d="M489 260 L505 260" marker-end="url(#atip)" />
-          <path d="M646 260 L662 260" marker-end="url(#atip)" />
-          <path d="M803 260 L819 260" marker-end="url(#atip)" />
-        </g>
-
-        <!-- the two phases -->
-        <g class="bracket">
-          <path d="M40 318 L40 328 L646 328 L646 318" />
-          <path d="M668 318 L668 328 L960 328 L960 318" />
-        </g>
-        <text class="phase-label" x="343" y="352">Human-facing design</text>
-        <text class="flow-note" x="343" y="372">find friction before it becomes cost · fewer mistakes</text>
-        <text class="phase-label" x="814" y="352">Implementation</text>
-        <text class="flow-note" x="814" y="372">KPIs · less manual work</text>
-
-        <!-- both phases hold up the payoff -->
-        <g class="flow-arrows">
-          <path d="M343 380 L343 396" marker-end="url(#atip)" />
-          <path d="M814 380 L814 424 L716 424" marker-end="url(#atip)" />
-        </g>
-        <g class="outcome">
-          <rect x="290" y="402" width="420" height="44" rx="2" />
-          <text class="outcome-sm" x="500" y="430">Seamless collaboration, cohesive company</text>
-        </g>
-
-        <defs>
-          <marker id="atip" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
-            <path d="M0 1 L9 5 L0 9 z" />
-          </marker>
-          <marker id="rtip" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
-            <path d="M0 1 L9 5 L0 9 z" />
-          </marker>
-        </defs>
-      </svg>
-    </div>
-
-    <div class="flow-legend approach-legend">
-      <button type="button" data-node="workshop" aria-pressed="false">
-        <b>01 · Workshop</b>
-        <span>The only session your three stakeholders attend: they see our presentation and answer our questions, and we scope one department together. We take care of everything after it.</span>
-      </button>
-      <button type="button" data-node="observe" aria-pressed="false">
-        <b>02 · Observe</b>
-        <span>Watch the real hand-offs: who waits on whom, where decisions get stuck, where information is retyped or lost.</span>
-      </button>
-      <button type="button" data-node="interview" aria-pressed="false">
-        <b>03 · Interview</b>
-        <span>One-to-one conversations, including each person's last and biggest mistake. The patterns show where friction turns into cost.</span>
-      </button>
-      <button type="button" data-node="design" aria-pressed="false">
-        <b>04 · Design</b>
-        <span>Small, contained changes to roles, routines or meetings, tested in that department before anything goes wider.</span>
-      </button>
-      <button type="button" data-node="kpis" aria-pressed="false">
-        <b>05 · Measure</b>
-        <span>Turn what worked into a few KPIs each team can work to, so friction shows up in the numbers before it shows up as cost.</span>
-      </button>
-      <button type="button" data-node="automate" aria-pressed="false">
-        <b>06 · Automate with AI</b>
-        <span>With the human gaps clear, decide which admin, finance and accounts tasks AI takes on, and with which tools.</span>
-      </button>
-    </div>
+    <figure class="org-story" id="org-story">
+      <div class="os-bar">
+        <div class="os-nav" role="group" aria-label="Stages"></div>
+        <button class="os-play" type="button" aria-pressed="false">Play</button>
+      </div>
+      <div class="os-head">
+        <h3 id="os-title">Status quo</h3>
+        <p id="os-note" aria-live="polite"></p>
+      </div>
+      <div class="os-canvas"></div>
+      <ol class="sr" aria-label="The stages, in words">
+        <li><b>Status quo.</b> Work crosses departments without a clear route, so hand-offs are missed, work is redone and decisions stall. Each one adds cost.</li>
+        <li><b>01 · Workshop.</b> One session with your leaders sets shared goals across Strategy, Operations and Service, and agrees where we start.</li>
+        <li><b>02 · Observe &amp; record.</b> We follow how work actually travels between people, and record where it waits, gets redone or meets disagreement.</li>
+        <li><b>03 · Design interventions.</b> A few influential connectors carry the redesign: a clear hand-off, an owner for each decision, and a working feedback loop.</li>
+        <li><b>04 · Measure change.</b> Checkpoints on the redesigned routes track hand-off time, rework and decision clarity, and feed the next round of design.</li>
+        <li><b>05 · Automate with AI.</b> Validated routine steps on the improved routes are automated. People still own each route and review what the automation produces.</li>
+        <li><b>06 · Accelerated growth.</b> The intended result: purposeful connections across teams, giving the cohesion and seamless collaboration that growth depends on.</li>
+      </ol>
+    </figure>
     </div>
 
   </div>
@@ -461,6 +302,7 @@
 <script src="budget-core.js"></script>
 <script src="deck-budget.js"></script>
 <script src="deck.js"></script>
+<script src="org-story.js"></script>
 <script src="ask.js"></script>
 </body>
 </html>
