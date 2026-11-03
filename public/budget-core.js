@@ -34,8 +34,8 @@ window.Budget = (function () {
   // Which view this page reads, where its comments go, and whether it sees both kinds.
   // The team page asks for a view the switches do not gate, and its comments stay with
   // the team.
-  let source = "/api/budget";
-  let commentPath = "/api/budget/comment";
+  let source = "api/budget";
+  let commentPath = "api/budget/comment";
   let showsBothKinds = false;
 
   async function load() {
@@ -44,7 +44,7 @@ window.Budget = (function () {
     renderers.forEach((fn) => fn(state));
   }
 
-  const send = (action, body) => post(`/api/budget/${action}`, body);
+  const send = (action, body) => post(`api/budget/${action}`, body);
 
   async function post(path, body) {
     const res = await fetch(path, {

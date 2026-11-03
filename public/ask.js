@@ -160,7 +160,7 @@
     if (!hits.length) return { hits, answer: null };
     let answer = null;
     try {
-      const res = await fetch("/api/ask", {
+      const res = await fetch("api/ask", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ q: question, passages: hits }),

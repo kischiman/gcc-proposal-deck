@@ -168,7 +168,7 @@ const SIGN_IN_PAGE = `<!doctype html>
   f.addEventListener("submit", async (e) => {
     e.preventDefault();
     err.textContent = "";
-    const res = await fetch("/api/auth", {
+    const res = await fetch("api/auth", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ password: document.getElementById("password").value }),

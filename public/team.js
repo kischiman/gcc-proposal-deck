@@ -49,9 +49,9 @@ function render(state) {
 Budget.onRender(render);
 Budget.start({
   // Everything, regardless of what the public deck is set to show.
-  source: "/api/team",
+  source: "api/team",
   // A comment written here stays with the team; the deck's own route makes public ones.
-  commentPath: "/api/team/comment",
+  commentPath: "api/team/comment",
   showsBothKinds: true,
   onStatus(kind, msg) {
     if (kind === "live") {

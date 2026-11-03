@@ -66,14 +66,14 @@ async function api(path, body) {
 
 // Draw before revealing, so a failure halfway through does not leave an empty panel.
 async function enter() {
-  state = await api("/api/admin/state");
+  state = await api("api/admin/state");
   render();
   $("panel").hidden = false;
   connect();
 }
 
 $("export").addEventListener("click", async () => {
-  const res = await fetch("/api/budget/export");
+  const res = await fetch("api/budget/export");
   const blob = await res.blob();
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
@@ -372,7 +372,7 @@ function reportFailure(err) {
 
   // A refusal usually means this page is describing something the server no longer
   // has. Re-read, so the stale line goes rather than sitting there to be clicked again.
-  api("/api/admin/state")
+  api("api/admin/state")
     .then((fresh) => {
       state = fresh;
       render();
@@ -383,8 +383,8 @@ function reportFailure(err) {
 /** True when the change went through; callers close their dialog on that, not before. */
 async function mutate(action, body) {
   try {
-    await api(`/api/admin/${action}`, body);
-    state = await api("/api/admin/state");
+    await api(`api/admin/${action}`, body);
+    state = await api("api/admin/state");
     render();
     return true;
   } catch (err) {
@@ -743,7 +743,7 @@ function connect() {
   document.addEventListener("visibilitychange", async () => {
     if (document.hidden) return;
     try {
-      state = await api("/api/admin/state");
+      state = await api("api/admin/state");
       render();
     } catch (err) {
       reportFailure(err);

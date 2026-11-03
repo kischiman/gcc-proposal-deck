@@ -29,13 +29,13 @@ const askJs = fs.readFileSync(path.join(PUB, "ask.js"), "utf8");
 
 // --- strip the document shell; the artifact host supplies it
 html = html.replace(/^[\s\S]*?<body>\s*/, "").replace(/\s*<\/body>[\s\S]*$/, "");
-html = html.replace(/<script src="\/deck\.js"><\/script>/, "");
-html = html.replace(/<script src="\/ask\.js"><\/script>/, "");
-html = html.replace(/<script src="\/budget-core\.js"><\/script>\n?/, "");
-html = html.replace(/<script src="\/deck-budget\.js"><\/script>\n?/, "");
+html = html.replace(/<script src="\/?deck\.js"><\/script>/, "");
+html = html.replace(/<script src="\/?ask\.js"><\/script>/, "");
+html = html.replace(/<script src="\/?budget-core\.js"><\/script>\n?/, "");
+html = html.replace(/<script src="\/?deck-budget\.js"><\/script>\n?/, "");
 
 // --- inline every image
-html = html.replace(/src="(\/img\/[^"]+)"/g, (_, p) => `src="${dataUri(p)}"`);
+html = html.replace(/src="\/?(img\/[^"]+)"/g, (_, p) => `src="${dataUri(p)}"`);
 
 
 
