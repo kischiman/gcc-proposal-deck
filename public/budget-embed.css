@@ -12,11 +12,12 @@
 
 .budget-scope .eyebrow {
   font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-size: 12.5px;
+  letter-spacing: 0.005em;
+  text-transform: none;
   color: var(--accent);
   margin: 0 0 8px;
+  font-variant-numeric: tabular-nums;
 }
 
 .budget-scope .live {
@@ -24,6 +25,7 @@
   font-size: 11px;
   color: var(--muted);
   white-space: nowrap;
+  font-variant-numeric: tabular-nums;
 }
 
 .budget-scope .live[data-on="true"]::before {
@@ -41,7 +43,7 @@
   border: 1px solid var(--ink);
   background: var(--ink);
   color: var(--paper);
-  border-radius: 8px;
+  border-radius: 2px;
   padding: 10px 18px;
   font: inherit;
   font-size: 14px;
@@ -55,7 +57,7 @@
 
 .budget-scope .btn.ghost { background: none; color: var(--ink); border-color: var(--rule); }
 
-.budget-scope .btn.small { padding: 6px 13px; font-size: 12.5px; border-radius: 6px; }
+.budget-scope .btn.small { padding: 6px 13px; font-size: 12.5px; border-radius: 2px; }
 
 .modal input,
 .modal textarea,
@@ -65,7 +67,7 @@
   font-size: 15px;
   padding: 9px 11px;
   border: 1px solid var(--rule);
-  border-radius: 7px;
+  border-radius: 2px;
   background: var(--paper);
   color: var(--ink);
 }
@@ -76,7 +78,7 @@
 
 .budget-scope .phase {
   border: 1px solid var(--rule);
-  border-radius: 10px;
+  border-radius: 2px;
   background: #fff;
   margin-bottom: 20px;
   overflow: hidden;
@@ -93,7 +95,7 @@
   flex-wrap: wrap;
 }
 
-.budget-scope .phase h2 { font-family: var(--serif); font-weight: 400; font-size: 19px; margin: 0; }
+.budget-scope .phase h2 { font-family: var(--display); font-weight: 400; font-size: 19px; margin: 0; }
 
 .budget-scope .phase header .note { font-size: 12.5px; color: var(--muted); margin: 4px 0 0; }
 
@@ -134,6 +136,7 @@
   letter-spacing: 0.04em;
   color: var(--muted);
   white-space: nowrap;
+  font-variant-numeric: tabular-nums;
 }
 
 .budget-scope .line.segment-sum {
@@ -146,10 +149,11 @@
 
 .budget-scope .phase-total-label {
   font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-size: 12.5px;
+  letter-spacing: 0.005em;
+  text-transform: none;
   color: var(--ink);
+  font-variant-numeric: tabular-nums;
 }
 
 .budget-scope .line.segment-sum.phase-total .num.sub {
@@ -166,7 +170,9 @@
 }
 
 .budget-scope .line .num.time,
-.budget-scope .line .num.rate { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.budget-scope .line .num.rate { font-family: var(--mono); font-size: 12px; color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
 
 .budget-scope .line .num.sub {
   font-family: var(--mono);
@@ -190,10 +196,11 @@
 .budget-scope .divider-name {
   flex: 1;
   font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-size: 12.5px;
+  letter-spacing: 0.005em;
+  text-transform: none;
   color: var(--muted);
+  font-variant-numeric: tabular-nums;
 }
 
 .budget-scope .divider-span {
@@ -203,6 +210,7 @@
   font-size: 10.5px;
   color: var(--accent);
   white-space: nowrap;
+  font-variant-numeric: tabular-nums;
 }
 
 .budget-scope .line.divider.expenses-mark { cursor: default; padding-top: 22px; }
@@ -211,11 +219,12 @@
 
 .budget-scope .only-here {
   font-family: var(--mono);
-  font-size: 9.5px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 12.5px;
+  letter-spacing: 0.005em;
+  text-transform: none;
   color: var(--muted);
   margin-right: 8px;
+  font-variant-numeric: tabular-nums;
 }
 
 .budget-scope .line .name { font-size: 14.5px; font-weight: 600; }
@@ -235,23 +244,24 @@
 .budget-scope .tag {
   display: inline-block;
   font-family: var(--mono);
-  font-size: 9.5px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-size: 12.5px;
+  letter-spacing: 0.005em;
+  text-transform: none;
   color: var(--muted);
   border: 1px solid var(--rule);
-  border-radius: 3px;
+  border-radius: 2px;
   padding: 2px 6px;
   margin-left: 7px;
   vertical-align: 1px;
+  font-variant-numeric: tabular-nums;
 }
 
 .budget-scope .line-actions { display: flex; gap: 6px; justify-content: flex-end; }
 
 .budget-scope .summary {
   background: var(--accent-soft);
-  border: 1px solid rgba(176, 58, 26, 0.25);
-  border-radius: 10px;
+  border: 1px solid rgba(35, 55, 198, 0.25);
+  border-radius: 2px;
   padding: 24px 26px;
   margin-top: 34px;
 }
@@ -261,7 +271,7 @@
   justify-content: space-between;
   gap: 20px;
   padding: 10px 0;
-  border-bottom: 1px solid rgba(176, 58, 26, 0.18);
+  border-bottom: 1px solid rgba(35, 55, 198, 0.18);
   font-size: 14.5px;
 }
 
@@ -279,13 +289,13 @@
 .budget-scope .summary .row .v { font-family: var(--mono); font-variant-numeric: tabular-nums; }
 
 .budget-scope .summary .row.sub { color: var(--muted); font-size: 13px; }
-/* what a figure is for, e.g. the reason for the discount, under its label */
+
 .budget-scope .summary .row-note { display: block; margin-top: 2px; font-size: 12px; font-style: italic; color: var(--muted); }
 
 .scrim {
   position: fixed;
   inset: 0;
-  background: rgba(23, 21, 15, 0.42);
+  background: rgba(17, 19, 24, 0.42);
   z-index: 40;
   animation: fade 0.15s ease both;
 }
@@ -303,8 +313,8 @@
   overflow-y: auto;
   background: var(--paper);
   border: 1px solid var(--rule);
-  border-radius: 12px;
-  box-shadow: 0 32px 64px -28px rgba(23, 21, 15, 0.55);
+  border-radius: 2px;
+  box-shadow: 0 32px 64px -28px rgba(17, 19, 24, 0.55);
   padding: 22px 24px 24px;
   animation: pop 0.16s ease both;
 }
@@ -316,7 +326,7 @@
 
 .modal header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
 
-.modal h2 { font-family: var(--serif); font-weight: 400; font-size: 22px; margin: 0; }
+.modal h2 { font-family: var(--display); font-weight: 400; font-size: 22px; margin: 0; }
 
 .x {
   border: 0;
@@ -338,10 +348,10 @@
 
 .modal label {
   display: block;
-  font-size: 11px;
+  font-size: 12.5px;
   font-weight: 600;
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  text-transform: none;
   color: var(--muted);
   margin: 16px 0 6px;
 }
@@ -355,7 +365,7 @@
   align-items: end;
   background: #fff;
   border: 1px solid var(--rule);
-  border-radius: 9px;
+  border-radius: 2px;
   padding: 14px 16px;
   margin-top: 16px;
 }
@@ -363,7 +373,9 @@
 .calc label { margin-top: 0; }
 
 .calc input,
-.calc select { font-family: var(--mono); }
+.calc select { font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+}
 
 .calc .times,
 .calc .equals {
@@ -371,6 +383,7 @@
   color: var(--muted);
   padding-bottom: 10px;
   font-size: 15px;
+  font-variant-numeric: tabular-nums;
 }
 
 .calc .unit {
@@ -379,6 +392,7 @@
   font-size: 10.5px;
   color: var(--muted);
   margin-top: 5px;
+  font-variant-numeric: tabular-nums;
 }
 
 .calc-total output {
@@ -451,7 +465,7 @@
   font-size: 13px;
   padding: 8px 11px;
   border: 1px solid var(--rule);
-  border-radius: 7px;
+  border-radius: 2px;
   
   background: #fff;
 }
@@ -462,16 +476,19 @@
 
 .proposal.on .who { color: var(--claimed); }
 
-.proposal .terms { font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
+.proposal .terms { font-family: var(--mono); font-size: 11.5px; color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
 
 .proposal .amt { font-family: var(--mono); font-variant-numeric: tabular-nums; }
 
 .on-tag {
   font-family: var(--mono);
-  font-size: 9.5px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-size: 12.5px;
+  letter-spacing: 0.005em;
+  text-transform: none;
   color: var(--claimed);
+  font-variant-numeric: tabular-nums;
 }
 
 .pnote {
@@ -485,11 +502,12 @@
 .scope-label {
   display: block;
   font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-size: 12.5px;
+  letter-spacing: 0.005em;
+  text-transform: none;
   color: var(--muted);
   margin-top: 3px;
+  font-variant-numeric: tabular-nums;
 }
 
 .budget-scope .line .num.scope,
@@ -508,7 +526,7 @@
 .others {
   background: var(--paper-2);
   border: 1px solid var(--rule);
-  border-radius: 9px;
+  border-radius: 2px;
   padding: 13px 15px;
   margin-bottom: 4px;
 }
@@ -516,11 +534,12 @@
 .others-label {
   display: block;
   font-family: var(--mono);
-  font-size: 9.5px;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
+  font-size: 12.5px;
+  letter-spacing: 0.005em;
+  text-transform: none;
   color: var(--muted);
   margin-bottom: 9px;
+  font-variant-numeric: tabular-nums;
 }
 
 .other {
@@ -537,7 +556,9 @@
 
 .other .who { font-weight: 600; }
 
-.other .terms { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.other .terms { font-family: var(--mono); font-size: 11px; color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
 
 .other .amt { font-family: var(--mono); font-variant-numeric: tabular-nums; }
 
@@ -568,10 +589,11 @@
 
 .budget-scope .owner span {
   font-family: var(--mono);
-  font-size: 9.5px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 12.5px;
+  letter-spacing: 0.005em;
+  text-transform: none;
   color: var(--muted);
+  font-variant-numeric: tabular-nums;
 }
 
 .budget-scope .owner input {
@@ -580,7 +602,7 @@
   font-size: 13px;
   padding: 3px 8px;
   border: 1px solid var(--rule);
-  border-radius: 5px;
+  border-radius: 2px;
   background: var(--paper);
   color: var(--ink);
 }
@@ -596,21 +618,22 @@
   vertical-align: 1px;
   border: 1px solid var(--rule);
   background: var(--paper);
-  border-radius: 4px;
+  border-radius: 2px;
   padding: 1px 7px;
   font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 12.5px;
+  letter-spacing: 0.005em;
+  text-transform: none;
   color: var(--muted);
   cursor: pointer;
+  font-variant-numeric: tabular-nums;
 }
 
 .budget-scope .kind-toggle:hover { border-color: var(--muted); color: var(--ink); }
 
 .budget-scope .kind-toggle.on {
   color: var(--accent);
-  border-color: rgba(176, 58, 26, 0.35);
+  border-color: rgba(35, 55, 198, 0.35);
   background: var(--accent-soft);
 }
 
@@ -652,14 +675,14 @@
   font: inherit;
   color: inherit;
   background: var(--paper, #fff);
-  border: 1px solid var(--rule, rgba(23, 21, 15, 0.16));
-  border-radius: 6px;
+  border: 1px solid var(--rule, rgba(17, 19, 24, 0.16));
+  border-radius: 2px;
   padding: 7px 9px;
   min-width: 0;
 }
 
 .budget-scope .phase-edit input:focus,
-.budget-scope .phase-edit textarea:focus { outline: none; border-color: var(--accent, #b03a1a); }
+.budget-scope .phase-edit textarea:focus { outline: none; border-color: var(--accent, var(--accent)); }
 
 .budget-scope .phase-name { flex: 1 1 220px; font-size: 17px; font-weight: 600; }
 
@@ -676,10 +699,10 @@
 .budget-scope .phase-lists label { display: flex; flex-direction: column; gap: 5px; }
 
 .budget-scope .phase-lists span {
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted, #6e675a);
+  font-size: 12.5px;
+  letter-spacing: 0.005em;
+  text-transform: none;
+  color: var(--muted, var(--muted));
 }
 
 .budget-scope .phase-lists textarea { resize: vertical; font-size: 13px; line-height: 1.5; }
@@ -690,28 +713,58 @@
 
 .budget-scope .hide-toggle {
   font: inherit;
-  font-size: 10px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted, #6e675a);
+  font-size: 12.5px;
+  letter-spacing: 0.005em;
+  text-transform: none;
+  color: var(--muted, var(--muted));
   background: none;
-  border: 1px solid var(--rule, rgba(23, 21, 15, 0.16));
-  border-radius: 4px;
+  border: 1px solid var(--rule, rgba(17, 19, 24, 0.16));
+  border-radius: 2px;
   padding: 3px 7px;
   cursor: pointer;
 }
 
-.budget-scope .hide-toggle:hover { color: var(--ink, #17150f); border-color: var(--ink, #17150f); }
+.budget-scope .hide-toggle:hover { color: var(--ink, var(--ink)); border-color: var(--ink, var(--ink)); }
 
 .budget-scope .hide-toggle.on {
-  color: var(--accent, #b03a1a);
-  border-color: var(--accent, #b03a1a);
-  background: var(--accent-soft, #f6ebe5);
+  color: var(--accent, var(--accent));
+  border-color: var(--accent, var(--accent));
+  background: var(--accent-soft, var(--accent-soft));
 }
 
 .budget-scope .hidden-tag {
-  color: var(--accent, #b03a1a);
-  border-color: var(--accent, #b03a1a);
+  color: var(--accent, var(--accent));
+  border-color: var(--accent, var(--accent));
 }
 
 .budget-scope .line[data-hidden="true"] { opacity: 0.72; }
+
+.budget-scope .phase-move { display: inline-flex; gap: 2px; }
+
+.budget-scope .phase-move .move {
+  font: inherit;
+  font-size: 12px;
+  line-height: 1;
+  width: 24px;
+  height: 22px;
+  color: var(--muted, var(--muted));
+  background: none;
+  border: 1px solid var(--rule, rgba(17, 19, 24, 0.16));
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.budget-scope .phase-move .move:hover:not(:disabled) { color: var(--ink, var(--ink)); border-color: var(--ink, var(--ink)); }
+
+.budget-scope .phase-move .move:disabled { opacity: 0.35; cursor: default; }
+
+.budget-scope .phase[data-phase-hidden="true"] > header .phase-edit,
+.budget-scope .phase[data-phase-hidden="true"] > .line { opacity: 0.55; }
+
+.budget-scope h2 { letter-spacing: -0.02em; }
+
+.budget-scope .lede,
+.budget-scope .about-lede,
+.budget-scope .card p,
+.budget-scope .callout p,
+.budget-scope .inner > p:not(.eyebrow) { font-family: var(--serif); }

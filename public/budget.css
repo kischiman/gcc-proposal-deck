@@ -1,19 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Schibsted+Grotesk:wght@400;500;600&display=swap");
+
 /* Residency budget — shared working document */
 
 :root {
-  --paper: #fbfaf7;
-  --paper-2: #f4f1ea;
-  --ink: #17150f;
-  --muted: #6e675a;
-  --rule: #e3ded2;
-  --accent: #b03a1a;
-  --accent-soft: #f6ebe5;
+  --paper: #f4f4f1;
+  --paper-2: #eaeae5;
+  --ink: #111318;
+  --muted: #4d5059;
+  --rule: #d6d6cf;
+  --accent: #2337c6;
+  --accent-soft: #e4e7f8;
   --claimed: #3f6b4a;
   --claimed-soft: #edf3ee;
 
-  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, ui-serif, serif;
-  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Helvetica, Arial, sans-serif;
-  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  --serif: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --sans: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --mono: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --display: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --line: #a9aaa3;
+  --node: #8f918a;
 }
 
 * { box-sizing: border-box; }
@@ -59,15 +64,16 @@ body {
 
 .eyebrow {
   font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-size: 12.5px;
+  letter-spacing: 0.005em;
+  text-transform: none;
   color: var(--accent);
   margin: 0 0 8px;
+  font-variant-numeric: tabular-nums;
 }
 
 h1 {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 400;
   font-size: clamp(24px, 3vw, 32px);
   letter-spacing: -0.015em;
@@ -81,6 +87,7 @@ h1 {
   font-size: 11px;
   color: var(--muted);
   white-space: nowrap;
+  font-variant-numeric: tabular-nums;
 }
 
 .live[data-on="true"]::before {
@@ -100,7 +107,7 @@ h1 {
   border: 1px solid var(--ink);
   background: var(--ink);
   color: var(--paper);
-  border-radius: 8px;
+  border-radius: 2px;
   padding: 10px 18px;
   font: inherit;
   font-size: 14px;
@@ -112,23 +119,23 @@ h1 {
 
 .btn:hover { opacity: 0.85; }
 .btn.ghost { background: none; color: var(--ink); border-color: var(--rule); }
-.btn.small { padding: 6px 13px; font-size: 12.5px; border-radius: 6px; }
+.btn.small { padding: 6px 13px; font-size: 12.5px; border-radius: 2px; }
 
 /* ---------------------------------------------------------------- rates */
 
 .rates {
   background: #fff;
   border: 1px solid var(--rule);
-  border-radius: 10px;
+  border-radius: 2px;
   padding: 20px 22px;
   margin-bottom: 34px;
 }
 
 h3 {
-  font-size: 11px;
+  font-size: 12.5px;
   font-weight: 600;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  text-transform: none;
   color: var(--muted);
   margin: 0 0 14px;
 }
@@ -147,12 +154,14 @@ h3 {
   font-size: 15px;
   padding: 9px 11px;
   border: 1px solid var(--rule);
-  border-radius: 7px;
+  border-radius: 2px;
   background: var(--paper);
   color: var(--ink);
 }
 
-.rate input { font-family: var(--mono); }
+.rate input { font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+}
 
 .rate input:focus,
 .modal input:focus,
@@ -165,7 +174,7 @@ h3 {
 
 .phase {
   border: 1px solid var(--rule);
-  border-radius: 10px;
+  border-radius: 2px;
   background: #fff;
   margin-bottom: 20px;
   overflow: hidden;
@@ -182,7 +191,7 @@ h3 {
   flex-wrap: wrap;
 }
 
-.phase h2 { font-family: var(--serif); font-weight: 400; font-size: 19px; margin: 0; }
+.phase h2 { font-family: var(--display); font-weight: 400; font-size: 19px; margin: 0; }
 .phase header .note { font-size: 12.5px; color: var(--muted); margin: 4px 0 0; }
 .phase header .amount { font-family: var(--mono); font-size: 15px; font-variant-numeric: tabular-nums; }
 
@@ -231,6 +240,7 @@ h3 {
   letter-spacing: 0.04em;
   color: var(--muted);
   white-space: nowrap;
+  font-variant-numeric: tabular-nums;
 }
 
 /* Closes a segment. No border of its own — the next separator draws the line. */
@@ -247,10 +257,11 @@ h3 {
 
 .phase-total-label {
   font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-size: 12.5px;
+  letter-spacing: 0.005em;
+  text-transform: none;
   color: var(--ink);
+  font-variant-numeric: tabular-nums;
 }
 
 .line.segment-sum.phase-total .num.sub {
@@ -267,7 +278,9 @@ h3 {
 }
 
 .line .num.time,
-.line .num.rate { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.line .num.rate { font-family: var(--mono); font-size: 12px; color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
 .line .num.sub {
   font-family: var(--mono);
   font-size: 12.5px;
@@ -295,10 +308,11 @@ h3 {
 .divider-name {
   flex: 1;
   font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-size: 12.5px;
+  letter-spacing: 0.005em;
+  text-transform: none;
   color: var(--muted);
+  font-variant-numeric: tabular-nums;
 }
 
 .divider-span {
@@ -308,6 +322,7 @@ h3 {
   font-size: 10.5px;
   color: var(--accent);
   white-space: nowrap;
+  font-variant-numeric: tabular-nums;
 }
 
 /* Rendered by the process page to head its expense group. Not a stored line: nothing
@@ -331,11 +346,12 @@ h3 {
 
 .only-here {
   font-family: var(--mono);
-  font-size: 9.5px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 12.5px;
+  letter-spacing: 0.005em;
+  text-transform: none;
   color: var(--muted);
   margin-right: 8px;
+  font-variant-numeric: tabular-nums;
 }
 
 .line.admin { cursor: grab; }
@@ -361,7 +377,7 @@ h3 {
   font-size: 11.5px;
   color: var(--claimed);
   border: 1px solid rgba(63, 107, 74, 0.35);
-  border-radius: 999px;
+  border-radius: 2px;
   padding: 2px 9px;
   margin-top: 7px;
 }
@@ -378,15 +394,16 @@ h3 {
 .tag {
   display: inline-block;
   font-family: var(--mono);
-  font-size: 9.5px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-size: 12.5px;
+  letter-spacing: 0.005em;
+  text-transform: none;
   color: var(--muted);
   border: 1px solid var(--rule);
-  border-radius: 3px;
+  border-radius: 2px;
   padding: 2px 6px;
   margin-left: 7px;
   vertical-align: 1px;
+  font-variant-numeric: tabular-nums;
 }
 
 .line-actions { display: flex; gap: 6px; justify-content: flex-end; }
@@ -399,7 +416,7 @@ h3 {
   line-height: 1;
   cursor: pointer;
   padding: 4px 7px;
-  border-radius: 5px;
+  border-radius: 2px;
 }
 
 .remove:hover { color: var(--accent); background: var(--accent-soft); }
@@ -410,8 +427,8 @@ h3 {
 
 .summary {
   background: var(--accent-soft);
-  border: 1px solid rgba(176, 58, 26, 0.25);
-  border-radius: 10px;
+  border: 1px solid rgba(35, 55, 198, 0.25);
+  border-radius: 2px;
   padding: 24px 26px;
   margin-top: 34px;
 }
@@ -421,7 +438,7 @@ h3 {
   justify-content: space-between;
   gap: 20px;
   padding: 10px 0;
-  border-bottom: 1px solid rgba(176, 58, 26, 0.18);
+  border-bottom: 1px solid rgba(35, 55, 198, 0.18);
   font-size: 14.5px;
 }
 
@@ -448,7 +465,7 @@ h3 {
 .scrim {
   position: fixed;
   inset: 0;
-  background: rgba(23, 21, 15, 0.42);
+  background: rgba(17, 19, 24, 0.42);
   z-index: 40;
   animation: fade 0.15s ease both;
 }
@@ -466,8 +483,8 @@ h3 {
   overflow-y: auto;
   background: var(--paper);
   border: 1px solid var(--rule);
-  border-radius: 12px;
-  box-shadow: 0 32px 64px -28px rgba(23, 21, 15, 0.55);
+  border-radius: 2px;
+  box-shadow: 0 32px 64px -28px rgba(17, 19, 24, 0.55);
   padding: 22px 24px 24px;
   animation: pop 0.16s ease both;
 }
@@ -478,7 +495,7 @@ h3 {
 }
 
 .modal header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
-.modal h2 { font-family: var(--serif); font-weight: 400; font-size: 22px; margin: 0; }
+.modal h2 { font-family: var(--display); font-weight: 400; font-size: 22px; margin: 0; }
 
 .x {
   border: 0;
@@ -498,10 +515,10 @@ h3 {
 
 .modal label {
   display: block;
-  font-size: 11px;
+  font-size: 12.5px;
   font-weight: 600;
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  text-transform: none;
   color: var(--muted);
   margin: 16px 0 6px;
 }
@@ -515,19 +532,22 @@ h3 {
   align-items: end;
   background: #fff;
   border: 1px solid var(--rule);
-  border-radius: 9px;
+  border-radius: 2px;
   padding: 14px 16px;
   margin-top: 16px;
 }
 
 .calc label { margin-top: 0; }
-.calc input, .calc select { font-family: var(--mono); }
+.calc input, .calc select { font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+}
 
 .calc .times, .calc .equals {
   font-family: var(--mono);
   color: var(--muted);
   padding-bottom: 10px;
   font-size: 15px;
+  font-variant-numeric: tabular-nums;
 }
 
 .calc .unit {
@@ -536,6 +556,7 @@ h3 {
   font-size: 10.5px;
   color: var(--muted);
   margin-top: 5px;
+  font-variant-numeric: tabular-nums;
 }
 
 .calc-total output {
@@ -610,7 +631,7 @@ h3 {
   font-size: 13px;
   padding: 8px 11px;
   border: 1px solid var(--rule);
-  border-radius: 7px;
+  border-radius: 2px;
   /* Lighter than the line it hangs under, so a proposal reads as attached to that
      line rather than as another one. */
   background: #fff;
@@ -619,15 +640,18 @@ h3 {
 .proposal.on { border-color: rgba(63, 107, 74, 0.45); background: var(--claimed-soft); }
 .proposal .who { font-weight: 600; }
 .proposal.on .who { color: var(--claimed); }
-.proposal .terms { font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
+.proposal .terms { font-family: var(--mono); font-size: 11.5px; color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
 .proposal .amt { font-family: var(--mono); font-variant-numeric: tabular-nums; }
 
 .on-tag {
   font-family: var(--mono);
-  font-size: 9.5px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-size: 12.5px;
+  letter-spacing: 0.005em;
+  text-transform: none;
   color: var(--claimed);
+  font-variant-numeric: tabular-nums;
 }
 
 .pnote {
@@ -643,11 +667,12 @@ h3 {
 .scope-label {
   display: block;
   font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-size: 12.5px;
+  letter-spacing: 0.005em;
+  text-transform: none;
   color: var(--muted);
   margin-top: 3px;
+  font-variant-numeric: tabular-nums;
 }
 
 .line .num.scope, .line .num.base { color: var(--muted); }
@@ -668,7 +693,7 @@ h3 {
 .prow-actions { display: flex; align-items: center; gap: 5px; justify-content: flex-end; }
 .proposal.admin { grid-template-columns: minmax(80px, auto) 1fr auto auto; }
 
-.btn.ghost.danger { color: var(--accent); border-color: rgba(176, 58, 26, 0.3); }
+.btn.ghost.danger { color: var(--accent); border-color: rgba(35, 55, 198, 0.3); }
 .btn.ghost.danger:hover { background: var(--accent-soft); }
 .modal-actions .danger { margin-left: auto; }
 .line.admin .line-actions { align-items: center; flex-wrap: nowrap; }
@@ -679,7 +704,7 @@ h3 {
 .others {
   background: var(--paper-2);
   border: 1px solid var(--rule);
-  border-radius: 9px;
+  border-radius: 2px;
   padding: 13px 15px;
   margin-bottom: 4px;
 }
@@ -687,11 +712,12 @@ h3 {
 .others-label {
   display: block;
   font-family: var(--mono);
-  font-size: 9.5px;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
+  font-size: 12.5px;
+  letter-spacing: 0.005em;
+  text-transform: none;
   color: var(--muted);
   margin-bottom: 9px;
+  font-variant-numeric: tabular-nums;
 }
 
 .other {
@@ -706,7 +732,9 @@ h3 {
 
 .other:last-of-type { border-bottom: 0; }
 .other .who { font-weight: 600; }
-.other .terms { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.other .terms { font-family: var(--mono); font-size: 11px; color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
 .other .amt { font-family: var(--mono); font-variant-numeric: tabular-nums; }
 
 .others-note { margin: 9px 0 0; font-size: 12px; color: var(--muted); line-height: 1.5; }
@@ -736,20 +764,20 @@ h3 {
   width: min(400px, 100%);
   background: #fff;
   border: 1px solid var(--rule);
-  border-radius: 12px;
+  border-radius: 2px;
   padding: 30px 32px 32px;
-  box-shadow: 0 30px 60px -34px rgba(23, 21, 15, 0.5);
+  box-shadow: 0 30px 60px -34px rgba(17, 19, 24, 0.5);
 }
 
-.gate-card h1 { font-family: var(--serif); font-weight: 400; font-size: 28px; margin: 0 0 10px; }
+.gate-card h1 { font-family: var(--display); font-weight: 400; font-size: 28px; margin: 0 0 10px; }
 .gate-note { font-size: 13.5px; color: var(--muted); line-height: 1.55; margin: 0 0 20px; }
 
 .gate-card label {
   display: block;
-  font-size: 11px;
+  font-size: 12.5px;
   font-weight: 600;
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  text-transform: none;
   color: var(--muted);
   margin-bottom: 6px;
 }
@@ -760,7 +788,7 @@ h3 {
   font-size: 15px;
   padding: 11px 13px;
   border: 1px solid var(--rule);
-  border-radius: 8px;
+  border-radius: 2px;
   background: var(--paper);
   margin-bottom: 16px;
 }
@@ -780,15 +808,16 @@ h3 {
   font-size: 9px;
   letter-spacing: 0.12em;
   color: var(--accent);
-  border: 1px solid rgba(176, 58, 26, 0.3);
-  border-radius: 3px;
+  border: 1px solid rgba(35, 55, 198, 0.3);
+  border-radius: 2px;
   padding: 2px 6px;
   margin-left: 8px;
+  font-variant-numeric: tabular-nums;
 }
 
 .storage-warn {
   background: var(--accent-soft);
-  border: 1px solid rgba(176, 58, 26, 0.35);
+  border: 1px solid rgba(35, 55, 198, 0.35);
   border-left-width: 3px;
   border-radius: 0 8px 8px 0;
   padding: 14px 18px;
@@ -802,8 +831,9 @@ h3 {
   font-size: 11.5px;
   background: #fff;
   border: 1px solid var(--rule);
-  border-radius: 3px;
+  border-radius: 2px;
   padding: 1px 5px;
+  font-variant-numeric: tabular-nums;
 }
 
 .prefill-bar {
@@ -819,10 +849,14 @@ h3 {
 
 .prefill-bar b { display: block; font-size: 14px; font-weight: 600; }
 .prefill-bar em { display: block; font-style: normal; font-size: 12.5px; color: var(--muted); line-height: 1.55; margin-top: 4px; max-width: 62ch; }
-.prefill-bar code { font-family: var(--mono); font-size: 11.5px; background: var(--paper-2); border: 1px solid var(--rule); border-radius: 3px; padding: 1px 5px; }
+.prefill-bar code { font-family: var(--mono); font-size: 11.5px; background: var(--paper-2); border: 1px solid var(--rule); border-radius: 2px; padding: 1px 5px;
+  font-variant-numeric: tabular-nums;
+}
 
 .prefill-actions { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
-.prefill-count { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-right: 4px; white-space: nowrap; }
+.prefill-count { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-right: 4px; white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
 
 /* per-line control, sitting under the base figure */
 /* Sits inline with the name — what a line *is*, rather than a setting about it. */
@@ -835,10 +869,11 @@ h3 {
 
 .owner span {
   font-family: var(--mono);
-  font-size: 9.5px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 12.5px;
+  letter-spacing: 0.005em;
+  text-transform: none;
   color: var(--muted);
+  font-variant-numeric: tabular-nums;
 }
 
 .owner input {
@@ -847,7 +882,7 @@ h3 {
   font-size: 13px;
   padding: 3px 8px;
   border: 1px solid var(--rule);
-  border-radius: 5px;
+  border-radius: 2px;
   background: var(--paper);
   color: var(--ink);
 }
@@ -862,21 +897,22 @@ h3 {
   vertical-align: 1px;
   border: 1px solid var(--rule);
   background: var(--paper);
-  border-radius: 4px;
+  border-radius: 2px;
   padding: 1px 7px;
   font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 12.5px;
+  letter-spacing: 0.005em;
+  text-transform: none;
   color: var(--muted);
   cursor: pointer;
+  font-variant-numeric: tabular-nums;
 }
 
 .kind-toggle:hover { border-color: var(--muted); color: var(--ink); }
 
 .kind-toggle.on {
   color: var(--accent);
-  border-color: rgba(176, 58, 26, 0.35);
+  border-color: rgba(35, 55, 198, 0.35);
   background: var(--accent-soft);
 }
 
@@ -885,15 +921,16 @@ h3 {
   margin: 5px 0 0 auto;
   border: 1px solid var(--rule);
   background: var(--paper);
-  border-radius: 4px;
+  border-radius: 2px;
   padding: 2px 7px;
   font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 12.5px;
+  letter-spacing: 0.005em;
+  text-transform: none;
   color: var(--muted);
   cursor: pointer;
   transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  font-variant-numeric: tabular-nums;
 }
 
 .prefill-toggle:hover { border-color: var(--muted); color: var(--ink); }
@@ -928,7 +965,7 @@ h3 {
   padding: 13px 18px;
   background: #fff;
   border: 1px solid var(--rule);
-  border-radius: 9px;
+  border-radius: 2px;
   margin-bottom: 8px;
 }
 
@@ -971,7 +1008,7 @@ h3 {
   padding: 13px 15px;
   background: var(--paper-2);
   border: 1px solid var(--rule);
-  border-radius: 8px;
+  border-radius: 2px;
   font-family: var(--mono);
   font-size: 11.5px;
   line-height: 1.6;
@@ -980,6 +1017,7 @@ h3 {
   overflow-x: auto;
   max-height: 260px;
   overflow-y: auto;
+  font-variant-numeric: tabular-nums;
 }
 
 /* Scope-only board: with the budget hidden there is no amount column, so the
@@ -1000,14 +1038,14 @@ h3 {
   font: inherit;
   color: inherit;
   background: var(--paper, #fff);
-  border: 1px solid var(--rule, rgba(23, 21, 15, 0.16));
-  border-radius: 6px;
+  border: 1px solid var(--rule, rgba(17, 19, 24, 0.16));
+  border-radius: 2px;
   padding: 7px 9px;
   min-width: 0;
 }
 
 .phase-edit input:focus,
-.phase-edit textarea:focus { outline: none; border-color: var(--accent, #b03a1a); }
+.phase-edit textarea:focus { outline: none; border-color: var(--accent, var(--accent)); }
 
 .phase-name { flex: 1 1 220px; font-size: 17px; font-weight: 600; }
 .phase-when { flex: 0 0 120px; font-size: 13px; }
@@ -1022,10 +1060,10 @@ h3 {
 .phase-lists label { display: flex; flex-direction: column; gap: 5px; }
 
 .phase-lists span {
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted, #6e675a);
+  font-size: 12.5px;
+  letter-spacing: 0.005em;
+  text-transform: none;
+  color: var(--muted, var(--muted));
 }
 
 .phase-lists textarea { resize: vertical; font-size: 13px; line-height: 1.5; }
@@ -1042,28 +1080,28 @@ h3 {
 
 .hide-toggle {
   font: inherit;
-  font-size: 10px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted, #6e675a);
+  font-size: 12.5px;
+  letter-spacing: 0.005em;
+  text-transform: none;
+  color: var(--muted, var(--muted));
   background: none;
-  border: 1px solid var(--rule, rgba(23, 21, 15, 0.16));
-  border-radius: 4px;
+  border: 1px solid var(--rule, rgba(17, 19, 24, 0.16));
+  border-radius: 2px;
   padding: 3px 7px;
   cursor: pointer;
 }
 
-.hide-toggle:hover { color: var(--ink, #17150f); border-color: var(--ink, #17150f); }
+.hide-toggle:hover { color: var(--ink, var(--ink)); border-color: var(--ink, var(--ink)); }
 
 .hide-toggle.on {
-  color: var(--accent, #b03a1a);
-  border-color: var(--accent, #b03a1a);
-  background: var(--accent-soft, #f6ebe5);
+  color: var(--accent, var(--accent));
+  border-color: var(--accent, var(--accent));
+  background: var(--accent-soft, var(--accent-soft));
 }
 
 .hidden-tag {
-  color: var(--accent, #b03a1a);
-  border-color: var(--accent, #b03a1a);
+  color: var(--accent, var(--accent));
+  border-color: var(--accent, var(--accent));
 }
 
 /* The whole row reads as set aside, so it is obvious at a glance which lines the
@@ -1083,15 +1121,21 @@ h3 {
   line-height: 1;
   width: 24px;
   height: 22px;
-  color: var(--muted, #6e675a);
+  color: var(--muted, var(--muted));
   background: none;
-  border: 1px solid var(--rule, rgba(23, 21, 15, 0.16));
-  border-radius: 4px;
+  border: 1px solid var(--rule, rgba(17, 19, 24, 0.16));
+  border-radius: 2px;
   cursor: pointer;
 }
 
-.phase-move .move:hover:not(:disabled) { color: var(--ink, #17150f); border-color: var(--ink, #17150f); }
+.phase-move .move:hover:not(:disabled) { color: var(--ink, var(--ink)); border-color: var(--ink, var(--ink)); }
 .phase-move .move:disabled { opacity: 0.35; cursor: default; }
 
 .phase[data-phase-hidden="true"] > header .phase-edit,
 .phase[data-phase-hidden="true"] > .line { opacity: 0.55; }
+
+/* ---------------------------------------------------------------- Asilo identity
+   Prose in Newsreader; structure, labels and figures in Schibsted Grotesk with aligned
+   numerals where the old monospace was; cards become ruled sections instead of bordered boxes. */
+h1, h2 { letter-spacing: -0.02em; }
+.lede, .about-lede, .card p, .callout p, .inner > p:not(.eyebrow) { font-family: var(--serif); }
