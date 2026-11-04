@@ -181,7 +181,11 @@ function renderPeople() {
 // Terms for a proposal or line: a fixed sum, a quantity at a rate, or — when no
 // rate was given — just the quantity, rather than "× $0".
 const terms = (x) =>
-  x.unit === "fixed" ? "fixed" : x.rate ? `${x.qty} ${esc(x.unit)} × ${money(x.rate)}` : `${x.qty} ${esc(x.unit)}`;
+  x.unit === "fixed"
+    ? "fixed"
+    : x.qty === null || x.qty === undefined || x.qty === ""
+      ? x.rate ? `${money(x.rate)} / ${esc(x.unit || "unit")}` : ""
+      : `${x.qty}${x.unit ? " " + esc(x.unit) : ""}${x.rate ? ` × ${money(x.rate)}` : ""}`;
 
 function proposalRow(t, p) {
   const on = t.assigned === p.id;
@@ -248,7 +252,7 @@ function lineHtml(t) {
     </div>
     <div class="num base">
       <span class="terms">${terms(t)}</span>
-      ${money(t.base)}
+      ${t.qty === null && !t.rate ? "—" : money(t.base)}
       <button class="prefill-toggle${t.prefill ? " on" : ""}" data-prefill="${esc(t.id)}"
               title="${t.prefill ? "Public board suggests this rate" : "Public board shows no rate for this line"}">
         ${t.prefill ? "suggested" : "hidden"}
@@ -414,9 +418,7 @@ function openNewLine(phaseId, kind) {
   $("e-name").value = "";
   $("e-note").value = "";
   $("e-qty").value = "";
-  $("e-unit").innerHTML = state.units
-    .map((u) => `<option value="${u}"${u === "days" ? " selected" : ""}>${u}</option>`)
-    .join("");
+  $("e-unit").innerHTML = unitOptions("days");
   $("e-rate").value = "";
   $("e-memo").value = "";
 
@@ -425,6 +427,11 @@ function openNewLine(phaseId, kind) {
   $("edit-modal").hidden = false;
   $("e-name").focus();
 }
+
+/** The unit choices, with an empty one first so a line can carry no unit. */
+const unitOptions = (selected) =>
+  `<option value=""${selected === "" ? " selected" : ""}>— none —</option>` +
+  state.units.map((u) => `<option value="${u}"${u === selected ? " selected" : ""}>${u}</option>`).join("");
 
 function openEdit(id) {
   const t = state.tasks.find((x) => x.id === id);
@@ -436,10 +443,8 @@ function openEdit(id) {
 
   $("e-name").value = t.name;
   $("e-note").value = t.note || "";
-  $("e-qty").value = t.qty;
-  $("e-unit").innerHTML = state.units
-    .map((u) => `<option value="${u}"${u === t.unit ? " selected" : ""}>${u}</option>`)
-    .join("");
+  $("e-qty").value = t.qty ?? "";
+  $("e-unit").innerHTML = unitOptions(t.unit);
   $("e-rate").value = t.rate ?? "";
   $("e-memo").value = t.memo || "";
 

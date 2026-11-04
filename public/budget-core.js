@@ -26,7 +26,8 @@ window.Budget = (function () {
   const terms = (x) => {
     if (x.unit === "fixed") return x.rate || x.qty ? "fixed" : "";
     if (!Number(x.qty)) return "";
-    return x.rate ? `${x.qty} ${esc(x.unit)} × ${money(x.rate)}` : `${x.qty} ${esc(x.unit)}`;
+    const u = x.unit ? ` ${esc(x.unit)}` : "";
+    return x.rate ? `${x.qty}${u} × ${money(x.rate)}` : `${x.qty}${u}`;
   };
 
   // ---------------------------------------------------------------- transport
@@ -182,7 +183,7 @@ window.Budget = (function () {
     const rate = t.rate ?? t.suggestedRate;
     const fixed = t.unit === "fixed";
     return {
-      time: fixed ? "fixed" : qty !== null && qty !== undefined ? `${qty} ${esc(t.unit || "days")}` : "",
+      time: fixed ? "fixed" : qty !== null && qty !== undefined ? `${qty}${t.unit ? " " + esc(t.unit) : ""}` : "",
       rate: rate ? money(rate) : "",
       subtotal: !fixed && qty && rate ? qty * rate : fixed && qty ? Number(qty) : 0,
     };
