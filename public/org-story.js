@@ -12,7 +12,7 @@
   const STAGES = [
     { nav: "Status quo", title: "Status quo",
       note: "Work crosses departments without a clear route, so hand-offs are missed, work is redone and decisions stall. Each one adds cost." },
-    { nav: "Workshop", title: "01 · Workshop",
+    { nav: "Kickoff Meeting", title: "01 · Kickoff Meeting",
       note: "A 90-minute kickoff with your three executives sets shared goals and we pick the one department we start with. We baseline its key numbers and agree targets with you." },
     { nav: "Observe & record", title: "02 · Observe & record",
       note: "We follow how work actually travels between people, and record where it waits, gets redone or meets disagreement. Site leads and project managers join the interviews." },
