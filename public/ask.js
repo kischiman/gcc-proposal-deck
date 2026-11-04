@@ -219,7 +219,7 @@
     const { hits, answer } = await query(question);
     if (!hits.length) {
       out.innerHTML = `<p class="ask-empty">The proposal doesn't cover that. Try asking about the
-        approach, the process and investment, the capabilities or the team.</p>`;
+        approach, the process and investment, how we work or the team.</p>`;
     } else if (answer) {
       out.innerHTML = `<div class="ask-answer">${answerHtml(answer)}</div>
         <div class="ask-sources"><span class="ask-label">In the proposal</span>${sourcesHtml(hits)}</div>`;
