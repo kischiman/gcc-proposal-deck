@@ -1585,6 +1585,16 @@ h1, h2 { letter-spacing: -0.02em; }
 .fnode[data-selected="true"] .fglyph rect { fill: none; stroke: var(--accent); }
 .fnode[data-selected="true"] .fglyph rect.fill { fill: var(--accent); }
 
+/* the two of us, as drawn on asilo.solutions */
+.about-people { display: flex; flex-wrap: wrap; gap: 28px; margin: 8px 0 0; }
+.about-person { margin: 0; width: 160px; }
+.about-person img { display: block; width: 100%; height: auto; border: 1px solid var(--rule); background: #fff; }
+.about-person figcaption { margin-top: 10px; font-family: var(--sans); font-size: 15px; font-weight: 500; color: var(--ink); }
+@media (max-width: 640px) {
+  .about-people { gap: 16px; }
+  .about-person { width: calc(50% - 8px); }
+}
+
 .about-link { margin: 28px 0 0; font-family: var(--sans); font-size: 15px; font-weight: 500; }
 .about-link a { color: var(--accent); text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; }
 .about-link a:hover { text-decoration: underline; text-underline-offset: 0.18em; }
