@@ -82,6 +82,11 @@
     return n;
   }
   const ALL = "0,1,2,3,4,5,6";
+  // From the workshop to automation the work stays in one department, the middle one;
+  // the other two step back until the outcome, when the result reaches the whole company.
+  const FOCUS = "1,2,3,4,5";
+  const FOCUS_KEY = "O";
+  const fade = (n, stages = FOCUS) => { n.classList.add("os-fadeable"); n.dataset.fade = stages; return n; };
 
   // markers
   const defs = el("defs", {});
@@ -92,8 +97,13 @@
 
   // departments: the formal boundaries, left unnamed
   DEPTS.forEach((d) => {
-    layer("rect", { x: d.cx - BOX.half, y: BOX.y, width: BOX.half * 2, height: BOX.h, class: "os-silo" }, ALL, "6");
+    const box = layer("rect", { x: d.cx - BOX.half, y: BOX.y, width: BOX.half * 2, height: BOX.h, class: "os-silo" }, ALL, "6");
+    if (d.key !== FOCUS_KEY) fade(box);
   });
+  // the department we start with
+  const focus = DEPTS.find((d) => d.key === FOCUS_KEY);
+  layer("rect", { x: focus.cx - BOX.half, y: BOX.y, width: BOX.half * 2, height: BOX.h, rx: 4, class: "os-focus" }, FOCUS);
+  label(focus.cx - BOX.half + 14, BOX.y + 24, "Focus department", FOCUS, "os-focus-label", "start");
 
   // 01 shared goals: one band across every department, tied to each manager
   layer("rect", { x: 60, y: 118, width: 880, height: 18, class: "os-band" }, "1");
@@ -101,18 +111,22 @@
   DEPTS.forEach((d) => layer("path", { d: `M${d.cx} 136 V181`, class: "os-tie" }, "1"));
 
   // formal reporting structure: thin, orthogonal, grey
-  let rep = `M500 61 V100 M200 100 H800 M200 100 V182 M500 100 V182 M800 100 V182`;
+  layer("path", { d: `M500 61 V100 M200 100 H800 M200 100 V182 M500 100 V182 M800 100 V182`, class: "os-report" }, ALL, "2,3,4,5,6");
   DEPTS.forEach((d) => {
     const c = d.cx;
-    rep += ` M${c} 198 V245 M${c - 90} 245 H${c + 90}`;
+    let rep = `M${c} 198 V245 M${c - 90} 245 H${c + 90}`;
     for (const x of [c - 90, c, c + 90]) rep += ` M${x} 245 V${290 - R} M${x} ${290 + R} V${360 - R}`;
+    const n = layer("path", { d: rep, class: "os-report" }, ALL, "2,3,4,5,6");
+    if (d.key !== FOCUS_KEY) fade(n);
   });
-  layer("path", { d: rep, class: "os-report" }, ALL, "2,3,4,5,6");
 
   // 02 the observed collaboration network: what actually happens between people
   [["S1", "O1", 30], ["S5", "O3", 16], ["O2", "V0", -18], ["S4", "V4", 70], ["S0", "S4", 14],
    ["O1", "V1", -40], ["V2", "V5", -14], ["O4", "O0", 18], ["S2", "O0", -14], ["O5", "V3", -18]]
-    .forEach(([a, b, k]) => layer("path", { d: curve(a, b, k), class: "os-net" }, "2,3,4,5", "3,4,5"));
+    .forEach(([a, b, k]) => {
+      const n = layer("path", { d: curve(a, b, k), class: "os-net" }, "2,3,4,5", "3,4,5");
+      if (a[0] !== FOCUS_KEY && b[0] !== FOCUS_KEY) fade(n);
+    });
 
   // status quo friction (vermilion). Missed hand-off: work stops at the boundary
   layer("path", { d: curve("S2", [341, 286], -8), class: "os-fric", "marker-end": "url(#os-a-f)" }, "0,1,2", "1");
@@ -183,24 +197,31 @@
   // people last, so every line passes under them
   el("rect", { x: 489, y: 39, width: 22, height: 22, class: "os-lead-node" });
   const lt = el("text", { x: 522, y: 56, class: "os-label os-leader" }); lt.textContent = "Leadership";
-  DEPTS.forEach((d, i) => el("rect", { x: d.cx - 8, y: 182, width: 16, height: 16, class: "os-mgr" }));
+  DEPTS.forEach((d) => {
+    const m = el("rect", { x: d.cx - 8, y: 182, width: 16, height: 16, class: "os-mgr" });
+    if (d.key !== FOCUS_KEY) fade(m);
+  });
   const people = {};
   DEPTS.forEach((d) => {
     for (let k = 0; k < 6; k++) {
       const id = d.key + k, [x, y] = P[id];
       people[id] = el("circle", { cx: x, cy: y, r: R, class: "os-person" });
+      if (d.key !== FOCUS_KEY) fade(people[id]);
     }
   });
   // influential connectors, emphasized from 03 on
   ["S2", "O5", "V0"].forEach((id) => { people[id].classList.add("os-el-hi"); people[id].dataset.hi = "3,4,5,6"; });
+  // the two connectors next door carry hand-offs into the focus department, so once
+  // they are emphasized they stop fading
+  ["S2", "V0"].forEach((id) => (people[id].dataset.fade = "1,2"));
 
   // ------------------------------------------------------------ stages
   const layers = [...svg.querySelectorAll(".os-el")];
   const his = [...svg.querySelectorAll(".os-el-hi")];
+  const fades = [...svg.querySelectorAll(".os-fadeable")];
   const nav = root.querySelector(".os-nav");
   const titleEl = root.querySelector("#os-title");
   const noteEl = root.querySelector("#os-note");
-  const playBtn = root.querySelector(".os-play");
   const reduce = matchMedia("(prefers-reduced-motion: reduce)");
 
   const btns = STAGES.map((st, i) => {
@@ -208,7 +229,7 @@
     b.type = "button";
     b.className = "os-step";
     b.innerHTML = i ? `<span>0${i}</span>${st.nav}` : st.nav;
-    b.addEventListener("click", () => { stop(); show(i); });
+    b.addEventListener("click", () => show(i));
     nav.appendChild(b);
     return b;
   });
@@ -223,6 +244,7 @@
       n.classList.toggle("dim", Boolean(dim));
     }
     for (const n of his) n.classList.toggle("hi", n.dataset.hi.split(",").includes(String(i)));
+    for (const n of fades) n.classList.toggle("faded", n.dataset.fade.split(",").includes(String(i)));
     btns.forEach((b, j) => b.setAttribute("aria-pressed", String(j === i)));
     titleEl.textContent = STAGES[i].title;
     noteEl.textContent = STAGES[i].note;
@@ -252,26 +274,6 @@
     raf = requestAnimationFrame(tick);
   }
 
-  // Play runs once through the story and stops on the outcome
-  let timer = 0;
-  function stop() {
-    clearTimeout(timer);
-    timer = 0;
-    playBtn.setAttribute("aria-pressed", "false");
-    playBtn.textContent = "Play";
-  }
-  function play() {
-    if (stage >= LAST) show(0);
-    playBtn.setAttribute("aria-pressed", "true");
-    playBtn.textContent = "Pause";
-    const next = () => {
-      if (stage >= LAST) return stop();
-      show(stage + 1);
-      timer = setTimeout(next, stage === 5 ? 3800 : 3200);
-    };
-    timer = setTimeout(next, 2600);
-  }
-  playBtn.addEventListener("click", () => (timer ? stop() : play()));
 
   // arrow keys move between stages here, rather than between slides
   nav.addEventListener("keydown", (e) => {
@@ -279,7 +281,6 @@
     if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(k)) return;
     e.preventDefault();
     e.stopPropagation();
-    stop();
     const i = k === "Home" ? 0 : k === "End" ? LAST : Math.max(0, Math.min(LAST, stage + (k === "ArrowRight" ? 1 : -1)));
     show(i);
     btns[i].focus();

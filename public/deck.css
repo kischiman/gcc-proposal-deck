@@ -1634,7 +1634,7 @@ h1, h2 { letter-spacing: -0.02em; }
 }
 .os-bar { display: flex; gap: 12px; align-items: flex-start; justify-content: space-between; }
 .os-nav { display: flex; flex-wrap: wrap; gap: 2px; }
-.os-step, .os-play {
+.os-step {
   font: 500 13px/1 var(--sans); color: var(--muted); background: none; cursor: pointer;
   border: 1px solid transparent; border-radius: 2px; padding: 9px 8px; min-height: 36px;
 }
@@ -1642,9 +1642,7 @@ h1, h2 { letter-spacing: -0.02em; }
 .os-step:hover { color: var(--ink); }
 .os-step[aria-pressed="true"] { color: var(--ink); border-color: var(--ink); }
 .os-step[aria-pressed="true"] span { color: var(--ind); }
-.os-play { border-color: var(--line); color: var(--ink); min-width: 74px; flex: none; }
-.os-play[aria-pressed="true"] { border-color: var(--ind); color: var(--ind); }
-.os-step:focus-visible, .os-play:focus-visible { outline: 2px solid var(--ind); outline-offset: 2px; }
+.os-step:focus-visible { outline: 2px solid var(--ind); outline-offset: 2px; }
 .os-head { margin: 16px 2px 4px; min-height: 64px; }
 .os-head h3 { font: 500 19px/1.25 var(--display); letter-spacing: -0.01em; margin: 0 0 4px; }
 .os-head p { font: 400 16px/1.5 var(--serif); color: var(--muted); margin: 0; max-width: 62ch; }
@@ -1658,7 +1656,7 @@ h1, h2 { letter-spacing: -0.02em; }
 /* nodes */
 .os-lead-node, .os-mgr { fill: var(--ink); }
 .os-person { fill: var(--node); transform-box: fill-box; transform-origin: center;
-  transition: fill .7s var(--ease), transform .7s var(--ease); }
+  transition: fill .7s var(--ease), transform .7s var(--ease), opacity .75s var(--ease); }
 .os-person.hi { fill: var(--ind); transform: scale(1.35); }
 
 /* layers fade in and out; drawn paths draw on */
@@ -1668,6 +1666,11 @@ h1, h2 { letter-spacing: -0.02em; }
 .os-report.on.dim { opacity: .5; }
 
 .os-silo { fill: none; stroke: var(--line); stroke-width: 1; stroke-dasharray: 5 4; }
+/* the department the work starts in; the other two fade while it is in focus */
+.os-focus { fill: var(--ind-soft); fill-opacity: .55; stroke: var(--ind); stroke-width: 2; }
+.os-focus-label { font-size: 13.5px; font-weight: 600; fill: var(--ind); }
+.os-mgr.os-fadeable { transition: opacity .75s var(--ease); }
+.os-fadeable.faded, .os-el.on.faded { opacity: .22; }
 .os-report { fill: none; stroke: var(--node); stroke-width: 1.1; }
 .os-band { fill: var(--ind-soft); stroke: var(--ind); stroke-width: 1; }
 .os-band-label { font-size: 12.5px; font-weight: 600; fill: var(--ind); }
@@ -1709,7 +1712,7 @@ h1, h2 { letter-spacing: -0.02em; }
   .os-bar { flex-direction: column-reverse; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .os-el, .os-person { transition: none; }
+  .os-el, .os-person, .os-mgr { transition: none; }
 }
 
 /* wide screens: stage buttons in a column on the left, a smaller figure to their right */
@@ -1721,14 +1724,13 @@ h1, h2 { letter-spacing: -0.02em; }
   .os-bar { grid-area: bar; flex-direction: column; align-items: stretch; gap: 10px; }
   .os-nav { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2px; }
   .os-step { text-align: left; }
-  .os-play { align-self: flex-start; }
   .os-head { grid-area: head; margin: 14px 2px 0; }
   .os-head h3 { font-size: 17px; }
   .os-head p { font-size: 15px; }
   .os-canvas { grid-area: canvas; width: 100%; max-width: 580px; justify-self: end; }
   /* the figure is drawn smaller here, so its labels are set a little larger to stay readable */
   .os-label { font-size: 17px; }
-  .os-dept { font-size: 16px; }
+  .os-dept, .os-focus-label { font-size: 16px; }
   .os-leader { font-size: 17px; }
 }
 
