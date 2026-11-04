@@ -13,7 +13,7 @@
     { nav: "Status quo", title: "Status quo",
       note: "Work crosses departments without a clear route, so hand-offs are missed, work is redone and decisions stall. Each one adds cost." },
     { nav: "Workshop", title: "01 · Workshop",
-      note: "One session with your leaders sets shared goals and picks the one department we start with." },
+      note: "One session with your leaders sets shared goals and we pick the one department we start with." },
     { nav: "Observe & record", title: "02 · Observe & record",
       note: "We follow how work actually travels between people, and record where it waits, gets redone or meets disagreement." },
     { nav: "Design interventions", title: "03 · Design interventions",
