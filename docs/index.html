@@ -1595,14 +1595,18 @@ h1, h2 { letter-spacing: -0.02em; }
 .fnode[data-selected="true"] .fglyph rect { fill: none; stroke: var(--accent); }
 .fnode[data-selected="true"] .fglyph rect.fill { fill: var(--accent); }
 
-/* the two of us, as drawn on asilo.solutions */
-.about-people { display: flex; flex-wrap: wrap; gap: 28px; margin: 8px 0 0; }
-.about-person { margin: 0; width: 160px; }
-.about-person img { display: block; width: 100%; height: auto; border: 1px solid var(--rule); background: #fff; }
-.about-person figcaption { margin-top: 10px; font-family: var(--sans); font-size: 15px; font-weight: 500; color: var(--ink); }
-@media (max-width: 640px) {
-  .about-people { gap: 16px; }
-  .about-person { width: calc(50% - 8px); }
+/* the two of us, as drawn on asilo.solutions: always side by side */
+.slide .about-people {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 160px));
+  gap: 28px;
+  margin: 8px 0 0;
+}
+.slide .about-person { margin: 0; min-width: 0; }
+.slide .about-person img { display: block; width: 100%; height: auto; border: 1px solid var(--rule); background: #fff; }
+.slide .about-person figcaption { margin-top: 10px; font-family: var(--sans); font-size: 15px; font-weight: 500; color: var(--ink); }
+@media (max-width: 400px) {
+  .slide .about-people { gap: 14px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 .about-link { margin: 28px 0 0; font-family: var(--sans); font-size: 15px; font-weight: 500; }
