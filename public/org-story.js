@@ -21,7 +21,7 @@
     { nav: "Measure change", title: "04 · Measure change",
       note: "Checkpoints on the redesigned routes track hand-off time, rework and decision clarity, and feed the next round of design." },
     { nav: "Automate with AI", title: "05 · Automate with AI",
-      note: "Validated routine steps on the improved routes are automated. People still own each route and review what the automation produces." },
+      note: "Validated routine steps on the improved routes are automated." },
     { nav: "Accelerated growth", title: "06 · Accelerated growth",
       note: "The intended result: purposeful connections across teams, giving the cohesion and seamless collaboration that growth depends on." },
   ];
