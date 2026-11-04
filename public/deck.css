@@ -1737,5 +1737,4 @@ h1, h2 { letter-spacing: -0.02em; }
 /* with room to spare, the six stages sit in pairs under Status quo */
 @media (min-width: 1200px) {
   .os-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; }
-  .os-nav .os-step:first-child { grid-column: 1 / -1; }
 }

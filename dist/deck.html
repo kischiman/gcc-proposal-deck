@@ -1739,7 +1739,6 @@ h1, h2 { letter-spacing: -0.02em; }
 /* with room to spare, the six stages sit in pairs under Status quo */
 @media (min-width: 1200px) {
   .os-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; }
-  .os-nav .os-step:first-child { grid-column: 1 / -1; }
 }
 
 
@@ -1821,12 +1820,11 @@ h1, h2 { letter-spacing: -0.02em; }
       <div class="os-canvas"></div>
       <ol class="sr" aria-label="The stages, in words">
         <li><b>Status quo.</b> Work crosses departments without a clear route, so hand-offs are missed, work is redone and decisions stall. Each one adds cost.</li>
-        <li><b>01 · Kickoff Meeting.</b> A 90-minute kickoff with your three executives sets shared goals and we pick the one department we start with. We baseline its key numbers and agree targets with you.</li>
-        <li><b>02 · Observe &amp; record.</b> We follow how work actually travels between people, and record where it waits, gets redone or meets disagreement. Site leads and project managers join the interviews.</li>
-        <li><b>03 · Design interventions.</b> A few influential connectors carry the redesign: a clear hand-off, an owner for each decision, and a working feedback loop. The department tests each change, and it is reviewed before rollout.</li>
-        <li><b>04 · Measure change.</b> Checkpoints track the numbers baselined in Phase 1, such as rework, schedule slip, tender margin variance and change-order turnaround, against the targets we agreed. They feed the next round of design.</li>
-        <li><b>05 · Automate with AI.</b> Validated routine steps on the improved routes are automated through API and MCP integrations with the software you already use. Nothing is replaced.</li>
-        <li><b>06 · Accelerated growth.</b> The intended result: purposeful connections across teams, giving the cohesion and seamless collaboration that growth depends on.</li>
+        <li><b>Kickoff Meeting.</b> A 90-minute kickoff with your three executives sets shared goals and we pick the one department we start with. We baseline its key numbers and agree targets with you.</li>
+        <li><b>Observe &amp; record.</b> We follow how work actually travels between people, and record where it waits, gets redone or meets disagreement. Site leads and project managers join the interviews.</li>
+        <li><b>Design interventions.</b> A few influential connectors carry the redesign: a clear hand-off, an owner for each decision, and a working feedback loop. The department tests each change, and it is reviewed before rollout.</li>
+        <li><b>Measure change.</b> Checkpoints track the numbers baselined in Phase 1, such as rework, schedule slip, tender margin variance and change-order turnaround, against the targets we agreed. They feed the next round of design.</li>
+        <li><b>Automate with AI.</b> Validated routine steps on the improved routes are automated through API and MCP integrations with the software you already use. Nothing is replaced.</li>
       </ol>
     </figure>
     </div>
@@ -2250,7 +2248,7 @@ window.deckGo = (slide, sub) => go(slide, sub);
 applyAddress();
 window.addEventListener("hashchange", applyAddress);
 
-// The Overview's story diagram: one organization, seven stages.
+// The Overview's story diagram: one organization, six stages.
 //
 // Every stage is the same picture with different layers shown, so nodes never move and
 // each stage reads as a still. Each drawn element names the stages it appears in
@@ -2264,18 +2262,16 @@ window.addEventListener("hashchange", applyAddress);
   const STAGES = [
     { nav: "Status quo", title: "Status quo",
       note: "Work crosses departments without a clear route, so hand-offs are missed, work is redone and decisions stall. Each one adds cost." },
-    { nav: "Kickoff Meeting", title: "01 · Kickoff Meeting",
+    { nav: "Kickoff Meeting", title: "Kickoff Meeting",
       note: "A 90-minute kickoff with your three executives sets shared goals and we pick the one department we start with. We baseline its key numbers and agree targets with you." },
-    { nav: "Observe & record", title: "02 · Observe & record",
+    { nav: "Observe & record", title: "Observe & record",
       note: "We follow how work actually travels between people, and record where it waits, gets redone or meets disagreement. Site leads and project managers join the interviews." },
-    { nav: "Design interventions", title: "03 · Design interventions",
+    { nav: "Design interventions", title: "Design interventions",
       note: "A few influential connectors carry the redesign: a clear hand-off, an owner for each decision, and a working feedback loop. The department tests each change, and it is reviewed before rollout." },
-    { nav: "Measure change", title: "04 · Measure change",
+    { nav: "Measure change", title: "Measure change",
       note: "Checkpoints track the numbers baselined in Phase 1, such as rework, schedule slip, tender margin variance and change-order turnaround, against the targets we agreed. They feed the next round of design." },
-    { nav: "Automate with AI", title: "05 · Automate with AI",
+    { nav: "Automate with AI", title: "Automate with AI",
       note: "Validated routine steps on the improved routes are automated through API and MCP integrations with the software you already use. Nothing is replaced." },
-    { nav: "Accelerated growth", title: "06 · Accelerated growth",
-      note: "The intended result: purposeful connections across teams, giving the cohesion and seamless collaboration that growth depends on." },
   ];
   const LAST = STAGES.length - 1;
 
@@ -2333,9 +2329,9 @@ window.addEventListener("hashchange", applyAddress);
     n.textContent = text;
     return n;
   }
-  const ALL = "0,1,2,3,4,5,6";
-  // From the workshop to automation the work stays in one department, the middle one;
-  // the other two step back until the outcome, when the result reaches the whole company.
+  const ALL = "0,1,2,3,4,5";
+  // From the kickoff to automation the work stays in one department, the middle one;
+  // the other two step back.
   const FOCUS = "1,2,3,4,5";
   const FOCUS_KEY = "O";
   const fade = (n, stages = FOCUS) => { n.classList.add("os-fadeable"); n.dataset.fade = stages; return n; };
@@ -2349,7 +2345,7 @@ window.addEventListener("hashchange", applyAddress);
 
   // departments: the formal boundaries, left unnamed
   DEPTS.forEach((d) => {
-    const box = layer("rect", { x: d.cx - BOX.half, y: BOX.y, width: BOX.half * 2, height: BOX.h, class: "os-silo" }, ALL, "6");
+    const box = layer("rect", { x: d.cx - BOX.half, y: BOX.y, width: BOX.half * 2, height: BOX.h, class: "os-silo" }, ALL);
     if (d.key !== FOCUS_KEY) fade(box);
   });
   // the department we start with
@@ -2363,12 +2359,12 @@ window.addEventListener("hashchange", applyAddress);
   DEPTS.forEach((d) => layer("path", { d: `M${d.cx} 136 V181`, class: "os-tie" }, "1"));
 
   // formal reporting structure: thin, orthogonal, grey
-  layer("path", { d: `M500 61 V100 M200 100 H800 M200 100 V182 M500 100 V182 M800 100 V182`, class: "os-report" }, ALL, "2,3,4,5,6");
+  layer("path", { d: `M500 61 V100 M200 100 H800 M200 100 V182 M500 100 V182 M800 100 V182`, class: "os-report" }, ALL, "2,3,4,5");
   DEPTS.forEach((d) => {
     const c = d.cx;
     let rep = `M${c} 198 V245 M${c - 90} 245 H${c + 90}`;
     for (const x of [c - 90, c, c + 90]) rep += ` M${x} 245 V${290 - R} M${x} ${290 + R} V${360 - R}`;
-    const n = layer("path", { d: rep, class: "os-report" }, ALL, "2,3,4,5,6");
+    const n = layer("path", { d: rep, class: "os-report" }, ALL, "2,3,4,5");
     if (d.key !== FOCUS_KEY) fade(n);
   });
 
@@ -2409,12 +2405,12 @@ window.addEventListener("hashchange", applyAddress);
 
   // 03 the redesigned routes: intentional bridges (indigo, heavier, drawn on)
   const bridge = (d, s, extra = {}) => layer("path", { d, class: "os-bridge", pathLength: 1, ...extra }, s);
-  const B1 = bridge(curve("S2", "O0", -16), "3,4,5,6", { "marker-end": "url(#os-a-i)" });
-  bridge(curve("M1", "M2", 30, 12, 12), "3,4,5,6", { "marker-end": "url(#os-a-i)" });
-  const B3 = bridge(curve("O5", "V3", -22), "3,4,5,6", { "marker-end": "url(#os-a-i)" });
-  bridge(curve("V3", "O5", -22), "3,4,5,6", { class: "os-bridge back", "marker-end": "url(#os-a-i)" });
-  const B4 = bridge(curve("O2", "V0", -18), "3,4,5,6", { "marker-end": "url(#os-a-i)" });
-  layer("circle", { cx: 500, cy: 190, r: 15, class: "os-owner" }, "3,4,5,6", "4,5,6");
+  const B1 = bridge(curve("S2", "O0", -16), "3,4,5", { "marker-end": "url(#os-a-i)" });
+  bridge(curve("M1", "M2", 30, 12, 12), "3,4,5", { "marker-end": "url(#os-a-i)" });
+  const B3 = bridge(curve("O5", "V3", -22), "3,4,5", { "marker-end": "url(#os-a-i)" });
+  bridge(curve("V3", "O5", -22), "3,4,5", { class: "os-bridge back", "marker-end": "url(#os-a-i)" });
+  const B4 = bridge(curve("O2", "V0", -18), "3,4,5", { "marker-end": "url(#os-a-i)" });
+  layer("circle", { cx: 500, cy: 190, r: 15, class: "os-owner" }, "3,4,5", "4,5");
   label(333, 270, "Clear hand-off", "3", "os-ind-label", "end");
   label(488, 228, "Decision owner", "3", "os-ind-label", "end");
   label(662, 407, "Feedback loop", "3", "os-ind-label", "start");
@@ -2436,16 +2432,6 @@ window.addEventListener("hashchange", applyAddress);
   label(662, 407, "Human review gate", "5", "os-ind-label", "start");
   const tokens = [B1, B3, B4].map((path) => ({ path, n: layer("rect", { width: 8, height: 8, x: -4, y: -4, class: "os-token" }, "5") }));
 
-  // 06 the network resolved into purposeful cross-team connections
-  [["S1", "O1", -40], ["S4", "O4", 40], ["O1", "V1", -40], ["O4", "V4", 40], ["S5", "O3", 18]]
-    .forEach(([a, b, k]) => layer("path", { d: curve(a, b, k), class: "os-link", pathLength: 1 }, "6"));
-  label(350, 474, "Company cohesion", "6", "os-out-label");
-  label(650, 474, "Seamless collaboration", "6", "os-out-label");
-  layer("path", { d: "M350 484 Q350 514 400 528", class: "os-lead", "marker-end": "url(#os-a-i)" }, "6");
-  layer("path", { d: "M650 484 Q650 514 600 528", class: "os-lead", "marker-end": "url(#os-a-i)" }, "6");
-  layer("rect", { x: 405, y: 516, width: 190, height: 34, class: "os-growth" }, "6");
-  label(500, 538, "Accelerated growth", "6", "os-growth-label");
-
   // people last, so every line passes under them
   el("rect", { x: 489, y: 39, width: 22, height: 22, class: "os-lead-node" });
   const lt = el("text", { x: 522, y: 56, class: "os-label os-leader" }); lt.textContent = "Leadership";
@@ -2462,7 +2448,7 @@ window.addEventListener("hashchange", applyAddress);
     }
   });
   // influential connectors, emphasized from 03 on
-  ["S2", "O5", "V0"].forEach((id) => { people[id].classList.add("os-el-hi"); people[id].dataset.hi = "3,4,5,6"; });
+  ["S2", "O5", "V0"].forEach((id) => { people[id].classList.add("os-el-hi"); people[id].dataset.hi = "3,4,5"; });
   // the two connectors next door carry hand-offs into the focus department, so once
   // they are emphasized they stop fading
   ["S2", "V0"].forEach((id) => (people[id].dataset.fade = "1,2"));
@@ -2480,7 +2466,7 @@ window.addEventListener("hashchange", applyAddress);
     const b = document.createElement("button");
     b.type = "button";
     b.className = "os-step";
-    b.innerHTML = i ? `<span>0${i}</span>${st.nav}` : st.nav;
+    b.textContent = st.nav;
     b.addEventListener("click", () => show(i));
     nav.appendChild(b);
     return b;
