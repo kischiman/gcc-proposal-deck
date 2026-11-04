@@ -13,7 +13,7 @@
     { nav: "Status quo", title: "Status quo",
       note: "Work crosses departments without a clear route, so hand-offs are missed, work is redone and decisions stall. Each one adds cost." },
     { nav: "Workshop", title: "01 · Workshop",
-      note: "One session with your leaders sets shared goals across Strategy, Operations and Service, and agrees where we start." },
+      note: "One session with your leaders sets shared goals and picks the one department we start with." },
     { nav: "Observe & record", title: "02 · Observe & record",
       note: "We follow how work actually travels between people, and record where it waits, gets redone or meets disagreement." },
     { nav: "Design interventions", title: "03 · Design interventions",
@@ -31,9 +31,9 @@
   const NS = "http://www.w3.org/2000/svg";
   const W = 1000, H = 575;
   const DEPTS = [
-    { key: "S", name: "Strategy", cx: 200 },
-    { key: "O", name: "Operations", cx: 500 },
-    { key: "V", name: "Service", cx: 800 },
+    { key: "S", cx: 200 },
+    { key: "O", cx: 500 },
+    { key: "V", cx: 800 },
   ];
   const BOX = { y: 150, h: 290, half: 140 };
   const R = 8; // team member radius
@@ -90,10 +90,9 @@
     el("path", { d: "M0 1 L9 5 L0 9 z", class: "os-mk " + c }, m);
   });
 
-  // departments: the formal boundaries
+  // departments: the formal boundaries, left unnamed
   DEPTS.forEach((d) => {
     layer("rect", { x: d.cx - BOX.half, y: BOX.y, width: BOX.half * 2, height: BOX.h, class: "os-silo" }, ALL, "6");
-    label(d.cx - BOX.half + 16, BOX.y + 24, d.name, ALL, "os-dept", "start");
   });
 
   // 01 shared goals: one band across every department, tied to each manager
@@ -288,7 +287,7 @@
 
   show(0);
 
-  // on a narrow screen the figure pans; open it centred on Operations
+  // on a narrow screen the figure pans; open it centred on the middle department
   const canvas = root.querySelector(".os-canvas");
   const centre = () => { if (canvas.scrollWidth > canvas.clientWidth) canvas.scrollLeft = (canvas.scrollWidth - canvas.clientWidth) / 2; };
   requestAnimationFrame(centre);
